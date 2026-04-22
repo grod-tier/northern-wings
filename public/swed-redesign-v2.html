@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SWED — Snoop Dogg's Dispensary Near LAX</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --brick: oklch(0.38 0.09 35);
+  --brick-dark: oklch(0.28 0.08 35);
+  --ink: oklch(0.15 0.02 60);
+  --ink-soft: oklch(0.22 0.02 60);
+  --paper: oklch(0.96 0.015 85);
+  --paper-warm: oklch(0.92 0.025 80);
+  --mustard: oklch(0.82 0.17 85);
+  --mustard-deep: oklch(0.72 0.19 75);
+  --lime: oklch(0.78 0.18 130);
+  --rust: oklch(0.55 0.18 35);
+  --line: oklch(0.35 0.03 60);
+  
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.5;
+  font-kerning: normal;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--mustard); color: var(--ink); }
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: var(--space-md) var(--space-xl);
+  background: var(--ink);
+  border-bottom: 2px solid var(--mustard);
+}
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+.logo {
+  font-family: 'Bungee', sans-serif;
+  font-size: 1.5rem;
+  color: var(--mustard);
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo::before {
+  content: '';
+  width: 12px; height: 12px;
+  background: var(--mustard);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--ink), 0 0 0 4px var(--mustard);
+}
+.nav-links {
+  display: none;
+  gap: var(--space-xl);
+  list-style: none;
+}
+.nav-links a {
+  color: var(--paper);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-family: 'JetBrains Mono', monospace;
+  transition: color 150ms cubic-bezier(0.25,1,0.5,1);
+  position: relative;
+}
+.nav-links a:hover { color: var(--mustard); }
+.nav-links a:focus-visible { outline: 2px solid var(--mustard); outline-offset: 4px; }
+
+.nav-cta {
+  background: var(--mustard);
+  color: var(--ink);
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 2px solid var(--mustard);
+  transition: all 150ms cubic-bezier(0.25,1,0.5,1);
+}
+.nav-cta:hover { background: var(--paper); border-color: var(--paper); }
+
+@media (min-width: 900px) {
+  .nav-links { display: flex; }
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background: var(--brick-dark);
+  position: relative;
+  overflow: hidden;
+  padding: 140px var(--space-xl) var(--space-3xl);
+  color: var(--paper);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(ellipse at 20% 30%, oklch(0.45 0.1 35 / 0.4), transparent 50%),
+    radial-gradient(ellipse at 80% 70%, oklch(0.25 0.05 20 / 0.6), transparent 60%),
+    repeating-linear-gradient(0deg, transparent 0 40px, oklch(0.3 0.05 35 / 0.15) 40px 41px),
+    repeating-linear-gradient(90deg, transparent 0 80px, oklch(0.3 0.05 35 / 0.1) 80px 81px);
+  pointer-events: none;
+}
+.hero-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+  position: relative;
+  z-index: 2;
+  align-items: center;
+}
+@media (min-width: 1000px) {
+  .hero-grid { grid-template-columns: 1.3fr 1fr; }
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--mustard);
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  animation: fadeUp 600ms cubic-bezier(0.25,1,0.5,1) 200ms forwards;
+}
+.hero-tag::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--mustard);
+}
+
+.hero h1 {
+  font-family: 'Bungee', sans-serif;
+  font-size: clamp(3rem, 10vw, 7.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-lg);
+  color: var(--paper);
+}
+.hero h1 .line {
+  display: block;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 700ms cubic-bezier(0.25,1,0.5,1) forwards;
+}
+.hero h1 .line:nth-child(1) { animation-delay: 300ms; }
+.hero h1 .line:nth-child(2) { 
+  animation-delay: 450ms;
+  color: var(--mustard);
+  font-style: italic;
+}
+.hero h1 .line:nth-child(3) { animation-delay: 600ms; }
+
+.hero-sub {
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  max-width: 540px;
+  margin-bottom: var(--space-2xl);
+  color: oklch(0.85 0.02 60);
+  line-height: 1.6;
+  opacity: 0;
+  animation: fadeUp 600ms cubic-bezier(0.25,1,0.5,1) 800ms forwards;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  opacity: 0;
+  animation: fadeUp 600ms cubic-bezier(0.25,1,0.5,1) 950ms forwards;
+}
+.btn {
+  padding: 16px 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: all 150ms cubic-bezier(0.25,1,0.5,1);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn-primary {
+  background: var(--mustard);
+  color: var(--ink);
+  border-color: var(--mustard);
+}
+.btn-primary:hover {
+  background: var(--paper);
+  border-color: var(--paper);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--mustard);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--paper);
+  border-color: var(--paper);
+}
+.btn-ghost:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+.btn:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+
+.hero-plate {
+  position: relative;
+  opacity: 0;
+  animation: fadeUp 800ms cubic-bezier(0.25,1,0.5,1) 600ms forwards;
+  justify-self: center;
+}
+.plate-frame {
+  background: var(--paper);
+  border: 4px solid var(--ink);
+  padding: var(--space-lg) var(--space-xl);
+  width: min(360px, 90vw);
+  box-shadow: 12px 12px 0 var(--mustard), 12px 12px 0 4px var(--ink);
+  transform: rotate(-3deg);
+  position: relative;
+}
+.plate-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.plate-meta span:first-child { background: var(--lime); padding: 2px 8px; }
+.plate-meta span:last-child { background: var(--mustard); padding: 2px 8px; }
+.plate-state {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.plate-number {
+  text-align: center;
+  font-family: 'Bungee', sans-serif;
+  font-size: 4rem;
+  color: var(--mustard-deep);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-shadow: 3px 3px 0 var(--ink);
+}
+.plate-foot {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  margin-top: 6px;
+  color: var(--ink);
+}
+
+.hero-ticker {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  background: var(--mustard);
+  color: var(--ink);
+  padding: 12px 0;
+  overflow: hidden;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.ticker-track {
+  display: flex;
+  gap: var(--space-2xl);
+  animation: ticker 30s linear infinite;
+  white-space: nowrap;
+  font-family: 'Bungee', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+}
+.ticker-track span { display: flex; align-items: center; gap: var(--space-2xl); }
+.ticker-track span::after { content: '✦'; color: var(--rust); }
+
+@keyframes ticker {
+  to { transform: translateX(-50%); }
+}
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* SECTION BASE */
+section { padding: var(--space-4xl) var(--space-xl); position: relative; }
+.container { max-width: 1280px; margin: 0 auto; }
+
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--rust);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--space-lg);
+}
+.eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 2px;
+  background: var(--rust);
+}
+
+.section-title {
+  font-family: 'Bungee', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 0.95;
+  color: var(--ink);
+  margin-bottom: var(--space-xl);
+  max-width: 900px;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+/* ABOUT */
+.about { background: var(--paper-warm); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3xl);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .about-grid { grid-template-columns: 1fr 1fr; gap: var(--space-4xl); }
+}
+.about-copy p {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin-bottom: var(--space-md);
+}
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  margin-top: var(--space-xl);
+}
+.stat {
+  background: var(--paper-warm);
+  padding: var(--space-lg);
+}
+.stat-num {
+  font-family: 'Bungee', sans-serif;
+  font-size: 2.5rem;
+  color: var(--rust);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 6px;
+  color: var(--ink);
+}
+
+.about-visual {
+  position: relative;
+  min-height: 500px;
+}
+.about-img-wrap {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  background: var(--brick);
+  border: 3px solid var(--ink);
+  box-shadow: 16px 16px 0 var(--mustard);
+}
+.about-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: contrast(1.05) saturate(1.1);
+}
+.about-badge {
+  position: absolute;
+  top: -24px;
+  right: -24px;
+  width: 140px; height: 140px;
+  background: var(--lime);
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Bungee', sans-serif;
+  font-size: 0.9rem;
+  color: var(--ink);
+  line-height: 1;
+  transform: rotate(-12deg);
+  animation: wobble 6s ease-in-out infinite;
+  z-index: 2;
+}
+@keyframes wobble {
+  0%, 100% { transform: rotate(-12deg); }
+  50% { transform: rotate(-6deg); }
+}
+
+/* PRODUCTS */
+.products { background: var(--ink); color: var(--paper); }
+.products .section-title { color: var(--paper); }
+.products .section-title em { color: var(--mustard); }
+.products-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-2xl);
+}
+.products-intro p {
+  max-width: 400px;
+  color: oklch(0.75 0.02 60);
+  font-size: 1rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2px;
+  background: var(--line);
+  border: 2px solid var(--line);
+}
+.product {
+  background: var(--ink);
+  padding: var(--space-xl);
+  position: relative;
+  transition: background 250ms cubic-bezier(0.25,1,0.5,1);
+  cursor: pointer;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.product:hover { background: var(--brick-dark); }
+.product:hover .product-arrow { transform: translate(8px, -8px); color: var(--mustard); }
+.product-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--mustard);
+  letter-spacing: 0.15em;
+}
+.product-icon {
+  font-size: 3rem;
+  margin: var(--space-lg) 0;
+  filter: grayscale(0.2);
+}
+.product h3 {
+  font-family: 'Bungee', sans-serif;
+  font-size: 1.75rem;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-sm);
+  color: var(--paper);
+}
+.product p {
+  font-size: 0.9375rem;
+  color: oklch(0.72 0.02 60);
+  line-height: 1.55;
+  margin-bottom: var(--space-lg);
+}
+.product-arrow {
+  font-family: 'Bungee', sans-serif;
+  font-size: 1.25rem;
+  color: var(--paper);
+  transition: all 200ms cubic-bezier(0.25,1,0.5,1);
+  display: inline-block;
+  align-self: flex-start;
+}
+
+/* WHY */
+.why { background: var(--mustard); color: var(--ink); }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+.why-item {
+  padding: var(--space-lg) 0;
+  border-top: 2px solid var(--ink);
+}
+.why-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  margin-bottom: var(--space-md);
+  font-variant-numeric: tabular-nums;
+}
+.why-item h4 {
+  font-family: 'Bungee', sans-serif;
+  font-size: 1.25rem;
+  margin-bottom: var(--space-sm);
+  line-height: 1.1;
+}
+.why-item p {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* AREAS */
+.areas { background: var(--paper); }
+.areas-wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .areas-wrap { grid-template-columns: 1fr 1.3fr; }
+}
+.areas-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.areas-list li {
+  padding: var(--space-lg) 0;
+  border-bottom: 1px solid oklch(0.8 0.02 60);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Bungee', sans-serif;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  transition: all 200ms cubic-bezier(0.25,1,0.5,1);
+  cursor: pointer;
+}
+.areas-list li:hover {
+  color: var(--rust);
+  padding-left: var(--space-md);
+}
+.areas-list li span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+
+.map-card {
+  background: var(--brick);
+  padding: var(--space-xl);
+  color: var(--paper);
+  border: 3px solid var(--ink);
+  box-shadow: 12px 12px 0 var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.map-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    repeating-linear-gradient(0deg, transparent 0 30px, oklch(0.3 0.05 35 / 0.3) 30px 31px),
+    repeating-linear-gradient(90deg, transparent 0 60px, oklch(0.3 0.05 35 / 0.25) 60px 61px);
+  pointer-events: none;
+}
+.map-card > * { position: relative; z-index: 2; }
+.map-card h3 {
+  font-family: 'Bungee', sans-serif;
+  font-size: 1.5rem;
+  color: var(--mustard);
+  margin-bottom: var(--space-md);
+}
+.map-card p {
+  font-size: 0.95rem;
+  margin-bottom: var(--space-md);
+  line-height: 1.6;
+}
+.map-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  padding: var(--space-md) 0;
+  border-top: 1px dashed oklch(0.7 0.05 60 / 0.4);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* TESTIMONIAL / SOCIAL PROOF */
+.proof {
+  background: var(--brick);
+  color: var(--paper);
+  text-align: center;
+  padding: var(--space-4xl) var(--space-xl);
+  position: relative;
+  overflow: hidden;
+}
+.proof::before {
+  content: '"';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Bungee', sans-serif;
+  font-size: 20rem;
+  color: oklch(0.3 0.08 35);
+  line-height: 1;
+}
+.proof-quote {
+  position: relative;
+  z-index: 2;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.3;
+  max-width: 900px;
+  margin: 0 auto var(--space-xl);
+  font-style: italic;
+}
+.proof-quote em {
+  background: var(--mustard);
+  color: var(--ink);
+  padding: 2px 12px;
+  font-style: normal;
+  display: inline-block;
+  transform: rotate(-1deg);
+}
+.proof-attr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  letter-spacing: 0.15em;
+  color: var(--mustard);
+  text-transform: uppercase;
+}
+
+/* CTA FOOTER */
+.cta-footer {
+  background: var(--ink);
+  color: var(--paper);
+  padding: var(--space-4xl) var(--space-xl) var(--space-xl);
+}
+.cta-big {
+  font-family: 'Bungee', sans-serif;
+  font-size: clamp(2.5rem, 9vw, 7rem);
+  line-height: 0.9;
+  color: var(--paper);
+  margin-bottom: var(--space-2xl);
+  max-width: 1100px;
+}
+.cta-big em {
+  color: var(--mustard);
+  font-style: italic;
+}
+.cta-row {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4xl);
+}
+
+.footer-bottom {
+  border-top: 1px solid oklch(0.3 0.02 60);
+  padding-top: var(--space-xl);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: oklch(0.65 0.02 60);
+}
+@media (min-width: 700px) {
+  .footer-bottom { grid-template-columns: 1fr auto 1fr; align-items: center; }
+  .footer-bottom > :last-child { text-align: right; }
+}
+.footer-bottom a { color: var(--mustard); text-decoration: none; }
+.footer-bottom a:hover { color: var(--paper); }
+.footer-socials { display: flex; gap: var(--space-lg); justify-content: center; }
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 600ms cubic-bezier(0.25,1,0.5,1), transform 600ms cubic-bezier(0.25,1,0.5,1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">S.W.E.D</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#why">Why SWED</a></li>
+      <li><a href="#areas">Delivery</a></li>
+    </ul>
+    <a href="#shop" class="nav-cta">Shop Now</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-tag">California · Est. by Snoop Dogg</div>
+      <h1>
+        <span class="line">The Dopest</span>
+        <span class="line">Dispensary</span>
+        <span class="line">Near LAX.</span>
+      </h1>
+      <p class="hero-sub">Five minutes from the terminal, steps from SoFi. Premium cannabis, expert budtenders, and same-day delivery to Playa del Rey, Inglewood, El Segundo, Culver City & Hawthorne.</p>
+      <div class="hero-ctas">
+        <a href="#shop" class="btn btn-primary">Shop the Menu →</a>
+        <a href="#about" class="btn btn-ghost">Our Story</a>
+      </div>
+    </div>
+    <div class="hero-plate">
+      <div class="plate-frame">
+        <div class="plate-meta"><span>2024</span><span>JAN</span></div>
+        <div class="plate-state">CALIFORNIA</div>
+        <div class="plate-number">S.W.E.D</div>
+        <div class="plate-foot">A SNOOP DOGG STORE</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-ticker">
+    <div class="ticker-track">
+      <span>FREE DELIVERY OVER $75</span>
+      <span>OPEN DAILY · 8AM–10PM</span>
+      <span>PATIENT APPRECIATION TUESDAYS</span>
+      <span>5 MIN FROM LAX</span>
+      <span>FREE DELIVERY OVER $75</span>
+      <span>OPEN DAILY · 8AM–10PM</span>
+      <span>PATIENT APPRECIATION TUESDAYS</span>
+      <span>5 MIN FROM LAX</span>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <div class="eyebrow">Chapter 01 · The Shop</div>
+        <h2 class="section-title">Snoop's spot for <em>the real</em> thing.</h2>
+        <p>At SWED — Snoop Dogg's dispensary near LAX — we built the shopping experience we wished we had. Walk in off the strip, talk to a budtender who actually knows the flower, and leave with something you're actually excited about.</p>
+        <p>Whether you're local to Playa del Rey or passing through LAX, our team helps you find the right flower, edible, concentrate, or topical — no pressure, no nonsense.</p>
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-num">5<span style="font-size:1.25rem">min</span></div>
+            <div class="stat-label">From LAX</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">6</div>
+            <div class="stat-label">Neighborhoods served</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">100+</div>
+            <div class="stat-label">Curated strains</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">#1</div>
+            <div class="stat-label">Dispensary near LAX</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-visual reveal">
+        <div class="about-img-wrap">
+          <img src="https://swedstores.com/cdn/shop/files/Frame_32_1.jpg?v=1721154271&width=3840" alt="SWED storefront">
+        </div>
+        <div class="about-badge">SNOOP<br>APPROVED</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="products" id="products">
+  <div class="container">
+    <div class="products-intro reveal">
+      <div>
+        <div class="eyebrow" style="color:var(--mustard)">Chapter 02 · The Menu</div>
+        <h2 class="section-title">Built for the <em>connoisseur</em>.</h2>
+      </div>
+      <p>Flower, edibles, concentrates, topicals — every shelf vetted by people who actually use the product. No filler, no fluff.</p>
+    </div>
+    <div class="product-grid reveal">
+      <div class="product">
+        <div>
+          <div class="product-num">/ 01</div>
+          <div class="product-icon">🌿</div>
+          <h3>Flowers</h3>
+          <p>High-quality strains with distinctive aromas, flavors, and effects — indica, sativa, and hybrid.</p>
+        </div>
+        <div class="product-arrow">↗</div>
+      </div>
+      <div class="product">
+        <div>
+          <div class="product-num">/ 02</div>
+          <div class="product-icon">🍪</div>
+          <h3>Edibles</h3>
+          <p>Delicious and potent — from gummies and chocolates to fresh-baked goods with dialed-in doses.</p>
+        </div>
+        <div class="product-arrow">↗</div>
+      </div>
+      <div class="product">
+        <div>
+          <div class="product-num">/ 03</div>
+          <div class="product-icon">💎</div>
+          <h3>Concentrates</h3>
+          <p>Powerful extracts — live resin, rosin, shatter — for those chasing a more intense experience.</p>
+        </div>
+        <div class="product-arrow">↗</div>
+      </div>
+      <div class="product">
+        <div>
+          <div class="product-num">/ 04</div>
+          <div class="product-icon">🫧</div>
+          <h3>Topicals</h3>
+          <p>Balms, salves, and lotions for localized relief — all the benefit, none of the high.</p>
+        </div>
+        <div class="product-arrow">↗</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why" id="why">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Chapter 03 · Why SWED</div>
+      <h2 class="section-title">Not your average <em>dispensary</em>.</h2>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-item">
+        <div class="why-num">/ 01</div>
+        <h4>Expert Budtenders</h4>
+        <p>Real humans who smoke, vape, and dab. They'll find your thing in under five minutes.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-num">/ 02</div>
+        <h4>Same-Day Delivery</h4>
+        <p>Order online, it shows up. Free on orders over $75 across six neighborhoods.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-num">/ 03</div>
+        <h4>Curated Selection</h4>
+        <p>We taste-test everything. If it's on our shelf, it's because we'd hand it to a friend.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-num">/ 04</div>
+        <h4>Patient Days</h4>
+        <p>Monthly appreciation events with deep discounts and special drops for regulars.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="areas" id="areas">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Chapter 04 · Delivery Zones</div>
+      <h2 class="section-title">We deliver <em>door-to-door</em>.</h2>
+    </div>
+    <div class="areas-wrap">
+      <ul class="areas-list reveal">
+        <li>Playa del Rey <span>90293</span></li>
+        <li>Playa Vista <span>90094</span></li>
+        <li>El Segundo <span>90245</span></li>
+        <li>Culver City <span>90230</span></li>
+        <li>Inglewood <span>90301</span></li>
+        <li>Hawthorne <span>90250</span></li>
+      </ul>
+      <div class="map-card reveal">
+        <h3>Visit the shop</h3>
+        <p>Five minutes from LAX, steps from SoFi Stadium. Easy parking, easier conversation. Swing through before your flight or after the game.</p>
+        <div class="map-meta">
+          <span>LAT 33.9425° N</span>
+          <span>LON 118.4081° W</span>
+        </div>
+        <div style="margin-top: var(--space-lg);">
+          <a href="#" class="btn btn-primary">Get Directions →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="container">
+    <p class="proof-quote reveal">The realest shop near the airport. Everybody's cool, the flower's <em>loud</em>, and the vibe is unmatched. Straight up the best stop before a flight.</p>
+    <div class="proof-attr reveal">— Regulars, Playa del Rey</div>
+  </div>
+</section>
+
+<footer class="cta-footer">
+  <div class="container">
+    <h2 class="cta-big reveal">Pull up. <em>Light up.</em> Fly out.</h2>
+    <div class="cta-row reveal">
+      <a href="#" class="btn btn-primary">Shop the Menu →</a>
+      <a href="#" class="btn btn-ghost">Call the Shop</a>
+    </div>
+    <div class="footer-bottom">
+      <div>© SWED · A Snoop Dogg Store · Lic. C10-0000XXX-LIC</div>
+      <div class="footer-socials">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">YouTube</a>
+      </div>
+      <div>21+ only. Keep out of reach of children.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll for any nav link
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const el = document.querySelector(id);
+        if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      }
+    });
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = `${Math.min(i * 50, 300)}ms`;
+    io.observe(el);
+  });
+</script>
+
+</body>
+</html>

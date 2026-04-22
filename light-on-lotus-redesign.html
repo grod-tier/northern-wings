@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LolYoga — Light on Lotus | Soulful & Sweaty Yoga in Mar Vista</title>
+<meta name="description" content="Discover yoga classes, workshops, teacher trainings, and wellness services at Light On Lotus Yoga Studio in West LA. Join our community for transformation and relaxation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,700&family=Epilogue:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Original brand preserved — magenta/purple on lavender, refined */
+    --ink: oklch(0.22 0.02 320);
+    --ink-soft: oklch(0.38 0.025 320);
+    --ink-mute: oklch(0.55 0.02 320);
+    --paper: oklch(0.965 0.012 310);
+    --paper-2: oklch(0.93 0.02 305);
+    --paper-3: oklch(0.88 0.035 300);
+    --magenta: oklch(0.48 0.22 330);
+    --magenta-deep: oklch(0.38 0.20 328);
+    --magenta-soft: oklch(0.72 0.14 328);
+    --saffron: oklch(0.78 0.14 75);
+    --line: oklch(0.78 0.03 315);
+
+    --space-1: 4px; --space-2: 8px; --space-3: 12px;
+    --space-4: 16px; --space-6: 24px; --space-8: 32px;
+    --space-12: 48px; --space-16: 64px; --space-24: 96px;
+
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Epilogue', system-ui, sans-serif;
+    --mono: var(--sans);
+    --script: var(--serif);
+
+    --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--serif);
+    font-weight: 400;
+    color: var(--ink);
+    background: var(--paper);
+    font-feature-settings: "ss01", "kern";
+    font-kerning: normal;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  :focus-visible { outline: 3px solid var(--magenta); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: 1380px; margin: 0 auto; padding: 0 var(--space-8); }
+
+  /* ── HEADER ─────────────────────────────────── */
+  .header {
+    position: sticky; top: 0; z-index: 100;
+    background: color-mix(in oklab, var(--paper) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid color-mix(in oklab, var(--line) 60%, transparent);
+  }
+  .header-inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-4) 0;
+  }
+  /* Hand-lettered wordmark — restored brand identity */
+  .wordmark {
+    display: flex; flex-direction: column; line-height: 0.82;
+    font-family: var(--script);
+    color: var(--magenta);
+  }
+  .wordmark-lol {
+    font-size: 44px; font-weight: 700;
+    transform: rotate(-4deg); transform-origin: left center;
+    letter-spacing: -0.02em;
+  }
+  .wordmark-yoga {
+    font-size: 44px; font-weight: 700;
+    margin-left: 28px; margin-top: -6px;
+    transform: rotate(-2deg);
+    letter-spacing: -0.02em;
+  }
+  .wordmark-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-top: 10px;
+    margin-left: 2px;
+  }
+  .primary-nav {
+    display: flex; justify-content: center; gap: var(--space-8);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .primary-nav a { color: var(--ink-soft); padding: 6px 0; position: relative; transition: color 150ms var(--ease-out); }
+  .primary-nav a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 1px; background: var(--magenta);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 220ms var(--ease-out);
+  }
+  .primary-nav a:hover { color: var(--magenta); }
+  .primary-nav a:hover::after { transform: scaleX(1); }
+
+  .header-actions { display: flex; align-items: center; gap: var(--space-6); }
+  .member-link {
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 8px 12px;
+    transition: color 150ms var(--ease-out);
+  }
+  .member-link:hover { color: var(--magenta); }
+  .cart-link {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .cart-link .bag {
+    width: 18px; height: 18px; display: inline-block;
+    border: 1.5px solid currentColor; border-top: none;
+    border-radius: 0 0 3px 3px; position: relative;
+  }
+  .cart-link .bag::before {
+    content: ""; position: absolute; top: -6px; left: 3px; right: 3px;
+    height: 6px; border: 1.5px solid currentColor; border-bottom: none;
+    border-radius: 50% 50% 0 0;
+  }
+  .btn-book {
+    background: var(--magenta);
+    color: white;
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background 180ms var(--ease-out), transform 180ms var(--ease-out);
+  }
+  .btn-book:hover { background: var(--magenta-deep); transform: translateY(-1px); }
+  .btn-book:active { transform: translateY(0); }
+
+  /* ── HERO ────────────────────────────────────── */
+  .hero {
+    position: relative;
+    padding: var(--space-16) 0 var(--space-24);
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: var(--space-12);
+    align-items: center;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--magenta);
+    margin-bottom: var(--space-6);
+  }
+  .hero-eyebrow::before {
+    content: ""; width: 32px; height: 1px; background: var(--magenta);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(3rem, 7.2vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: var(--space-8);
+  }
+  .hero h1 .script-accent {
+    font-family: var(--script);
+    font-style: italic;
+    font-weight: 700;
+    color: var(--magenta);
+    font-size: 1.05em;
+    display: inline-block;
+    transform: rotate(-3deg);
+    margin: 0 0.05em;
+    line-height: 0.8;
+  }
+  .hero h1 .amp {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--magenta-soft);
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin-bottom: var(--space-8);
+  }
+  .hero-cta-row {
+    display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap;
+    margin-bottom: var(--space-6);
+  }
+  .cta-primary {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 18px 30px;
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: inline-flex; align-items: center; gap: 12px;
+    min-height: 48px;
+    transition: background 180ms var(--ease-out), transform 180ms var(--ease-out);
+  }
+  .cta-primary:hover { background: var(--magenta); transform: translateY(-1px); }
+  .cta-primary .arrow { transition: transform 220ms var(--ease-out); }
+  .cta-primary:hover .arrow { transform: translateX(4px); }
+  .cta-secondary {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 14px 4px;
+    border-bottom: 1px solid var(--ink-soft);
+    transition: color 180ms var(--ease-out), border-color 180ms var(--ease-out);
+  }
+  .cta-secondary:hover { color: var(--magenta); border-color: var(--magenta); }
+
+  .hero-microcopy {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-mute);
+    margin-bottom: var(--space-8);
+  }
+  .hero-microcopy .dot { color: var(--magenta); margin: 0 8px; }
+
+  .hero-trust {
+    display: flex; align-items: center; gap: var(--space-4);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--line);
+    max-width: 520px;
+  }
+  .stars { color: var(--saffron); font-size: 16px; letter-spacing: 2px; }
+  .trust-text {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+  .trust-text strong { color: var(--ink); font-weight: 500; }
+
+  /* Hero visual */
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 4/5;
+  }
+  .hero-photo {
+    position: absolute; inset: 0;
+    border-radius: 50% 50% 12px 12px / 40% 40% 12px 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 0 var(--paper-3);
+  }
+  .hero-photo img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .badge {
+    position: absolute;
+    top: 8%; right: -4%;
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    background: var(--magenta);
+    color: var(--paper);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    transform: rotate(8deg);
+    z-index: 2;
+    animation: slowspin 40s linear infinite;
+  }
+  .badge .est { font-family: var(--script); font-size: 38px; letter-spacing: 0; text-transform: none; line-height: 0.9; margin: 4px 0; }
+  @keyframes slowspin {
+    to { transform: rotate(368deg); }
+  }
+  .sticker {
+    position: absolute;
+    bottom: -5%; left: -6%;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    padding: 16px 20px;
+    border-radius: 14px;
+    max-width: 240px;
+    transform: rotate(-3deg);
+    z-index: 2;
+    font-family: var(--script);
+    font-size: 22px;
+    color: var(--magenta-deep);
+    line-height: 1.15;
+  }
+  .sticker small {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-top: 6px;
+  }
+
+  /* ── MARQUEE ─────────────────────────────────── */
+  .marquee {
+    background: var(--magenta-deep);
+    color: var(--paper);
+    overflow: hidden;
+    padding: var(--space-4) 0;
+    border-top: 1px solid color-mix(in oklab, var(--magenta-deep) 60%, black);
+  }
+  .marquee-track {
+    display: flex; gap: var(--space-12);
+    white-space: nowrap;
+    animation: scroll 40s linear infinite;
+    font-family: var(--script);
+    font-size: 28px;
+    font-weight: 400;
+  }
+  .marquee-track span { display: inline-flex; align-items: center; gap: var(--space-8); }
+  .marquee-track .dot { width: 8px; height: 8px; background: var(--saffron); border-radius: 50%; display: inline-block; }
+  @keyframes scroll {
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── ABOUT ──────────────────────────────────── */
+  .about {
+    padding: var(--space-24) 0;
+    background: var(--paper-2);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: var(--space-16);
+    align-items: center;
+  }
+  .about-image {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+  }
+  .about-image img { width: 100%; height: 100%; object-fit: cover; }
+  .about-image::after {
+    content: "Kate Duyn · Founder";
+    position: absolute; bottom: 16px; left: 16px;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--paper); background: color-mix(in oklab, var(--ink) 80%, transparent);
+    padding: 6px 12px; border-radius: 999px;
+    backdrop-filter: blur(4px);
+  }
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--magenta); margin-bottom: var(--space-4);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--magenta); }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 4.2vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-8);
+  }
+  .section-title em {
+    font-family: var(--script);
+    font-style: italic;
+    color: var(--magenta);
+    font-weight: 700;
+    font-size: 1.1em;
+    display: inline-block;
+    transform: rotate(-2deg);
+  }
+  .about p {
+    color: var(--ink-soft);
+    font-size: 1.08rem;
+    line-height: 1.65;
+    margin-bottom: var(--space-4);
+    max-width: 56ch;
+  }
+  .about p strong { color: var(--ink); font-weight: 600; }
+
+  /* ── CLASSES ────────────────────────────────── */
+  .classes {
+    padding: var(--space-24) 0;
+  }
+  .classes-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: end;
+    margin-bottom: var(--space-12);
+  }
+  .classes-head p {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    justify-self: end;
+  }
+  .class-table {
+    border-top: 1px solid var(--line);
+  }
+  .class-row {
+    display: grid;
+    grid-template-columns: 60px 1.3fr 1.5fr 1fr auto;
+    gap: var(--space-6);
+    padding: var(--space-6) 0;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+    transition: background 180ms var(--ease-out), padding 180ms var(--ease-out);
+  }
+  .class-row:hover {
+    background: var(--paper-2);
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+  .class-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-mute);
+    font-variant-numeric: tabular-nums;
+  }
+  .class-name {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .class-name .scr {
+    font-family: var(--script); color: var(--magenta);
+    font-style: italic; font-weight: 700; font-size: 1.1em;
+  }
+  .class-desc {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .class-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .class-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: gap 220ms var(--ease-out), color 180ms var(--ease-out);
+  }
+  .class-row:hover .class-link { gap: 14px; color: var(--magenta); }
+
+  /* ── WELLNESS ───────────────────────────────── */
+  .wellness {
+    padding: var(--space-24) 0;
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .wellness::before {
+    content: "";
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in oklab, var(--magenta) 40%, transparent) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .wellness .section-eyebrow { color: var(--magenta-soft); }
+  .wellness .section-eyebrow::before { background: var(--magenta-soft); }
+  .wellness-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-8);
+    margin-top: var(--space-12);
+    position: relative;
+  }
+  .wellness-item {
+    padding: var(--space-8) 0;
+    border-top: 1px solid color-mix(in oklab, var(--paper) 25%, transparent);
+  }
+  .wellness-item h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.6rem;
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.01em;
+  }
+  .wellness-item p {
+    font-size: 0.95rem;
+    color: color-mix(in oklab, var(--paper) 75%, transparent);
+    line-height: 1.55;
+  }
+  .wellness-item .num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--magenta-soft);
+    display: block;
+    margin-bottom: var(--space-3);
+  }
+
+  /* ── TESTIMONIAL ────────────────────────────── */
+  .testimonial {
+    padding: var(--space-24) 0;
+    text-align: center;
+  }
+  .testimonial blockquote {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    max-width: 22ch;
+    margin: 0 auto var(--space-8);
+    color: var(--ink);
+  }
+  .testimonial blockquote::before {
+    content: "";
+    font-family: var(--script);
+    color: var(--magenta);
+    font-size: 1em;
+    line-height: 0;
+    display: block;
+    margin-bottom: var(--space-4);
+  }
+  .testimonial cite {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-style: normal;
+  }
+  .testimonial cite strong { color: var(--ink); font-weight: 500; margin-right: 10px; }
+
+  /* ── CTA FOOTER ─────────────────────────────── */
+  .cta-footer {
+    background: var(--magenta);
+    color: var(--paper);
+    padding: var(--space-24) 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-footer-inner {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: var(--space-16);
+    align-items: center;
+  }
+  .cta-footer h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    margin-bottom: var(--space-6);
+  }
+  .cta-footer h2 .hs {
+    font-family: var(--script);
+    font-style: italic;
+    font-weight: 700;
+    color: var(--saffron);
+    font-size: 1.1em;
+    display: inline-block;
+    transform: rotate(-3deg);
+  }
+  .cta-footer p {
+    color: color-mix(in oklab, var(--paper) 85%, transparent);
+    font-size: 1.1rem;
+    margin-bottom: var(--space-8);
+    max-width: 50ch;
+  }
+  .cta-btn-large {
+    background: var(--paper);
+    color: var(--ink);
+    padding: 22px 36px;
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: inline-flex; align-items: center; gap: 14px;
+    transition: background 180ms var(--ease-out), transform 180ms var(--ease-out);
+  }
+  .cta-btn-large:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
+  .cta-micro {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: color-mix(in oklab, var(--paper) 75%, transparent);
+    margin-top: var(--space-6);
+  }
+  .cta-micro .pipe { margin: 0 10px; opacity: 0.4; }
+
+  .newsletter {
+    background: color-mix(in oklab, var(--paper) 12%, transparent);
+    backdrop-filter: blur(8px);
+    border: 1px solid color-mix(in oklab, var(--paper) 25%, transparent);
+    padding: var(--space-8);
+    border-radius: 16px;
+  }
+  .newsletter h3 {
+    font-family: var(--serif); font-weight: 500;
+    font-size: 1.4rem; margin-bottom: var(--space-3);
+  }
+  .newsletter p {
+    font-size: 0.9rem;
+    color: color-mix(in oklab, var(--paper) 80%, transparent);
+    margin-bottom: var(--space-6);
+  }
+  .newsletter-form { display: flex; gap: var(--space-2); }
+  .newsletter-form input {
+    flex: 1; min-width: 0;
+    padding: 14px 16px;
+    background: color-mix(in oklab, var(--paper) 95%, transparent);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+  .newsletter-form input::placeholder { color: var(--ink-mute); }
+  .newsletter-form button {
+    background: var(--ink); color: var(--paper);
+    padding: 14px 22px; border-radius: 999px;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    transition: background 180ms var(--ease-out);
+  }
+  .newsletter-form button:hover { background: var(--magenta-deep); }
+
+  /* ── FOOTER ─────────────────────────────────── */
+  .footer {
+    background: var(--paper);
+    padding: var(--space-16) 0 var(--space-8);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: var(--space-12);
+    padding-bottom: var(--space-12);
+    border-bottom: 1px solid var(--line);
+  }
+  .footer h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: var(--space-6);
+    font-weight: 500;
+  }
+  .footer ul { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); }
+  .footer a { color: var(--ink-soft); font-size: 0.98rem; transition: color 150ms var(--ease-out); }
+  .footer a:hover { color: var(--magenta); }
+  .footer-brand .wordmark-lol, .footer-brand .wordmark-yoga { font-size: 52px; }
+  .footer-brand p {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    max-width: 34ch;
+    margin-top: var(--space-6);
+    line-height: 1.55;
+  }
+  .footer-address {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-mute);
+    margin-top: var(--space-4);
+    line-height: 1.8;
+  }
+  .footer-bar {
+    padding-top: var(--space-6);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-mute);
+  }
+
+  /* ── ENTRANCE ANIMATIONS ────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: reveal 700ms var(--ease-out) forwards;
+  }
+  @keyframes reveal {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .r1 { animation-delay: 80ms; }
+  .r2 { animation-delay: 180ms; }
+  .r3 { animation-delay: 280ms; }
+  .r4 { animation-delay: 380ms; }
+  .r5 { animation-delay: 480ms; }
+  .r6 { animation-delay: 580ms; }
+
+  /* ── RESPONSIVE ─────────────────────────────── */
+  @media (max-width: 960px) {
+    .header-inner { grid-template-columns: auto auto; gap: var(--space-4); }
+    .primary-nav, .member-link, .cart-link { display: none; }
+    .hero-grid, .about-grid, .cta-footer-inner, .classes-head { grid-template-columns: 1fr; }
+    .class-row { grid-template-columns: 40px 1fr auto; }
+    .class-desc, .class-tag { display: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .badge { width: 110px; height: 110px; font-size: 9px; top: 4%; right: 2%; }
+    .badge .est { font-size: 28px; }
+    .sticker { left: 0; bottom: -8%; }
+    .footer-bar { flex-direction: column; gap: var(--space-3); text-align: center; }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding: 0 var(--space-6); }
+    .footer-grid { grid-template-columns: 1fr; }
+    .newsletter-form { flex-direction: column; }
+    .hero { padding: var(--space-12) 0 var(--space-16); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .marquee-track { animation: none; }
+    .badge { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="wrap header-inner">
+    <a href="/" class="wordmark" aria-label="LolYoga — Light on Lotus">
+      <span class="wordmark-lol">Lol</span>
+      <span class="wordmark-yoga">Yoga</span>
+      <span class="wordmark-sub">Light on Lotus · Mar Vista</span>
+    </a>
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="#schedule">Schedule</a>
+      <a href="#classes">Classes</a>
+      <a href="#about">About</a>
+      <a href="#wellness">Wellness</a>
+      <a href="#trainings">Trainings</a>
+      <a href="/blog?brand=%7B%22name%22%3A%22Light+On+Lotus%22%2C%22navCta%22%3A%22Book+a+Class%22%2C%22hue%22%3A%22300%22%2C%22accentHue%22%3A%22290%22%7D">Blog</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#login" class="member-link">Members ›</a>
+      <a href="#cart" class="cart-link" aria-label="Cart, 0 items">
+        <span class="bag" aria-hidden="true"></span><span>0</span>
+      </a>
+      <a href="#book" class="btn-book">Book a Class</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="hero-eyebrow reveal r1">Mar Vista · West Los Angeles</div>
+      <h1 class="reveal r2">
+        Soulful <span class="amp">&amp;</span> sweaty<br>
+        <span class="script-accent">yoga</span>, every day.
+      </h1>
+      <p class="hero-sub reveal r3">
+        A fluid, adventurous practice in a community-driven studio on the
+        Westside — in-person, in the garden, or live from home. Move, groove,
+        and find your way back to yourself.
+      </p>
+      <div class="hero-cta-row reveal r4">
+        <a href="#book" class="cta-primary">
+          Book your first class
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="#schedule" class="cta-secondary">See today's schedule</a>
+      </div>
+      <div class="hero-microcopy reveal r5">
+        First class $15 <span class="dot">•</span> All levels welcome <span class="dot">•</span> Mats provided
+      </div>
+      <div class="hero-trust reveal r6">
+        <div class="stars" aria-label="Rated 5 out of 5">★★★★★</div>
+        <div class="trust-text"><strong>4.9</strong> from 480+ students · <strong>Since 2016</strong></div>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal r3">
+      <div class="hero-photo">
+        <img src="https://images.squarespace-cdn.com/content/v1/6205b07bd5a39e2fcc619c94/37675c2b-fe84-49c3-94bc-2ce48cdf055a/0DDFF034-BF8F-48AF-B1F2-7EA0E3827D10.jpg" alt="Students practicing yoga together at Light on Lotus studio in Mar Vista">
+      </div>
+      <div class="badge" aria-label="Established 2016 in Mar Vista">
+        <span>Rooted in</span>
+        <span class="est">Mar Vista</span>
+        <span>Est · 2016</span>
+      </div>
+      <div class="sticker">
+        Om, move &amp; groove
+        <small>Our signature flow</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Lotus Flow<span class="dot"></span></span>
+    <span>Bhakti Flow<span class="dot"></span></span>
+    <span>Yummy Yin<span class="dot"></span></span>
+    <span>Lotus Rocks<span class="dot"></span></span>
+    <span>Sun Celebration<span class="dot"></span></span>
+    <span>Flow &amp; Slow<span class="dot"></span></span>
+    <span>Community Class<span class="dot"></span></span>
+    <span>Lotus Flow<span class="dot"></span></span>
+    <span>Bhakti Flow<span class="dot"></span></span>
+    <span>Yummy Yin<span class="dot"></span></span>
+    <span>Lotus Rocks<span class="dot"></span></span>
+    <span>Sun Celebration<span class="dot"></span></span>
+    <span>Flow &amp; Slow<span class="dot"></span></span>
+    <span>Community Class<span class="dot"></span></span>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-image">
+      <img src="https://images.squarespace-cdn.com/content/v1/6205b07bd5a39e2fcc619c94/fd48a4b0-48cc-46ee-bb1d-ce763bfacb9b/IMG_4360.jpg" alt="Kate Duyn, founder of LolYoga Light on Lotus">
+    </div>
+    <div>
+      <div class="section-eyebrow">About Kate &amp; the studio</div>
+      <h2 class="section-title">A sacred, <em>uplifting</em> space in the heart of the Westside.</h2>
+      <p>
+        <strong>Light on Lotus was founded by Kate Duyn in 2016</strong> with one
+        intention: create a place where all can come for support, community, and
+        inspiration — a place to Om, move, and groove together.
+      </p>
+      <p>
+        The studio offers classes for every level, including prenatal yoga, with
+        creative sequencing, inside or out in our garden (weather permitting),
+        and live-streamed for practice from home. Teacher trainings, workshops,
+        kirtans, soundbaths, and a Wellness Wing with massage, acupuncture, and
+        reiki round out the experience.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="classes" id="classes">
+  <div class="wrap">
+    <div class="classes-head">
+      <div>
+        <div class="section-eyebrow">Weekly schedule</div>
+        <h2 class="section-title">Nine flows, <em>one</em> community.</h2>
+      </div>
+      <p>
+        From sweaty power hours to slow, restorative evenings — every class
+        stays rooted in our signature fluid, adventurous, transformative flow.
+      </p>
+    </div>
+
+    <div class="class-table" role="list">
+      <a href="#schedule" class="class-row" role="listitem">
+        <span class="class-num">01</span>
+        <span class="class-name">Lotus <span class="scr">Flow</span></span>
+        <span class="class-desc">Our signature fluid, adventurous, transformative flow.</span>
+        <span class="class-tag">All levels · 60 min</span>
+        <span class="class-link">Book <span aria-hidden="true">→</span></span>
+      </a>
+      <a href="#schedule" class="class-row" role="listitem">
+        <span class="class-num">02</span>
+        <span class="class-name">Bhakti Flow</span>
+        <span class="class-desc">Devotional movement woven with chanting and live music.</span>
+        <span class="class-tag">All levels · 75 min</span>
+        <span class="class-link">Book <span aria-hidden="true">→</span></span>
+      </a>
+      <a href="#schedule" class="class-row" role="listitem">
+        <span class="class-num">03</span>
+        <span class="class-name">Lotus 2/3</span>
+        <span class="class-desc">Deeper exploration — inversions, arm balances, stamina.</span>
+        <span class="class-tag">Intermediate · 75 min</span>
+        <span class="class-link">Book <span aria-hidden="true">→</span></span>
+      </a>
+      <a href="#schedule" class="class-row" role="listitem">
+        <span class="class-num">04</span>
+        <span class="class-name">Lotus <span class="scr">Rocks</span></span>
+        <span class="class-desc">High-energy vinyasa set to loud, soulful rock.</span>
+        <span class="class-tag">All levels · 60 min</span>
+        <span class="class-link">Book <span aria-hidden="true">→</span></span>
+      </a>
+      <a href="#schedule" class="class-row" role="listitem">
+        <span class="class-num">05</span>
+        <span class="class-name">Flow &amp; Slow</span>
+        <span class="class-desc">Half warming flow, half long, delicious holds.</span>
+        <span class="class-tag">All levels · 75 min</span>
+        <span class="class-link">Book <span aria-hidden="true">→</span></span>
+      </a>
+      <a href="#schedule" class="class-row" role="listitem">
+        <span class="class-num">06</span>
+        <span class="class-name">Yummy <span class="scr">Yin</span></span>
+        <span class="class-desc">Long, passive floor holds for fascia and nervous system.</span>
+        <span class="class-tag">All levels · 75 min</span>
+        <span class="class-link">Book <span aria-hidden="true">→</span></span>
+      </a>
+      <a href="#schedule" class="class-row" role="listitem">
+        <span class="class-num">07</span>
+        <span class="class-name">Sun Celebration</span>
+        <span class="class-desc">108 sun salutations for the new moon and turning points.</span>
+        <span class="class-tag">All levels · 90 min</span>
+        <span class="class-link">Book <span aria-hidden="true">→</span></span>
+      </a>
+      <a href="#schedule" class="class-row" role="listitem">
+        <span class="class-num">08</span>
+        <span class="class-name">Lounging Lotus</span>
+        <span class="class-desc">Fully restorative — props, blankets, deep exhale.</span>
+        <span class="class-tag">All levels · 75 min</span>
+        <span class="class-link">Book <span aria-hidden="true">→</span></span>
+      </a>
+      <a href="#schedule" class="class-row" role="listitem">
+        <span class="class-num">09</span>
+        <span class="class-name">Community <span class="scr">Class</span></span>
+        <span class="class-desc">By donation. Taught by senior teachers and graduates.</span>
+        <span class="class-tag">All levels · 60 min</span>
+        <span class="class-link">Book <span aria-hidden="true">→</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="wellness" id="wellness">
+  <div class="wrap">
+    <div class="section-eyebrow">Wellness Wing</div>
+    <h2 class="section-title" style="max-width: 16ch;">Care beyond the mat.</h2>
+    <p style="color: color-mix(in oklab, var(--paper) 75%, transparent); max-width: 50ch; font-size: 1.08rem;">
+      Our in-studio healing suite for the days your practice needs a little help.
+      Appointments must be booked in advance.
+    </p>
+
+    <div class="wellness-grid">
+      <div class="wellness-item">
+        <span class="num">01 — Touch</span>
+        <h3>Massage Therapy</h3>
+        <p>Deep tissue, Swedish, and prenatal with licensed therapists who know the anatomy of a yogi.</p>
+      </div>
+      <div class="wellness-item">
+        <span class="num">02 — Needles</span>
+        <h3>Acupuncture</h3>
+        <p>Traditional Chinese Medicine to restore the flow of qi — stress, sleep, cycles, inflammation.</p>
+      </div>
+      <div class="wellness-item">
+        <span class="num">03 — Energy</span>
+        <h3>Reiki</h3>
+        <p>Subtle, hands-on energy work to recalibrate the nervous system between sessions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonial">
+  <div class="wrap">
+    <blockquote>
+      "The most honest, soulful studio on the Westside — I walk in heavy and leave lighter every time."
+    </blockquote>
+    <cite><strong>Ruby M.</strong>member since 2019</cite>
+  </div>
+</section>
+
+<section class="cta-footer" id="book">
+  <div class="wrap cta-footer-inner">
+    <div>
+      <h2>Come <span class="hs">find</span> your flow.</h2>
+      <p>
+        First class is $15 — mats, props, and a warm welcome included. Drop
+        your name and we'll see you on the mat.
+      </p>
+      <a href="#book-first" class="cta-btn-large">
+        Book your first class
+        <span aria-hidden="true">→</span>
+      </a>
+      <div class="cta-micro">
+        Open daily 7am–9pm <span class="pipe">|</span>
+        12408 Venice Blvd <span class="pipe">|</span>
+        No experience required
+      </div>
+    </div>
+
+    <form class="newsletter" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed ✓';">
+      <h3>The Lotus Letter</h3>
+      <p>Schedule changes, new workshops, and the occasional mantra. Once a week, never more.</p>
+      <div class="newsletter-form">
+        <label for="nl-email" class="sr-only" style="position:absolute;left:-9999px;">Email address</label>
+        <input id="nl-email" type="email" required placeholder="your@email.com">
+        <button type="submit">Sign Up</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="wordmark">
+          <span class="wordmark-lol">Lol</span>
+          <span class="wordmark-yoga">Yoga</span>
+        </div>
+        <p>Light on Lotus — a sacred, uplifting yoga studio in the heart of Mar Vista, West Los Angeles.</p>
+        <div class="footer-address">
+          12408 Venice Blvd<br>
+          Los Angeles, CA 90066<br>
+          (310) 555 · 0142
+        </div>
+      </div>
+      <div>
+        <h4>Practice</h4>
+        <ul>
+          <li><a href="#schedule">Schedule</a></li>
+          <li><a href="#classes">Classes</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Replays</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Community</h4>
+        <ul>
+          <li><a href="#">Teachers</a></li>
+          <li><a href="#">Trainings</a></li>
+          <li><a href="#">Events &amp; Kirtan</a></li>
+          <li><a href="#wellness">Wellness Wing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Account</h4>
+        <ul>
+          <li><a href="#">Member Login</a></li>
+          <li><a href="#">Buy a Package</a></li>
+          <li><a href="#">Gift Cards</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span>© 2025 Light on Lotus Yoga. All rights reserved.</span>
+      <span>Om · Move · Groove</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll for in-page links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const el = document.querySelector(id);
+        if (el) { e.preventDefault(); el.scrollIntoView({
