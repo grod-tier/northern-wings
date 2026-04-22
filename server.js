@@ -120,7 +120,7 @@ app.get('/blog/:slug', async (req, res) => {
  *   competitorUrl?: string,   — if set, scrapes competitor keywords first
  *   autoGenerate?: boolean,   — if true, immediately submits top keywords to Arvow
  *   webhookUrl?: string,      — required if autoGenerate: true
- *   limit?: number,           — how many keywords to send to Arvow (default 5)
+ *   limit?: number,           — how many blog posts to generate (default 3)
  * }
  */
 app.post('/api/blog/keywords', async (req, res) => {
@@ -130,7 +130,7 @@ app.post('/api/blog/keywords', async (req, res) => {
     competitorUrl,
     autoGenerate = false,
     webhookUrl,
-    limit = 5,
+    limit = 3,
   } = req.body;
 
   if (!businessName || !niche) {
@@ -151,11 +151,10 @@ app.post('/api/blog/keywords', async (req, res) => {
       onStep: (step, detail) => console.log(`  [keywords] ${step}: ${detail}`),
     });
 
-    // If autoGenerate, send top keywords to whichever generator is available
+    // If autoGenerate, send top `limit` keywords to whichever generator is available
     let generateResult = null;
     if (autoGenerate) {
       const topKeywords = result.keywords
-        .filter(k => k.priority === 1 || k.priority <= Math.ceil(limit / 2))
         .slice(0, limit)
         .map(k => ({ keyword: k.keyword }));
 
