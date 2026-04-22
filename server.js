@@ -6,7 +6,7 @@ import express from 'express';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { readdir, stat, readFile } from 'fs/promises';
+import { readFile } from 'fs/promises';
 import { searchBusinesses } from './lib/search.js';
 import { scrapeHomepage } from './lib/scrape.js';
 import { redesignHomepage } from './lib/redesign.js';
@@ -298,19 +298,10 @@ app.post('/api/blog/webhook', async (req, res) => {
  * GET /api/blog/posts
  * List all published posts (JSON).
  */
-// Serve the latest homepage redesign at /
+// Serve homepage — express.static above handles public/index.html for /
+// This fallback fires only if index.html doesn't exist yet.
 app.get('/', async (req, res) => {
-  try {
-    const publicDir = join(__dirname, 'public');
-    const files = (await readdir(publicDir)).filter(f => f.endsWith('-redesign.html'));
-    if (!files.length) return res.status(404).send('<h1>No homepage redesign generated yet. Use the app to generate one.</h1>');
-    const withStats = await Promise.all(files.map(async f => ({ f, mtime: (await stat(join(publicDir, f))).mtimeMs })));
-    const latest = withStats.sort((a, b) => b.mtime - a.mtime)[0].f;
-    const html = await readFile(join(publicDir, latest), 'utf8');
-    res.type('html').send(html);
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
+  res.status(404).send('<h1>No homepage redesign generated yet. Run the redesign pipeline first.</h1>');
 });
 
 app.get('/api/blog/posts', async (req, res) => {

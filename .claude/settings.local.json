@@ -50,7 +50,14 @@
       "Bash(xargs kill *)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(vercel --version)",
+      "Bash(vercel --yes)",
+      "Bash(vercel login *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://site-scraper-design.vercel.app/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://site-scraper-design.vercel.app/blog)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://site-scraper-design.vercel.app/blog/9-science-backed-benefits-of-vinyasa-yoga-for-body-mind)",
+      "Bash(vercel --prod)"
     ]
   }
 }
