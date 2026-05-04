@@ -303,6 +303,10 @@ app.get('/', async (req, res) => {
   res.status(404).send('<h1>No homepage redesign generated yet. Run the redesign pipeline first.</h1>');
 });
 
+// Static inner pages (no .html extension in URL)
+app.get('/plight', (req, res) => res.sendFile(join(__dirname, 'public/plight.html')));
+app.get('/waystation', (req, res) => res.sendFile(join(__dirname, 'public/waystation.html')));
+
 app.get('/api/blog/posts', async (req, res) => {
   try {
     const posts = await listPosts();

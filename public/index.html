@@ -178,7 +178,7 @@ img { max-width: 100%; display: block; }
   line-height: 0.98;
   letter-spacing: -0.025em;
   color: var(--ink);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
   font-variation-settings: "opsz" 144, "SOFT" 50;
   opacity: 0;
   animation: fadeUp 700ms var(--ease-out) 200ms forwards;
@@ -206,7 +206,7 @@ img { max-width: 100%; display: block; }
   gap: var(--space-md);
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
   opacity: 0;
   animation: fadeUp 700ms var(--ease-out) 440ms forwards;
 }
@@ -302,55 +302,16 @@ img { max-width: 100%; display: block; }
 .hero-visual {
   position: relative;
   height: 600px;
-  opacity: 0;
-  animation: fadeIn 900ms var(--ease-out) 400ms forwards;
 }
 
 .hero-img-main {
   position: absolute;
-  top: 0; right: 0;
-  width: 78%;
-  height: 78%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 200px 200px 8px 8px;
+  border-radius: 12px;
   filter: saturate(1.05);
-}
-
-.hero-img-accent {
-  position: absolute;
-  bottom: 0; left: 0;
-  width: 52%;
-  height: 42%;
-  object-fit: cover;
-  border-radius: 8px 8px 8px 120px;
-  border: 8px solid var(--cream);
-}
-
-.hero-stat {
-  position: absolute;
-  top: 32%;
-  left: 8%;
-  background: var(--cream);
-  padding: var(--space-md) var(--space-lg);
-  border-radius: 4px;
-  box-shadow: 0 12px 32px -12px oklch(22% 0.025 145 / 0.25);
-  z-index: 3;
-}
-
-.hero-stat .num {
-  font-family: var(--display);
-  font-size: 38px;
-  font-weight: 500;
-  color: var(--monarch-deep);
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-.hero-stat .lbl {
-  font-size: 12px;
-  color: var(--ink-soft);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-top: 4px;
 }
 
 /* MISSION */
@@ -807,10 +768,10 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
   </a>
   <ul class="nav-links">
     <li><a href="#mission">Mission</a></li>
-    <li><a href="#highlights">Highlights</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#kits" class="nav-cta">Shop Kits</a></li>
+    <li><a href="/plight">The Plight</a></li>
+    <li><a href="/waystation">Our Waystation</a></li>
     <li><a href="/blog">Blog</a></li>
+    <li><a href="#kits" class="nav-cta">Shop Kits</a></li>
     </ul>
 </nav>
 
@@ -834,12 +795,7 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
       </div>
     </div>
     <div class="hero-visual">
-      <img class="hero-img-main" src="https://static.wixstatic.com/media/322617_d34da49186dc43f386d270056518d47e~mv2.jpg/v1/crop/x_173,y_56,w_1188,h_1568/fill/w_577,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_7949.jpg" alt="Monarch butterfly habitat with milkweed in bloom" loading="eager">
-      <div class="hero-stat" role="figure" aria-label="One acre under conservation">
-        <div class="num">1.2<span style="font-size:18px;color:var(--ink-soft);">ac</span></div>
-        <div class="lbl">Habitat restored</div>
-      </div>
-      <img class="hero-img-accent" src="https://static.wixstatic.com/media/322617_9e3bd691162f438fb2a70b7fcb19f120~mv2.jpg/v1/fill/w_336,h_274,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/322617_9e3bd691162f438fb2a70b7fcb19f120~mv2.jpg" alt="Close-up of native pollinator plants" loading="lazy">
+      <img class="hero-img-main" src="https://static.wixstatic.com/media/322617_d34da49186dc43f386d270056518d47e~mv2.jpg/v1/crop/x_173,y_56,w_1188,h_1568/fill/w_577,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_7949.jpg" alt="Monarch butterfly on milkweed in bloom" loading="eager">
     </div>
   </div>
 </section>
@@ -927,12 +883,13 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
 
 <section class="about" id="about">
   <div class="about-inner">
-    <img class="about-img reveal" src="https://static.wixstatic.com/media/322617_a94995f7c7124135bd79514b4ca48b54~mv2.jpg/v1/crop/x_23,y_0,w_979,h_1024/fill/w_178,h_191,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/a%20woman%20hosting%20a%20butterfly%20conservation%20workshop%20in%20front%20of%20an%20audience.jpg" alt="Avery hosting a monarch conservation workshop">
+    <img class="about-img reveal" src="/waystation-sign.png" alt="Northern Wings official Monarch Waystation sign and certificate">
     <div class="reveal">
-      <div class="section-label">— About the founder</div>
-      <h2>Hi, I'm Avery — and the monarchs need <em>all of us.</em></h2>
-      <p>What started as a single milkweed patch in my backyard has grown into a certified Monarch Waystation, a youth-led conservation effort, and a small business that funds it all. Every kit sold plants more habitat — yours and ours.</p>
-      <p>I host workshops at schools and community gardens to share what I've learned: monarchs travel up to 3,000 miles, and the journey begins on a single leaf.</p>
+      <div class="section-label">— Certified Monarch Waystation #54310</div>
+      <h2>A real waystation on a real <em>migration corridor.</em></h2>
+      <p>Northern Wings is a certified Monarch Waystation located in Emmet County, MI — at the northernmost tip of Michigan's Lower Peninsula, where monarchs funnel through each fall on their journey to Mexico.</p>
+      <p>The waystation is larger than average, built on private farmland managed specifically for wildlife. Every kit sold directly supports the restoration of more habitat along this critical migratory route.</p>
+      <a href="/waystation" class="btn btn-secondary" style="margin-top:var(--space-md);display:inline-flex;">Learn about the waystation <span class="btn-arrow">→</span></a>
       <div class="signature">
         Avery Siudara
         <small>Founder · Northern Wings</small>
