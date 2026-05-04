@@ -3,1086 +3,992 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LolYoga — Light on Lotus | Soulful & Sweaty Yoga in Mar Vista</title>
-<meta name="description" content="Discover yoga classes, workshops, teacher trainings, and wellness services at Light On Lotus Yoga Studio in West LA. Join our community for transformation and relaxation.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,700&family=Epilogue:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<title>Northern Wings — Monarch Waystation & Pollinator Garden Kits</title>
 <style>
-  :root {
-    /* Original brand preserved — magenta/purple on lavender, refined */
-    --ink: oklch(0.22 0.02 320);
-    --ink-soft: oklch(0.38 0.025 320);
-    --ink-mute: oklch(0.55 0.02 320);
-    --paper: oklch(0.965 0.012 310);
-    --paper-2: oklch(0.93 0.02 305);
-    --paper-3: oklch(0.88 0.035 300);
-    --magenta: oklch(0.48 0.22 330);
-    --magenta-deep: oklch(0.38 0.20 328);
-    --magenta-soft: oklch(0.72 0.14 328);
-    --saffron: oklch(0.78 0.14 75);
-    --line: oklch(0.78 0.03 315);
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap');
 
-    --space-1: 4px; --space-2: 8px; --space-3: 12px;
-    --space-4: 16px; --space-6: 24px; --space-8: 32px;
-    --space-12: 48px; --space-16: 64px; --space-24: 96px;
+:root {
+  --leaf-deep: oklch(38% 0.06 145);
+  --leaf: oklch(46% 0.085 145);
+  --leaf-mid: oklch(58% 0.09 142);
+  --leaf-soft: oklch(72% 0.07 138);
+  --cream: oklch(96% 0.018 95);
+  --cream-warm: oklch(92% 0.035 88);
+  --paper: oklch(98% 0.012 95);
+  --ink: oklch(22% 0.025 145);
+  --ink-soft: oklch(34% 0.03 145);
+  --monarch: oklch(68% 0.18 50);
+  --monarch-deep: oklch(56% 0.19 42);
+  --milkweed: oklch(86% 0.04 100);
 
-    --serif: 'Fraunces', Georgia, serif;
-    --sans: 'Epilogue', system-ui, sans-serif;
-    --mono: var(--sans);
-    --script: var(--serif);
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
 
-    --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
-  }
+  --display: 'Fraunces', Georgia, serif;
+  --body: 'Newsreader', Georgia, serif;
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: var(--serif);
-    font-weight: 400;
-    color: var(--ink);
-    background: var(--paper);
-    font-feature-settings: "ss01", "kern";
-    font-kerning: normal;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-  img { max-width: 100%; display: block; }
-  a { color: inherit; text-decoration: none; }
-  button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
-  :focus-visible { outline: 3px solid var(--magenta); outline-offset: 3px; border-radius: 2px; }
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+}
 
-  .wrap { max-width: 1380px; margin: 0 auto; padding: 0 var(--space-8); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* ── HEADER ─────────────────────────────────── */
-  .header {
-    position: sticky; top: 0; z-index: 100;
-    background: color-mix(in oklab, var(--paper) 88%, transparent);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid color-mix(in oklab, var(--line) 60%, transparent);
-  }
-  .header-inner {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: var(--space-8);
-    padding: var(--space-4) 0;
-  }
-  /* Hand-lettered wordmark — restored brand identity */
-  .wordmark {
-    display: flex; flex-direction: column; line-height: 0.82;
-    font-family: var(--script);
-    color: var(--magenta);
-  }
-  .wordmark-lol {
-    font-size: 44px; font-weight: 700;
-    transform: rotate(-4deg); transform-origin: left center;
-    letter-spacing: -0.02em;
-  }
-  .wordmark-yoga {
-    font-size: 44px; font-weight: 700;
-    margin-left: 28px; margin-top: -6px;
-    transform: rotate(-2deg);
-    letter-spacing: -0.02em;
-  }
-  .wordmark-sub {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-top: 10px;
-    margin-left: 2px;
-  }
-  .primary-nav {
-    display: flex; justify-content: center; gap: var(--space-8);
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-  .primary-nav a { color: var(--ink-soft); padding: 6px 0; position: relative; transition: color 150ms var(--ease-out); }
-  .primary-nav a::after {
-    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
-    height: 1px; background: var(--magenta);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 220ms var(--ease-out);
-  }
-  .primary-nav a:hover { color: var(--magenta); }
-  .primary-nav a:hover::after { transform: scaleX(1); }
+html { scroll-behavior: smooth; }
 
-  .header-actions { display: flex; align-items: center; gap: var(--space-6); }
-  .member-link {
-    font-family: var(--mono);
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--ink-soft);
-    padding: 8px 12px;
-    transition: color 150ms var(--ease-out);
-  }
-  .member-link:hover { color: var(--magenta); }
-  .cart-link {
-    font-family: var(--mono); font-size: 11px;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--ink-soft);
-    display: flex; align-items: center; gap: 6px;
-  }
-  .cart-link .bag {
-    width: 18px; height: 18px; display: inline-block;
-    border: 1.5px solid currentColor; border-top: none;
-    border-radius: 0 0 3px 3px; position: relative;
-  }
-  .cart-link .bag::before {
-    content: ""; position: absolute; top: -6px; left: 3px; right: 3px;
-    height: 6px; border: 1.5px solid currentColor; border-bottom: none;
-    border-radius: 50% 50% 0 0;
-  }
-  .btn-book {
-    background: var(--magenta);
-    color: white;
-    padding: 14px 24px;
-    border-radius: 999px;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-weight: 500;
-    transition: background 180ms var(--ease-out), transform 180ms var(--ease-out);
-  }
-  .btn-book:hover { background: var(--magenta-deep); transform: translateY(-1px); }
-  .btn-book:active { transform: translateY(0); }
+body {
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--cream);
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
 
-  /* ── HERO ────────────────────────────────────── */
-  .hero {
-    position: relative;
-    padding: var(--space-16) 0 var(--space-24);
-    overflow: hidden;
-  }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: var(--space-12);
-    align-items: center;
-  }
-  .hero-eyebrow {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-family: var(--mono);
-    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--magenta);
-    margin-bottom: var(--space-6);
-  }
-  .hero-eyebrow::before {
-    content: ""; width: 32px; height: 1px; background: var(--magenta);
-  }
-  .hero h1 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(3rem, 7.2vw, 6.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.025em;
-    color: var(--ink);
-    margin-bottom: var(--space-8);
-  }
-  .hero h1 .script-accent {
-    font-family: var(--script);
-    font-style: italic;
-    font-weight: 700;
-    color: var(--magenta);
-    font-size: 1.05em;
-    display: inline-block;
-    transform: rotate(-3deg);
-    margin: 0 0.05em;
-    line-height: 0.8;
-  }
-  .hero h1 .amp {
-    font-style: italic;
-    font-weight: 500;
-    color: var(--magenta-soft);
-  }
-  .hero-sub {
-    font-size: 1.15rem;
-    line-height: 1.55;
-    color: var(--ink-soft);
-    max-width: 46ch;
-    margin-bottom: var(--space-8);
-  }
-  .hero-cta-row {
-    display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap;
-    margin-bottom: var(--space-6);
-  }
-  .cta-primary {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 18px 30px;
-    border-radius: 999px;
-    font-family: var(--mono);
-    font-size: 13px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 500;
-    display: inline-flex; align-items: center; gap: 12px;
-    min-height: 48px;
-    transition: background 180ms var(--ease-out), transform 180ms var(--ease-out);
-  }
-  .cta-primary:hover { background: var(--magenta); transform: translateY(-1px); }
-  .cta-primary .arrow { transition: transform 220ms var(--ease-out); }
-  .cta-primary:hover .arrow { transform: translateX(4px); }
-  .cta-secondary {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    padding: 14px 4px;
-    border-bottom: 1px solid var(--ink-soft);
-    transition: color 180ms var(--ease-out), border-color 180ms var(--ease-out);
-  }
-  .cta-secondary:hover { color: var(--magenta); border-color: var(--magenta); }
+img { max-width: 100%; display: block; }
 
-  .hero-microcopy {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--ink-mute);
-    margin-bottom: var(--space-8);
-  }
-  .hero-microcopy .dot { color: var(--magenta); margin: 0 8px; }
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: var(--space-md) var(--space-2xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: oklch(96% 0.018 95 / 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid oklch(46% 0.085 145 / 0.12);
+}
 
-  .hero-trust {
-    display: flex; align-items: center; gap: var(--space-4);
-    padding-top: var(--space-6);
-    border-top: 1px solid var(--line);
-    max-width: 520px;
-  }
-  .stars { color: var(--saffron); font-size: 16px; letter-spacing: 2px; }
-  .trust-text {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--ink-soft);
-    text-transform: uppercase;
-  }
-  .trust-text strong { color: var(--ink); font-weight: 500; }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--leaf-deep);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
 
-  /* Hero visual */
-  .hero-visual {
-    position: relative;
-    aspect-ratio: 4/5;
-  }
-  .hero-photo {
-    position: absolute; inset: 0;
-    border-radius: 50% 50% 12px 12px / 40% 40% 12px 12px;
-    overflow: hidden;
-    box-shadow: 0 1px 0 var(--paper-3);
-  }
-  .hero-photo img {
-    width: 100%; height: 100%; object-fit: cover;
-  }
-  .badge {
-    position: absolute;
-    top: 8%; right: -4%;
-    width: 150px; height: 150px;
-    border-radius: 50%;
-    background: var(--magenta);
-    color: var(--paper);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center;
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    line-height: 1.4;
-    transform: rotate(8deg);
-    z-index: 2;
-    animation: slowspin 40s linear infinite;
-  }
-  .badge .est { font-family: var(--script); font-size: 38px; letter-spacing: 0; text-transform: none; line-height: 0.9; margin: 4px 0; }
-  @keyframes slowspin {
-    to { transform: rotate(368deg); }
-  }
-  .sticker {
-    position: absolute;
-    bottom: -5%; left: -6%;
-    background: var(--paper-2);
-    border: 1px solid var(--line);
-    padding: 16px 20px;
-    border-radius: 14px;
-    max-width: 240px;
-    transform: rotate(-3deg);
-    z-index: 2;
-    font-family: var(--script);
-    font-size: 22px;
-    color: var(--magenta-deep);
-    line-height: 1.15;
-  }
-  .sticker small {
-    display: block;
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-top: 6px;
-  }
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  color: var(--monarch);
+}
 
-  /* ── MARQUEE ─────────────────────────────────── */
-  .marquee {
-    background: var(--magenta-deep);
-    color: var(--paper);
-    overflow: hidden;
-    padding: var(--space-4) 0;
-    border-top: 1px solid color-mix(in oklab, var(--magenta-deep) 60%, black);
-  }
-  .marquee-track {
-    display: flex; gap: var(--space-12);
-    white-space: nowrap;
-    animation: scroll 40s linear infinite;
-    font-family: var(--script);
-    font-size: 28px;
-    font-weight: 400;
-  }
-  .marquee-track span { display: inline-flex; align-items: center; gap: var(--space-8); }
-  .marquee-track .dot { width: 8px; height: 8px; background: var(--saffron); border-radius: 50%; display: inline-block; }
-  @keyframes scroll {
-    to { transform: translateX(-50%); }
-  }
+.brand-mark svg { width: 100%; height: 100%; }
 
-  /* ── ABOUT ──────────────────────────────────── */
-  .about {
-    padding: var(--space-24) 0;
-    background: var(--paper-2);
-  }
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.3fr;
-    gap: var(--space-16);
-    align-items: center;
-  }
-  .about-image {
-    position: relative;
-    border-radius: 4px;
-    overflow: hidden;
-    aspect-ratio: 4/5;
-  }
-  .about-image img { width: 100%; height: 100%; object-fit: cover; }
-  .about-image::after {
-    content: "Kate Duyn · Founder";
-    position: absolute; bottom: 16px; left: 16px;
-    font-family: var(--mono); font-size: 10px;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--paper); background: color-mix(in oklab, var(--ink) 80%, transparent);
-    padding: 6px 12px; border-radius: 999px;
-    backdrop-filter: blur(4px);
-  }
-  .section-eyebrow {
-    font-family: var(--mono);
-    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--magenta); margin-bottom: var(--space-4);
-    display: flex; align-items: center; gap: 10px;
-  }
-  .section-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--magenta); }
-  .section-title {
-    font-family: var(--serif);
-    font-size: clamp(2.2rem, 4.2vw, 3.5rem);
-    font-weight: 400;
-    line-height: 1.02;
-    letter-spacing: -0.02em;
-    margin-bottom: var(--space-8);
-  }
-  .section-title em {
-    font-family: var(--script);
-    font-style: italic;
-    color: var(--magenta);
-    font-weight: 700;
-    font-size: 1.1em;
-    display: inline-block;
-    transform: rotate(-2deg);
-  }
-  .about p {
-    color: var(--ink-soft);
-    font-size: 1.08rem;
-    line-height: 1.65;
-    margin-bottom: var(--space-4);
-    max-width: 56ch;
-  }
-  .about p strong { color: var(--ink); font-weight: 600; }
+.brand small {
+  display: block;
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--leaf-mid);
+  font-weight: 500;
+  margin-top: 2px;
+}
 
-  /* ── CLASSES ────────────────────────────────── */
-  .classes {
-    padding: var(--space-24) 0;
-  }
-  .classes-head {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-12);
-    align-items: end;
-    margin-bottom: var(--space-12);
-  }
-  .classes-head p {
-    color: var(--ink-soft);
-    font-size: 1.05rem;
-    max-width: 46ch;
-    justify-self: end;
-  }
-  .class-table {
-    border-top: 1px solid var(--line);
-  }
-  .class-row {
-    display: grid;
-    grid-template-columns: 60px 1.3fr 1.5fr 1fr auto;
-    gap: var(--space-6);
-    padding: var(--space-6) 0;
-    border-bottom: 1px solid var(--line);
-    align-items: center;
-    transition: background 180ms var(--ease-out), padding 180ms var(--ease-out);
-  }
-  .class-row:hover {
-    background: var(--paper-2);
-    padding-left: var(--space-4);
-    padding-right: var(--space-4);
-  }
-  .class-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--ink-mute);
-    font-variant-numeric: tabular-nums;
-  }
-  .class-name {
-    font-family: var(--serif);
-    font-size: 1.6rem;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    line-height: 1;
-  }
-  .class-name .scr {
-    font-family: var(--script); color: var(--magenta);
-    font-style: italic; font-weight: 700; font-size: 1.1em;
-  }
-  .class-desc {
-    font-size: 0.95rem;
-    color: var(--ink-soft);
-    line-height: 1.5;
-  }
-  .class-tag {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-  }
-  .class-link {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink);
-    display: inline-flex; align-items: center; gap: 8px;
-    transition: gap 220ms var(--ease-out), color 180ms var(--ease-out);
-  }
-  .class-row:hover .class-link { gap: 14px; color: var(--magenta); }
+.nav-links {
+  display: flex;
+  gap: var(--space-xl);
+  align-items: center;
+  list-style: none;
+}
 
-  /* ── WELLNESS ───────────────────────────────── */
-  .wellness {
-    padding: var(--space-24) 0;
-    background: var(--ink);
-    color: var(--paper);
-    position: relative;
-    overflow: hidden;
-  }
-  .wellness::before {
-    content: "";
-    position: absolute;
-    top: -200px; right: -200px;
-    width: 500px; height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, color-mix(in oklab, var(--magenta) 40%, transparent) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .wellness .section-eyebrow { color: var(--magenta-soft); }
-  .wellness .section-eyebrow::before { background: var(--magenta-soft); }
-  .wellness-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: var(--space-8);
-    margin-top: var(--space-12);
-    position: relative;
-  }
-  .wellness-item {
-    padding: var(--space-8) 0;
-    border-top: 1px solid color-mix(in oklab, var(--paper) 25%, transparent);
-  }
-  .wellness-item h3 {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 1.6rem;
-    margin-bottom: var(--space-4);
-    letter-spacing: -0.01em;
-  }
-  .wellness-item p {
-    font-size: 0.95rem;
-    color: color-mix(in oklab, var(--paper) 75%, transparent);
-    line-height: 1.55;
-  }
-  .wellness-item .num {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    color: var(--magenta-soft);
-    display: block;
-    margin-bottom: var(--space-3);
-  }
+.nav-links a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 150ms var(--ease-out);
+}
 
-  /* ── TESTIMONIAL ────────────────────────────── */
-  .testimonial {
-    padding: var(--space-24) 0;
-    text-align: center;
-  }
-  .testimonial blockquote {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
-    line-height: 1.25;
-    letter-spacing: -0.015em;
-    max-width: 22ch;
-    margin: 0 auto var(--space-8);
-    color: var(--ink);
-  }
-  .testimonial blockquote::before {
-    content: "";
-    font-family: var(--script);
-    color: var(--magenta);
-    font-size: 1em;
-    line-height: 0;
-    display: block;
-    margin-bottom: var(--space-4);
-  }
-  .testimonial cite {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    font-style: normal;
-  }
-  .testimonial cite strong { color: var(--ink); font-weight: 500; margin-right: 10px; }
+.nav-links a:hover { color: var(--leaf-deep); }
+.nav-links a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 4px; border-radius: 2px; }
 
-  /* ── CTA FOOTER ─────────────────────────────── */
-  .cta-footer {
-    background: var(--magenta);
-    color: var(--paper);
-    padding: var(--space-24) 0;
-    position: relative;
-    overflow: hidden;
-  }
-  .cta-footer-inner {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: var(--space-16);
-    align-items: center;
-  }
-  .cta-footer h2 {
-    font-family: var(--serif);
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 400;
-    line-height: 0.98;
-    letter-spacing: -0.025em;
-    margin-bottom: var(--space-6);
-  }
-  .cta-footer h2 .hs {
-    font-family: var(--script);
-    font-style: italic;
-    font-weight: 700;
-    color: var(--saffron);
-    font-size: 1.1em;
-    display: inline-block;
-    transform: rotate(-3deg);
-  }
-  .cta-footer p {
-    color: color-mix(in oklab, var(--paper) 85%, transparent);
-    font-size: 1.1rem;
-    margin-bottom: var(--space-8);
-    max-width: 50ch;
-  }
-  .cta-btn-large {
-    background: var(--paper);
-    color: var(--ink);
-    padding: 22px 36px;
-    border-radius: 999px;
-    font-family: var(--mono);
-    font-size: 13px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-weight: 500;
-    display: inline-flex; align-items: center; gap: 14px;
-    transition: background 180ms var(--ease-out), transform 180ms var(--ease-out);
-  }
-  .cta-btn-large:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
-  .cta-micro {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: color-mix(in oklab, var(--paper) 75%, transparent);
-    margin-top: var(--space-6);
-  }
-  .cta-micro .pipe { margin: 0 10px; opacity: 0.4; }
+.nav-cta {
+  background: var(--monarch-deep);
+  color: var(--cream);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: transform 150ms var(--ease-out), background 150ms var(--ease-out);
+}
+.nav-cta:hover { background: var(--ink); color: var(--cream) !important; transform: translateY(-1px); }
 
-  .newsletter {
-    background: color-mix(in oklab, var(--paper) 12%, transparent);
-    backdrop-filter: blur(8px);
-    border: 1px solid color-mix(in oklab, var(--paper) 25%, transparent);
-    padding: var(--space-8);
-    border-radius: 16px;
-  }
-  .newsletter h3 {
-    font-family: var(--serif); font-weight: 500;
-    font-size: 1.4rem; margin-bottom: var(--space-3);
-  }
-  .newsletter p {
-    font-size: 0.9rem;
-    color: color-mix(in oklab, var(--paper) 80%, transparent);
-    margin-bottom: var(--space-6);
-  }
-  .newsletter-form { display: flex; gap: var(--space-2); }
-  .newsletter-form input {
-    flex: 1; min-width: 0;
-    padding: 14px 16px;
-    background: color-mix(in oklab, var(--paper) 95%, transparent);
-    border: 1px solid transparent;
-    border-radius: 999px;
-    font-family: var(--serif);
-    font-size: 0.95rem;
-    color: var(--ink);
-  }
-  .newsletter-form input::placeholder { color: var(--ink-mute); }
-  .newsletter-form button {
-    background: var(--ink); color: var(--paper);
-    padding: 14px 22px; border-radius: 999px;
-    font-family: var(--mono); font-size: 11px;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    transition: background 180ms var(--ease-out);
-  }
-  .newsletter-form button:hover { background: var(--magenta-deep); }
+/* HERO */
+.hero {
+  padding: 140px var(--space-2xl) var(--space-3xl);
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 80% 10%, oklch(72% 0.07 138 / 0.35), transparent 55%),
+    radial-gradient(ellipse at 10% 90%, oklch(86% 0.04 100 / 0.5), transparent 50%),
+    var(--cream);
+}
 
-  /* ── FOOTER ─────────────────────────────────── */
-  .footer {
-    background: var(--paper);
-    padding: var(--space-16) 0 var(--space-8);
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr 1fr;
-    gap: var(--space-12);
-    padding-bottom: var(--space-12);
-    border-bottom: 1px solid var(--line);
-  }
-  .footer h4 {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: var(--space-6);
-    font-weight: 500;
-  }
-  .footer ul { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); }
-  .footer a { color: var(--ink-soft); font-size: 0.98rem; transition: color 150ms var(--ease-out); }
-  .footer a:hover { color: var(--magenta); }
-  .footer-brand .wordmark-lol, .footer-brand .wordmark-yoga { font-size: 52px; }
-  .footer-brand p {
-    color: var(--ink-soft);
-    font-size: 0.95rem;
-    max-width: 34ch;
-    margin-top: var(--space-6);
-    line-height: 1.55;
-  }
-  .footer-address {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--ink-mute);
-    margin-top: var(--space-4);
-    line-height: 1.8;
-  }
-  .footer-bar {
-    padding-top: var(--space-6);
-    display: flex; justify-content: space-between; align-items: center;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--ink-mute);
-  }
+.hero-grid {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: center;
+}
 
-  /* ── ENTRANCE ANIMATIONS ────────────────────── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    animation: reveal 700ms var(--ease-out) forwards;
-  }
-  @keyframes reveal {
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .r1 { animation-delay: 80ms; }
-  .r2 { animation-delay: 180ms; }
-  .r3 { animation-delay: 280ms; }
-  .r4 { animation-delay: 380ms; }
-  .r5 { animation-delay: 480ms; }
-  .r6 { animation-delay: 580ms; }
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--leaf);
+  font-weight: 500;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  animation: fadeUp 600ms var(--ease-out) 100ms forwards;
+}
+.eyebrow::before {
+  content: "";
+  width: 32px;
+  height: 1px;
+  background: var(--leaf);
+}
 
-  /* ── RESPONSIVE ─────────────────────────────── */
-  @media (max-width: 960px) {
-    .header-inner { grid-template-columns: auto auto; gap: var(--space-4); }
-    .primary-nav, .member-link, .cart-link { display: none; }
-    .hero-grid, .about-grid, .cta-footer-inner, .classes-head { grid-template-columns: 1fr; }
-    .class-row { grid-template-columns: 40px 1fr auto; }
-    .class-desc, .class-tag { display: none; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-    .badge { width: 110px; height: 110px; font-size: 9px; top: 4%; right: 2%; }
-    .badge .est { font-size: 28px; }
-    .sticker { left: 0; bottom: -8%; }
-    .footer-bar { flex-direction: column; gap: var(--space-3); text-align: center; }
-  }
-  @media (max-width: 520px) {
-    .wrap { padding: 0 var(--space-6); }
-    .footer-grid { grid-template-columns: 1fr; }
-    .newsletter-form { flex-direction: column; }
-    .hero { padding: var(--space-12) 0 var(--space-16); }
-  }
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(44px, 6.2vw, 88px);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: var(--space-lg);
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  opacity: 0;
+  animation: fadeUp 700ms var(--ease-out) 200ms forwards;
+}
 
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-    .marquee-track { animation: none; }
-    .badge { animation: none; }
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--monarch-deep);
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+
+.hero-sub {
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 520px;
+  margin-bottom: var(--space-2xl);
+  opacity: 0;
+  animation: fadeUp 700ms var(--ease-out) 320ms forwards;
+}
+
+.cta-row {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  animation: fadeUp 700ms var(--ease-out) 440ms forwards;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 16px 28px;
+  border-radius: 4px;
+  font-family: var(--body);
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: transform 150ms var(--ease-out), background 150ms var(--ease-out), box-shadow 200ms var(--ease-out);
+  min-height: 48px;
+}
+
+.btn-primary {
+  background: var(--monarch-deep);
+  color: var(--cream);
+  box-shadow: 0 1px 0 oklch(40% 0.18 42), 0 8px 24px -8px oklch(56% 0.19 42 / 0.5);
+}
+.btn-primary:hover {
+  background: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 1px 0 var(--ink), 0 12px 28px -8px oklch(22% 0.025 145 / 0.4);
+}
+.btn-primary:focus-visible {
+  outline: 3px solid var(--leaf);
+  outline-offset: 3px;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid oklch(34% 0.03 145 / 0.3);
+}
+.btn-secondary:hover { border-color: var(--ink); background: oklch(46% 0.085 145 / 0.06); }
+.btn-secondary:focus-visible { outline: 3px solid var(--leaf); outline-offset: 3px; }
+
+.btn-arrow {
+  display: inline-block;
+  transition: transform 200ms var(--ease-out);
+}
+.btn:hover .btn-arrow { transform: translateX(4px); }
+
+.micro {
+  font-size: 14px;
+  color: var(--leaf);
+  opacity: 0;
+  animation: fadeUp 700ms var(--ease-out) 560ms forwards;
+}
+
+.trust {
+  margin-top: var(--space-2xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid oklch(46% 0.085 145 / 0.15);
+  opacity: 0;
+  animation: fadeUp 700ms var(--ease-out) 680ms forwards;
+}
+
+.cert-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--leaf-deep);
+  color: var(--cream);
+  display: grid;
+  place-items: center;
+  font-family: var(--display);
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.1;
+  font-weight: 600;
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+}
+
+.trust-text {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+.trust-text strong { color: var(--leaf-deep); font-weight: 600; display: block; }
+
+/* HERO VISUAL */
+.hero-visual {
+  position: relative;
+  height: 600px;
+  opacity: 0;
+  animation: fadeIn 900ms var(--ease-out) 400ms forwards;
+}
+
+.hero-img-main {
+  position: absolute;
+  top: 0; right: 0;
+  width: 78%;
+  height: 78%;
+  object-fit: cover;
+  border-radius: 200px 200px 8px 8px;
+  filter: saturate(1.05);
+}
+
+.hero-img-accent {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 52%;
+  height: 42%;
+  object-fit: cover;
+  border-radius: 8px 8px 8px 120px;
+  border: 8px solid var(--cream);
+}
+
+.hero-stat {
+  position: absolute;
+  top: 32%;
+  left: 8%;
+  background: var(--cream);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: 4px;
+  box-shadow: 0 12px 32px -12px oklch(22% 0.025 145 / 0.25);
+  z-index: 3;
+}
+
+.hero-stat .num {
+  font-family: var(--display);
+  font-size: 38px;
+  font-weight: 500;
+  color: var(--monarch-deep);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.hero-stat .lbl {
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* MISSION */
+.mission {
+  padding: var(--space-4xl) var(--space-2xl);
+  background: var(--leaf-deep);
+  color: var(--cream);
+  position: relative;
+}
+
+.mission-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: var(--space-3xl);
+  align-items: start;
+}
+
+.section-label {
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--leaf-soft);
+  font-weight: 500;
+  margin-bottom: var(--space-md);
+}
+
+.mission .section-label { color: var(--leaf-soft); }
+
+.mission h2 {
+  font-family: var(--display);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+}
+.mission h2 em {
+  font-style: italic;
+  color: var(--monarch);
+  font-weight: 400;
+}
+
+.mission-body p {
+  font-size: 19px;
+  line-height: 1.6;
+  color: oklch(92% 0.02 95);
+  margin-bottom: var(--space-md);
+}
+.mission-body p:first-child::first-letter {
+  font-family: var(--display);
+  font-size: 64px;
+  float: left;
+  line-height: 0.85;
+  margin: 6px 12px 0 0;
+  color: var(--monarch);
+  font-weight: 500;
+}
+
+/* HIGHLIGHTS */
+.highlights {
+  padding: var(--space-4xl) var(--space-2xl);
+  background: var(--cream);
+}
+
+.highlights .section-label { color: var(--leaf); }
+
+.highlights-head {
+  max-width: 1320px;
+  margin: 0 auto var(--space-3xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: var(--space-2xl);
+  flex-wrap: wrap;
+}
+
+.highlights-head h2 {
+  font-family: var(--display);
+  font-size: clamp(36px, 4.5vw, 60px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  max-width: 700px;
+}
+.highlights-head h2 em { font-style: italic; color: var(--leaf); font-weight: 400; }
+
+.highlights-head p {
+  font-size: 17px;
+  color: var(--ink-soft);
+  max-width: 320px;
+}
+
+.timeline {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.month {
+  position: relative;
+}
+
+.month-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: var(--space-md);
+  transition: transform 400ms var(--ease-out);
+}
+.month:hover .month-img { transform: scale(1.02); }
+
+.month-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-xs);
+}
+
+.month-num {
+  font-family: var(--display);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--leaf);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.month-tag {
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.month h3 {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: var(--space-sm);
+  line-height: 1.05;
+}
+
+.month p {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* KITS */
+.kits {
+  padding: var(--space-4xl) var(--space-2xl);
+  background: var(--milkweed);
+  position: relative;
+  overflow: hidden;
+}
+
+.kits::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 90% 20%, oklch(68% 0.18 50 / 0.12), transparent 40%),
+    radial-gradient(circle at 5% 80%, oklch(46% 0.085 145 / 0.1), transparent 45%);
+  pointer-events: none;
+}
+
+.kits .section-label { color: var(--leaf); }
+
+.kits-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: center;
+  position: relative;
+}
+
+.kits-text h2 {
+  font-family: var(--display);
+  font-size: clamp(40px, 5vw, 68px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: var(--space-md) 0 var(--space-lg);
+}
+.kits-text h2 em { font-style: italic; color: var(--monarch-deep); font-weight: 400; }
+
+.kits-text > p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-bottom: var(--space-xl);
+  max-width: 520px;
+}
+
+.kit-features {
+  list-style: none;
+  display: grid;
+  gap: 0;
+  margin-bottom: var(--space-2xl);
+}
+
+.kit-features li {
+  display: flex;
+  gap: var(--space-md);
+  align-items: start;
+  padding: var(--space-md) 0;
+  border-top: 1px solid oklch(46% 0.085 145 / 0.18);
+  font-size: 16px;
+}
+.kit-features li:last-child { border-bottom: 1px solid oklch(46% 0.085 145 / 0.18); }
+
+.kit-features .num {
+  font-family: var(--display);
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+  color: var(--leaf);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  width: 32px;
+  padding-top: 2px;
+}
+
+.kit-features strong {
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 2px;
+}
+.kit-features span { color: var(--ink-soft); font-size: 15px; }
+
+.kits-visual {
+  position: relative;
+  aspect-ratio: 4/5;
+}
+
+.kits-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.float-card {
+  position: absolute;
+  bottom: -24px;
+  left: -24px;
+  background: var(--leaf-deep);
+  color: var(--cream);
+  padding: var(--space-lg) var(--space-xl);
+  border-radius: 4px;
+  max-width: 240px;
+  box-shadow: 0 16px 40px -16px oklch(22% 0.025 145 / 0.4);
+}
+.float-card .price {
+  font-family: var(--display);
+  font-size: 32px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  display: block;
+  margin-bottom: var(--space-2xs);
+}
+.float-card p { font-size: 13px; color: oklch(88% 0.025 95); line-height: 1.4; }
+
+/* ABOUT */
+.about {
+  padding: var(--space-4xl) var(--space-2xl);
+  background: var(--cream);
+}
+
+.about .section-label { color: var(--leaf); }
+
+.about-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--space-3xl);
+  align-items: center;
+}
+
+.about-img {
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.about h2 {
+  font-family: var(--display);
+  font-size: clamp(36px, 4.5vw, 56px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin: var(--space-md) 0 var(--space-lg);
+}
+.about h2 em { font-style: italic; color: var(--monarch-deep); font-weight: 400; }
+
+.about p {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin-bottom: var(--space-md);
+}
+
+.signature {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid oklch(46% 0.085 145 / 0.18);
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--leaf-deep);
+}
+.signature small {
+  display: block;
+  font-family: var(--body);
+  font-style: normal;
+  font-size: 13px;
+  color: var(--ink-soft);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* CTA FOOTER */
+.cta-final {
+  padding: var(--space-4xl) var(--space-2xl);
+  background: var(--ink);
+  color: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-final::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, oklch(56% 0.19 42 / 0.18), transparent 50%),
+    radial-gradient(ellipse at 80% 80%, oklch(46% 0.085 145 / 0.25), transparent 50%);
+}
+
+.cta-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+}
+
+.cta-final h2 {
+  font-family: var(--display);
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-lg);
+  font-variation-settings: "opsz" 144, "SOFT" 80;
+}
+.cta-final h2 em { font-style: italic; color: var(--monarch); }
+
+.cta-final p {
+  font-size: 19px;
+  color: oklch(86% 0.02 95);
+  max-width: 560px;
+  margin: 0 auto var(--space-2xl);
+  line-height: 1.5;
+}
+
+footer {
+  background: var(--ink);
+  color: oklch(78% 0.02 145);
+  padding: var(--space-2xl);
+  border-top: 1px solid oklch(34% 0.03 145);
+  font-size: 14px;
+  text-align: center;
+}
+footer .brand { color: var(--cream); justify-content: center; margin-bottom: var(--space-md); }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero { padding: 110px var(--space-lg) var(--space-2xl); }
+  .hero-grid, .mission-inner, .kits-inner, .about-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
   }
+  .hero-visual { height: 460px; }
+  .timeline { grid-template-columns: 1fr; gap: var(--space-2xl); }
+  .nav { padding: var(--space-sm) var(--space-md); }
+  .nav-links { gap: var(--space-md); }
+  .nav-links a:not(.nav-cta) { display: none; }
+  .brand { font-size: 16px; }
+  .brand small { font-size: 10px; }
+  .mission, .highlights, .kits, .about, .cta-final { padding: var(--space-3xl) var(--space-md); }
+  .hero-stat { left: auto; right: 8%; top: 28%; }
+  .float-card { left: var(--space-md); bottom: -16px; }
+  .highlights-head { flex-direction: column; align-items: start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
+}
 </style>
 </head>
 <body>
 
-<header class="header">
-  <div class="wrap header-inner">
-    <a href="/" class="wordmark" aria-label="LolYoga — Light on Lotus">
-      <span class="wordmark-lol">Lol</span>
-      <span class="wordmark-yoga">Yoga</span>
-      <span class="wordmark-sub">Light on Lotus · Mar Vista</span>
-    </a>
-    <nav class="primary-nav" aria-label="Primary">
-      <a href="#schedule">Schedule</a>
-      <a href="#classes">Classes</a>
-      <a href="#about">About</a>
-      <a href="#wellness">Wellness</a>
-      <a href="#trainings">Trainings</a>
-      <a href="/blog?brand=%7B%22name%22%3A%22Light+On+Lotus%22%2C%22navCta%22%3A%22Book+a+Class%22%2C%22hue%22%3A%22300%22%2C%22accentHue%22%3A%22290%22%7D">Blog</a>
-    </nav>
-    <div class="header-actions">
-      <a href="#login" class="member-link">Members ›</a>
-      <a href="#cart" class="cart-link" aria-label="Cart, 0 items">
-        <span class="bag" aria-hidden="true"></span><span>0</span>
-      </a>
-      <a href="#book" class="btn-book">Book a Class</a>
-    </div>
-  </div>
-</header>
+<nav class="nav">
+  <a href="#" class="brand" aria-label="Northern Wings home">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 40 40" fill="none">
+        <path d="M20 8 C12 8, 6 14, 8 22 C10 28, 16 30, 20 26 C24 30, 30 28, 32 22 C34 14, 28 8, 20 8 Z M20 14 L20 32" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <circle cx="14" cy="18" r="1.5" fill="currentColor"/>
+        <circle cx="26" cy="18" r="1.5" fill="currentColor"/>
+      </svg>
+    </span>
+    <span>Northern Wings<small>Monarch Waystation</small></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#highlights">Highlights</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#kits" class="nav-cta">Shop Kits</a></li>
+    <li><a href="/blog">Blog</a></li>
+    </ul>
+</nav>
 
 <section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <div class="hero-eyebrow reveal r1">Mar Vista · West Los Angeles</div>
-      <h1 class="reveal r2">
-        Soulful <span class="amp">&amp;</span> sweaty<br>
-        <span class="script-accent">yoga</span>, every day.
-      </h1>
-      <p class="hero-sub reveal r3">
-        A fluid, adventurous practice in a community-driven studio on the
-        Westside — in-person, in the garden, or live from home. Move, groove,
-        and find your way back to yourself.
-      </p>
-      <div class="hero-cta-row reveal r4">
-        <a href="#book" class="cta-primary">
-          Book your first class
-          <span class="arrow" aria-hidden="true">→</span>
-        </a>
-        <a href="#schedule" class="cta-secondary">See today's schedule</a>
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="eyebrow">Youth-led conservation · Est. Waystation #54310</div>
+      <h1>Plant a milkweed.<br>Save a <em>monarch.</em></h1>
+      <p class="hero-sub">Northern Wings is a youth-led project restoring over an acre of monarch habitat — and helping you build your own pollinator sanctuary at home with native-seed garden kits.</p>
+      <div class="cta-row">
+        <a href="#kits" class="btn btn-primary">Get a Pollinator Kit <span class="btn-arrow">→</span></a>
+        <a href="#about" class="btn btn-secondary">Read our story</a>
       </div>
-      <div class="hero-microcopy reveal r5">
-        First class $15 <span class="dot">•</span> All levels welcome <span class="dot">•</span> Mats provided
-      </div>
-      <div class="hero-trust reveal r6">
-        <div class="stars" aria-label="Rated 5 out of 5">★★★★★</div>
-        <div class="trust-text"><strong>4.9</strong> from 480+ students · <strong>Since 2016</strong></div>
+      <p class="micro">✦ Native seeds · Bio-degradable materials · Ships across North America</p>
+      <div class="trust">
+        <div class="cert-badge" aria-hidden="true">MONARCH<br>WATCH</div>
+        <div class="trust-text">
+          <strong>Certified Monarch Waystation #54310</strong>
+          Recognized by Monarch Watch for creating, conserving, and protecting monarch habitats.
+        </div>
       </div>
     </div>
-
-    <div class="hero-visual reveal r3">
-      <div class="hero-photo">
-        <img src="https://images.squarespace-cdn.com/content/v1/6205b07bd5a39e2fcc619c94/37675c2b-fe84-49c3-94bc-2ce48cdf055a/0DDFF034-BF8F-48AF-B1F2-7EA0E3827D10.jpg" alt="Students practicing yoga together at Light on Lotus studio in Mar Vista">
+    <div class="hero-visual">
+      <img class="hero-img-main" src="https://static.wixstatic.com/media/322617_d34da49186dc43f386d270056518d47e~mv2.jpg/v1/crop/x_173,y_56,w_1188,h_1568/fill/w_577,h_762,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_7949.jpg" alt="Monarch butterfly habitat with milkweed in bloom" loading="eager">
+      <div class="hero-stat" role="figure" aria-label="One acre under conservation">
+        <div class="num">1.2<span style="font-size:18px;color:var(--ink-soft);">ac</span></div>
+        <div class="lbl">Habitat restored</div>
       </div>
-      <div class="badge" aria-label="Established 2016 in Mar Vista">
-        <span>Rooted in</span>
-        <span class="est">Mar Vista</span>
-        <span>Est · 2016</span>
-      </div>
-      <div class="sticker">
-        Om, move &amp; groove
-        <small>Our signature flow</small>
-      </div>
+      <img class="hero-img-accent" src="https://static.wixstatic.com/media/322617_9e3bd691162f438fb2a70b7fcb19f120~mv2.jpg/v1/fill/w_336,h_274,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/322617_9e3bd691162f438fb2a70b7fcb19f120~mv2.jpg" alt="Close-up of native pollinator plants" loading="lazy">
     </div>
   </div>
 </section>
 
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>Lotus Flow<span class="dot"></span></span>
-    <span>Bhakti Flow<span class="dot"></span></span>
-    <span>Yummy Yin<span class="dot"></span></span>
-    <span>Lotus Rocks<span class="dot"></span></span>
-    <span>Sun Celebration<span class="dot"></span></span>
-    <span>Flow &amp; Slow<span class="dot"></span></span>
-    <span>Community Class<span class="dot"></span></span>
-    <span>Lotus Flow<span class="dot"></span></span>
-    <span>Bhakti Flow<span class="dot"></span></span>
-    <span>Yummy Yin<span class="dot"></span></span>
-    <span>Lotus Rocks<span class="dot"></span></span>
-    <span>Sun Celebration<span class="dot"></span></span>
-    <span>Flow &amp; Slow<span class="dot"></span></span>
-    <span>Community Class<span class="dot"></span></span>
+<section class="mission" id="mission">
+  <div class="mission-inner">
+    <div class="reveal">
+      <div class="section-label">— Our Mission</div>
+      <h2>Safe havens for <em>monarchs,</em> one milkweed at a time.</h2>
+    </div>
+    <div class="mission-body reveal">
+      <p>Northern Wings is a youth-led social enterprise that manages over an acre of land specifically for Monarch butterfly conservation. Known as a Monarch Waystation, this land provides critical habitat for migrating monarchs — offering milkweed, nectar plants, and a safe place to rest and reproduce.</p>
+      <p>To support this effort, we sell DIY Pollinator Garden Kits so others can establish their own waystations or enhance their existing gardens. Together, we can help reverse the decline of one of North America's most iconic species.</p>
+    </div>
   </div>
-</div>
+</section>
+
+<section class="highlights" id="highlights">
+  <div class="highlights-head">
+    <h2 class="reveal">Project highlights, <em>month by month</em></h2>
+    <p class="reveal">A growing season at the waystation: from seedling to sanctuary.</p>
+  </div>
+  <div class="timeline">
+    <article class="month reveal">
+      <img class="month-img" src="https://static.wixstatic.com/media/322617_c3278366455844799679cd65ee8b113f~mv2.jpg/v1/fill/w_311,h_233,fp_0.50_0.50,q_90,enc_avif,quality_auto/322617_c3278366455844799679cd65ee8b113f~mv2.webp" alt="Milkweed seedlings in early spring">
+      <div class="month-meta">
+        <span class="month-num">Month 02</span>
+        <span class="month-tag">Late spring</span>
+      </div>
+      <h3>Germination & first leaves</h3>
+      <p>Native milkweed and nectar species begin breaking ground after a careful winter sow. Beds are mapped to provide continuous bloom from May through October.</p>
+    </article>
+    <article class="month reveal">
+      <img class="month-img" src="https://static.wixstatic.com/media/322617_3e012f525009477b9242a0fb8264c01e~mv2.jpg/v1/fill/w_311,h_233,fp_0.50_0.50,q_90,enc_avif,quality_auto/322617_3e012f525009477b9242a0fb8264c01e~mv2.webp" alt="Pollinator garden mid-summer">
+      <div class="month-meta">
+        <span class="month-num">Month 03</span>
+        <span class="month-tag">Mid summer</span>
+      </div>
+      <h3>The first eggs arrive</h3>
+      <p>Female monarchs locate the milkweed and begin laying eggs on the underside of the leaves. Caterpillars hatch within four days and feed exclusively on the host plant.</p>
+    </article>
+    <article class="month reveal">
+      <img class="month-img" src="https://static.wixstatic.com/media/322617_857ebbd82f304241a86b96f99349c005~mv2.jpg/v1/fill/w_310,h_233,fp_0.50_0.50,q_90,enc_avif,quality_auto/322617_857ebbd82f304241a86b96f99349c005~mv2.webp" alt="Monarchs feeding on nectar in late summer">
+      <div class="month-meta">
+        <span class="month-num">Month 04</span>
+        <span class="month-tag">Late summer</span>
+      </div>
+      <h3>Migration begins</h3>
+      <p>Adults emerge and fuel up on nectar plants for the long journey south. The acre supports hundreds of butterflies before they begin their flight to Mexico.</p>
+    </article>
+  </div>
+</section>
+
+<section class="kits" id="kits">
+  <div class="kits-inner">
+    <div class="kits-text reveal">
+      <div class="section-label">— Pollinator Garden Kits</div>
+      <h2>Build your own <em>monarch waystation.</em></h2>
+      <p>Each kit gives families, schools, and gardeners everything they need to start a pollinator-friendly habitat — designed by us, planted by you.</p>
+      <ul class="kit-features">
+        <li>
+          <span class="num">01</span>
+          <div><strong>Native seed mix</strong><span>Region-appropriate milkweed and nectar varieties.</span></div>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <div><strong>Bio-degradable planting materials</strong><span>Compostable trays and natural growing media.</span></div>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <div><strong>Educational guide</strong><span>Step-by-step planting & monarch life-cycle handbook.</span></div>
+        </li>
+      </ul>
+      <a href="#" class="btn btn-primary">Empower change & purchase <span class="btn-arrow">→</span></a>
+    </div>
+    <div class="kits-visual reveal">
+      <img class="kits-img" src="https://static.wixstatic.com/media/322617_6ebecff961c84a01adf1935c3cb8e4ebf000.jpg/v1/fill/w_1320,h_530,al_t,q_85,usm_0.33_1.00_0.00,enc_avif,quality_auto/322617_6ebecff961c84a01adf1935c3cb8e4ebf000.jpg" alt="Pollinator garden in full bloom">
+      <div class="float-card">
+        <span class="price">$28</span>
+        <p>Starter kit — covers ~25 sq ft of native habitat. Free shipping over $50.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="about" id="about">
-  <div class="wrap about-grid">
-    <div class="about-image">
-      <img src="https://images.squarespace-cdn.com/content/v1/6205b07bd5a39e2fcc619c94/fd48a4b0-48cc-46ee-bb1d-ce763bfacb9b/IMG_4360.jpg" alt="Kate Duyn, founder of LolYoga Light on Lotus">
-    </div>
-    <div>
-      <div class="section-eyebrow">About Kate &amp; the studio</div>
-      <h2 class="section-title">A sacred, <em>uplifting</em> space in the heart of the Westside.</h2>
-      <p>
-        <strong>Light on Lotus was founded by Kate Duyn in 2016</strong> with one
-        intention: create a place where all can come for support, community, and
-        inspiration — a place to Om, move, and groove together.
-      </p>
-      <p>
-        The studio offers classes for every level, including prenatal yoga, with
-        creative sequencing, inside or out in our garden (weather permitting),
-        and live-streamed for practice from home. Teacher trainings, workshops,
-        kirtans, soundbaths, and a Wellness Wing with massage, acupuncture, and
-        reiki round out the experience.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section class="classes" id="classes">
-  <div class="wrap">
-    <div class="classes-head">
-      <div>
-        <div class="section-eyebrow">Weekly schedule</div>
-        <h2 class="section-title">Nine flows, <em>one</em> community.</h2>
-      </div>
-      <p>
-        From sweaty power hours to slow, restorative evenings — every class
-        stays rooted in our signature fluid, adventurous, transformative flow.
-      </p>
-    </div>
-
-    <div class="class-table" role="list">
-      <a href="#schedule" class="class-row" role="listitem">
-        <span class="class-num">01</span>
-        <span class="class-name">Lotus <span class="scr">Flow</span></span>
-        <span class="class-desc">Our signature fluid, adventurous, transformative flow.</span>
-        <span class="class-tag">All levels · 60 min</span>
-        <span class="class-link">Book <span aria-hidden="true">→</span></span>
-      </a>
-      <a href="#schedule" class="class-row" role="listitem">
-        <span class="class-num">02</span>
-        <span class="class-name">Bhakti Flow</span>
-        <span class="class-desc">Devotional movement woven with chanting and live music.</span>
-        <span class="class-tag">All levels · 75 min</span>
-        <span class="class-link">Book <span aria-hidden="true">→</span></span>
-      </a>
-      <a href="#schedule" class="class-row" role="listitem">
-        <span class="class-num">03</span>
-        <span class="class-name">Lotus 2/3</span>
-        <span class="class-desc">Deeper exploration — inversions, arm balances, stamina.</span>
-        <span class="class-tag">Intermediate · 75 min</span>
-        <span class="class-link">Book <span aria-hidden="true">→</span></span>
-      </a>
-      <a href="#schedule" class="class-row" role="listitem">
-        <span class="class-num">04</span>
-        <span class="class-name">Lotus <span class="scr">Rocks</span></span>
-        <span class="class-desc">High-energy vinyasa set to loud, soulful rock.</span>
-        <span class="class-tag">All levels · 60 min</span>
-        <span class="class-link">Book <span aria-hidden="true">→</span></span>
-      </a>
-      <a href="#schedule" class="class-row" role="listitem">
-        <span class="class-num">05</span>
-        <span class="class-name">Flow &amp; Slow</span>
-        <span class="class-desc">Half warming flow, half long, delicious holds.</span>
-        <span class="class-tag">All levels · 75 min</span>
-        <span class="class-link">Book <span aria-hidden="true">→</span></span>
-      </a>
-      <a href="#schedule" class="class-row" role="listitem">
-        <span class="class-num">06</span>
-        <span class="class-name">Yummy <span class="scr">Yin</span></span>
-        <span class="class-desc">Long, passive floor holds for fascia and nervous system.</span>
-        <span class="class-tag">All levels · 75 min</span>
-        <span class="class-link">Book <span aria-hidden="true">→</span></span>
-      </a>
-      <a href="#schedule" class="class-row" role="listitem">
-        <span class="class-num">07</span>
-        <span class="class-name">Sun Celebration</span>
-        <span class="class-desc">108 sun salutations for the new moon and turning points.</span>
-        <span class="class-tag">All levels · 90 min</span>
-        <span class="class-link">Book <span aria-hidden="true">→</span></span>
-      </a>
-      <a href="#schedule" class="class-row" role="listitem">
-        <span class="class-num">08</span>
-        <span class="class-name">Lounging Lotus</span>
-        <span class="class-desc">Fully restorative — props, blankets, deep exhale.</span>
-        <span class="class-tag">All levels · 75 min</span>
-        <span class="class-link">Book <span aria-hidden="true">→</span></span>
-      </a>
-      <a href="#schedule" class="class-row" role="listitem">
-        <span class="class-num">09</span>
-        <span class="class-name">Community <span class="scr">Class</span></span>
-        <span class="class-desc">By donation. Taught by senior teachers and graduates.</span>
-        <span class="class-tag">All levels · 60 min</span>
-        <span class="class-link">Book <span aria-hidden="true">→</span></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="wellness" id="wellness">
-  <div class="wrap">
-    <div class="section-eyebrow">Wellness Wing</div>
-    <h2 class="section-title" style="max-width: 16ch;">Care beyond the mat.</h2>
-    <p style="color: color-mix(in oklab, var(--paper) 75%, transparent); max-width: 50ch; font-size: 1.08rem;">
-      Our in-studio healing suite for the days your practice needs a little help.
-      Appointments must be booked in advance.
-    </p>
-
-    <div class="wellness-grid">
-      <div class="wellness-item">
-        <span class="num">01 — Touch</span>
-        <h3>Massage Therapy</h3>
-        <p>Deep tissue, Swedish, and prenatal with licensed therapists who know the anatomy of a yogi.</p>
-      </div>
-      <div class="wellness-item">
-        <span class="num">02 — Needles</span>
-        <h3>Acupuncture</h3>
-        <p>Traditional Chinese Medicine to restore the flow of qi — stress, sleep, cycles, inflammation.</p>
-      </div>
-      <div class="wellness-item">
-        <span class="num">03 — Energy</span>
-        <h3>Reiki</h3>
-        <p>Subtle, hands-on energy work to recalibrate the nervous system between sessions.</p>
+  <div class="about-inner">
+    <img class="about-img reveal" src="https://static.wixstatic.com/media/322617_a94995f7c7124135bd79514b4ca48b54~mv2.jpg/v1/crop/x_23,y_0,w_979,h_1024/fill/w_178,h_191,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/a%20woman%20hosting%20a%20butterfly%20conservation%20workshop%20in%20front%20of%20an%20audience.jpg" alt="Avery hosting a monarch conservation workshop">
+    <div class="reveal">
+      <div class="section-label">— About the founder</div>
+      <h2>Hi, I'm Avery — and the monarchs need <em>all of us.</em></h2>
+      <p>What started as a single milkweed patch in my backyard has grown into a certified Monarch Waystation, a youth-led conservation effort, and a small business that funds it all. Every kit sold plants more habitat — yours and ours.</p>
+      <p>I host workshops at schools and community gardens to share what I've learned: monarchs travel up to 3,000 miles, and the journey begins on a single leaf.</p>
+      <div class="signature">
+        Avery Siudara
+        <small>Founder · Northern Wings</small>
       </div>
     </div>
   </div>
 </section>
 
-<section class="testimonial">
-  <div class="wrap">
-    <blockquote>
-      "The most honest, soulful studio on the Westside — I walk in heavy and leave lighter every time."
-    </blockquote>
-    <cite><strong>Ruby M.</strong>member since 2019</cite>
+<section class="cta-final">
+  <div class="cta-inner">
+    <h2 class="reveal">One acre at a time.<br>One <em>kit</em> at a time.</h2>
+    <p class="reveal">Join hundreds of gardeners, families and classrooms helping reverse the decline of the monarch butterfly.</p>
+    <div class="cta-row reveal" style="justify-content:center;">
+      <a href="#kits" class="btn btn-primary">Get my pollinator kit <span class="btn-arrow">→</span></a>
+      <a href="#mission" class="btn btn-secondary" style="color:var(--cream);border-color:oklch(78% 0.02 145 / 0.45);">Learn the mission</a>
+    </div>
   </div>
 </section>
 
-<section class="cta-footer" id="book">
-  <div class="wrap cta-footer-inner">
-    <div>
-      <h2>Come <span class="hs">find</span> your flow.</h2>
-      <p>
-        First class is $15 — mats, props, and a warm welcome included. Drop
-        your name and we'll see you on the mat.
-      </p>
-      <a href="#book-first" class="cta-btn-large">
-        Book your first class
-        <span aria-hidden="true">→</span>
-      </a>
-      <div class="cta-micro">
-        Open daily 7am–9pm <span class="pipe">|</span>
-        12408 Venice Blvd <span class="pipe">|</span>
-        No experience required
-      </div>
-    </div>
-
-    <form class="newsletter" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed ✓';">
-      <h3>The Lotus Letter</h3>
-      <p>Schedule changes, new workshops, and the occasional mantra. Once a week, never more.</p>
-      <div class="newsletter-form">
-        <label for="nl-email" class="sr-only" style="position:absolute;left:-9999px;">Email address</label>
-        <input id="nl-email" type="email" required placeholder="your@email.com">
-        <button type="submit">Sign Up</button>
-      </div>
-    </form>
+<footer>
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 40 40" fill="none">
+        <path d="M20 8 C12 8, 6 14, 8 22 C10 28, 16 30, 20 26 C24 30, 30 28, 32 22 C34 14, 28 8, 20 8 Z M20 14 L20 32" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </svg>
+    </span>
+    <span>Northern Wings</span>
   </div>
-</section>
-
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="wordmark">
-          <span class="wordmark-lol">Lol</span>
-          <span class="wordmark-yoga">Yoga</span>
-        </div>
-        <p>Light on Lotus — a sacred, uplifting yoga studio in the heart of Mar Vista, West Los Angeles.</p>
-        <div class="footer-address">
-          12408 Venice Blvd<br>
-          Los Angeles, CA 90066<br>
-          (310) 555 · 0142
-        </div>
-      </div>
-      <div>
-        <h4>Practice</h4>
-        <ul>
-          <li><a href="#schedule">Schedule</a></li>
-          <li><a href="#classes">Classes</a></li>
-          <li><a href="#">Pricing</a></li>
-          <li><a href="#">Replays</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Community</h4>
-        <ul>
-          <li><a href="#">Teachers</a></li>
-          <li><a href="#">Trainings</a></li>
-          <li><a href="#">Events &amp; Kirtan</a></li>
-          <li><a href="#wellness">Wellness Wing</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Account</h4>
-        <ul>
-          <li><a href="#">Member Login</a></li>
-          <li><a href="#">Buy a Package</a></li>
-          <li><a href="#">Gift Cards</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bar">
-      <span>© 2025 Light on Lotus Yoga. All rights reserved.</span>
-      <span>Om · Move · Groove</span>
-    </div>
-  </div>
+  <p>© 2025 Northern Wings · Monarch Waystation #54310 · A youth-led conservation enterprise</p>
 </footer>
 
 <script>
-  // Smooth scroll for in-page links
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
   document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
+    a.addEventListener('click', (e) => {
       const id = a.getAttribute('href');
       if (id.length > 1) {
         const el = document.querySelector(id);
-        if (el) { e.preventDefault(); el.scrollIntoView({
+        if (el) {
+          e.preventDefault();
+          const top = el.getBoundingClientRect().top + window.scrollY - 70;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>

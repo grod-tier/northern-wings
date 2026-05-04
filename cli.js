@@ -162,9 +162,8 @@ async function main() {
   // 6. Redesign — 4-phase pipeline with live progress
   const phaseLabels = {
     generating: { text: 'Generating v1 design…',         color: 'magenta' },
-    rendering:  { text: 'Rendering v1 for review…',      color: 'cyan'    },
-    critiquing: { text: 'Design director reviewing…',    color: 'yellow'  },
-    revising:   { text: 'Revising based on critique…',   color: 'magenta' },
+    scanning:   { text: 'Running impeccable scanner…',   color: 'cyan'    },
+    revising:   { text: 'Revising based on scan…',       color: 'magenta' },
   };
 
   const redesignSpinner = ora({ text: phaseLabels.generating.text, color: 'magenta' }).start();
