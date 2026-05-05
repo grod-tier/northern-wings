@@ -190,8 +190,11 @@ img { max-width: 100%; display: block; }
 }
 
 .content-img-wrap {
-  width: 100%;
+  padding: 0 var(--space-2xl);
+  margin-top: -96px;
   margin-bottom: var(--space-3xl);
+  position: relative;
+  z-index: 1;
 }
 
 .content-img {
@@ -200,6 +203,8 @@ img { max-width: 100%; display: block; }
   min-height: 480px;
   object-fit: cover;
   display: block;
+  border-radius: 12px;
+  box-shadow: 0 24px 64px -16px oklch(20% 0.02 145 / 0.2);
 }
 
 .prose p {
@@ -368,14 +373,14 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
   </div>
 </header>
 
-<main class="content">
-  <div class="content-img-wrap">
-    <img class="content-img"
-      src="https://static.wixstatic.com/media/322617_c3278366455844799679cd65ee8b113f~mv2.jpg/v1/fill/w_1320,h_530,fp_0.50_0.50,q_90,enc_avif,quality_auto/322617_c3278366455844799679cd65ee8b113f~mv2.webp"
-      alt="Monarch butterflies on milkweed in bloom"
-      loading="eager">
-  </div>
+<div class="content-img-wrap">
+  <img class="content-img"
+    src="https://static.wixstatic.com/media/322617_c3278366455844799679cd65ee8b113f~mv2.jpg/v1/fill/w_1320,h_530,fp_0.50_0.50,q_90,enc_avif,quality_auto/322617_c3278366455844799679cd65ee8b113f~mv2.webp"
+    alt="Monarch butterflies on milkweed in bloom"
+    loading="eager">
+</div>
 
+<main class="content">
   <div class="prose">
     <p>The Monarch butterfly is one of North America's most recognizable and remarkable insects, known for its vivid orange-and-black wings and extraordinary long-distance migration. Each year, monarchs travel thousands of miles between breeding grounds in the United States and Canada and overwintering sites in central Mexico and coastal California. Along the way, they depend on a network of habitats that provide food, shelter, and a place to reproduce.</p>
 
