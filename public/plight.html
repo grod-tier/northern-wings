@@ -415,5 +415,19 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
   <p>© 2025 Northern Wings · Monarch Waystation #54310 · A youth-led conservation enterprise</p>
 </footer>
 
+
+<script type="module">
+// Agentation dev overlay — only loads when ?dev=1 is in the URL
+if (new URLSearchParams(location.search).has('dev')) {
+  const [{ default: React }, { createRoot }, { Agentation }] = await Promise.all([
+    import('https://esm.sh/react@18'),
+    import('https://esm.sh/react-dom@18/client'),
+    import('https://esm.sh/agentation@3.0.2'),
+  ]);
+  const el = Object.assign(document.createElement('div'), { id: '__agentation__' });
+  document.body.appendChild(el);
+  createRoot(el).render(React.createElement(Agentation, { endpoint: 'http://localhost:4747' }));
+}
+</script>
 </body>
 </html>
