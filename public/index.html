@@ -164,12 +164,6 @@ img { max-width: 100%; display: block; }
   opacity: 0;
   animation: fadeUp 600ms var(--ease-out) 100ms forwards;
 }
-.eyebrow::before {
-  content: "";
-  width: 32px;
-  height: 1px;
-  background: var(--leaf);
-}
 
 .hero h1 {
   font-family: var(--display);
@@ -803,7 +797,7 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
 <section class="mission" id="mission">
   <div class="mission-inner">
     <div class="reveal">
-      <div class="section-label">— Our Mission</div>
+      <div class="section-label">Our Mission</div>
       <h2>Safe havens for <em>monarchs,</em> one milkweed at a time.</h2>
     </div>
     <div class="mission-body reveal">
@@ -852,7 +846,7 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
 <section class="kits" id="kits">
   <div class="kits-inner">
     <div class="kits-text reveal">
-      <div class="section-label">— Pollinator Garden Kits</div>
+      <div class="section-label">Pollinator Garden Kits</div>
       <h2>Build your own <em>monarch waystation.</em></h2>
       <p>Each kit gives families, schools, and gardeners everything they need to start a pollinator-friendly habitat — designed by us, planted by you.</p>
       <ul class="kit-features">
@@ -885,7 +879,7 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
   <div class="about-inner">
     <img class="about-img reveal" src="/waystation-sign.png" alt="Northern Wings official Monarch Waystation sign and certificate">
     <div class="reveal">
-      <div class="section-label">— Certified Monarch Waystation #54310</div>
+      <div class="section-label">Certified Monarch Waystation #54310</div>
       <h2>A real waystation on a real <em>migration corridor.</em></h2>
       <p>Northern Wings is a certified Monarch Waystation located in Emmet County, MI — at the northernmost tip of Michigan's Lower Peninsula, where monarchs funnel through each fall on their journey to Mexico.</p>
       <p>The waystation is larger than average, built on private farmland managed specifically for wildlife. Every kit sold directly supports the restoration of more habitat along this critical migratory route.</p>
@@ -947,17 +941,12 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
     });
   });
 </script>
-<script type="module">
+<script>
 // Agentation dev overlay — only loads when ?dev=1 is in the URL
 if (new URLSearchParams(location.search).has('dev')) {
-  const [{ default: React }, { createRoot }, { Agentation }] = await Promise.all([
-    import('https://esm.sh/react@18'),
-    import('https://esm.sh/react-dom@18/client'),
-    import('https://esm.sh/agentation@3.0.2'),
-  ]);
-  const el = Object.assign(document.createElement('div'), { id: '__agentation__' });
-  document.body.appendChild(el);
-  createRoot(el).render(React.createElement(Agentation, { endpoint: 'http://localhost:4747' }));
+  var s = document.createElement('script');
+  s.src = '/agentation-bundle.js';
+  document.body.appendChild(s);
 }
 </script>
 </body>
