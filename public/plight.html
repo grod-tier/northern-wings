@@ -130,12 +130,22 @@ img { max-width: 100%; display: block; }
 
 /* PAGE HEADER */
 .page-header {
-  padding: 140px var(--space-2xl) var(--space-3xl);
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px var(--space-2xl) var(--space-3xl);
   background:
     radial-gradient(ellipse at 70% 0%, oklch(56% 0.19 42 / 0.12), transparent 50%),
     radial-gradient(ellipse at 15% 100%, oklch(72% 0.07 138 / 0.25), transparent 50%),
     var(--cream);
+  box-sizing: border-box;
+}
+
+.page-header-inner {
   max-width: 860px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -149,12 +159,6 @@ img { max-width: 100%; display: block; }
   color: var(--leaf);
   font-weight: 500;
   margin-bottom: var(--space-lg);
-}
-.eyebrow::before {
-  content: "";
-  width: 32px;
-  height: 1px;
-  background: var(--leaf);
 }
 
 .page-header h1 {
@@ -188,12 +192,17 @@ img { max-width: 100%; display: block; }
   padding: 0 var(--space-2xl) var(--space-4xl);
 }
 
+.content-img-wrap {
+  width: 100%;
+  margin-bottom: var(--space-3xl);
+}
+
 .content-img {
   width: 100%;
-  aspect-ratio: 16/7;
+  height: 70vh;
+  min-height: 480px;
   object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: var(--space-3xl);
+  display: block;
 }
 
 .prose p {
@@ -355,16 +364,20 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
 </nav>
 
 <header class="page-header">
-  <div class="eyebrow">Conservation · Monarch Watch</div>
-  <h1>The plight of the <em>monarchs.</em></h1>
-  <p class="lede">One of North America's most iconic species faces an uncertain future — but understanding the threats is the first step toward reversing them.</p>
+  <div class="page-header-inner">
+    <div class="eyebrow">Conservation · Monarch Watch</div>
+    <h1>The plight of the <em>monarchs.</em></h1>
+    <p class="lede">One of North America's most iconic species faces an uncertain future — but understanding the threats is the first step toward reversing them.</p>
+  </div>
 </header>
 
 <main class="content">
-  <img class="content-img"
-    src="https://static.wixstatic.com/media/322617_c3278366455844799679cd65ee8b113f~mv2.jpg/v1/fill/w_1320,h_530,fp_0.50_0.50,q_90,enc_avif,quality_auto/322617_c3278366455844799679cd65ee8b113f~mv2.webp"
-    alt="Monarch butterflies on milkweed in bloom"
-    loading="eager">
+  <div class="content-img-wrap">
+    <img class="content-img"
+      src="https://static.wixstatic.com/media/322617_c3278366455844799679cd65ee8b113f~mv2.jpg/v1/fill/w_1320,h_530,fp_0.50_0.50,q_90,enc_avif,quality_auto/322617_c3278366455844799679cd65ee8b113f~mv2.webp"
+      alt="Monarch butterflies on milkweed in bloom"
+      loading="eager">
+  </div>
 
   <div class="prose">
     <p>The Monarch butterfly is one of North America's most recognizable and remarkable insects, known for its vivid orange-and-black wings and extraordinary long-distance migration. Each year, monarchs travel thousands of miles between breeding grounds in the United States and Canada and overwintering sites in central Mexico and coastal California. Along the way, they depend on a network of habitats that provide food, shelter, and a place to reproduce.</p>
