@@ -522,11 +522,43 @@ img { max-width: 100%; display: block; }
   display: flex;
   gap: var(--space-md);
   align-items: start;
-  padding: var(--space-md) 0;
+  padding: var(--space-md) var(--space-sm);
   border-top: 1px solid oklch(46% 0.085 145 / 0.18);
   font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  transition: background 300ms ease;
 }
 .kit-features li:last-child { border-bottom: 1px solid oklch(46% 0.085 145 / 0.18); }
+
+.kit-features li.kit-active {
+  background: oklch(38% 0.06 145 / 0.07);
+  border-top-color: transparent;
+}
+.kit-features li.kit-active + li { border-top-color: transparent; }
+
+.kit-features li.kit-active .num { color: var(--monarch-deep); }
+.kit-features li.kit-active strong { color: var(--monarch-deep); }
+
+.kit-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--monarch-deep);
+  border-radius: 1px;
+  pointer-events: none;
+}
+.kit-active .kit-progress {
+  animation: kit-progress-fill 8s linear forwards;
+}
+@keyframes kit-progress-fill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
 
 .kit-features .num {
   font-family: var(--display);
@@ -538,6 +570,7 @@ img { max-width: 100%; display: block; }
   flex-shrink: 0;
   width: 32px;
   padding-top: 2px;
+  transition: color 300ms ease;
 }
 
 .kit-features strong {
@@ -545,6 +578,7 @@ img { max-width: 100%; display: block; }
   color: var(--ink);
   display: block;
   margin-bottom: 2px;
+  transition: color 300ms ease;
 }
 .kit-features span { color: var(--ink-soft); font-size: 15px; }
 
@@ -558,6 +592,7 @@ img { max-width: 100%; display: block; }
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
+  transition: opacity 400ms ease;
 }
 
 .float-card {
@@ -850,15 +885,21 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
       <h2>Build your own <em>monarch waystation.</em></h2>
       <p>Each kit gives families, schools, and gardeners everything they need to start a pollinator-friendly habitat — designed by us, planted by you.</p>
       <ul class="kit-features">
-        <li>
+        <li
+          data-img="https://static.wixstatic.com/media/322617_c3278366455844799679cd65ee8b113f~mv2.jpg/v1/fill/w_800,h_1000,fp_0.50_0.50,q_90,enc_avif,quality_auto/322617_c3278366455844799679cd65ee8b113f~mv2.webp"
+          data-alt="Milkweed seedlings in early spring">
           <span class="num">01</span>
           <div><strong>Native seed mix</strong><span>Region-appropriate milkweed and nectar varieties.</span></div>
         </li>
-        <li>
+        <li
+          data-img="https://static.wixstatic.com/media/322617_6ebecff961c84a01adf1935c3cb8e4ebf000.jpg/v1/fill/w_800,h_1000,al_c,q_85,enc_avif,quality_auto/322617_6ebecff961c84a01adf1935c3cb8e4ebf000.jpg"
+          data-alt="Pollinator garden in full bloom">
           <span class="num">02</span>
           <div><strong>Bio-degradable planting materials</strong><span>Compostable trays and natural growing media.</span></div>
         </li>
-        <li>
+        <li
+          data-img="/monarch-hero.jpg"
+          data-alt="Monarch butterfly resting on milkweed">
           <span class="num">03</span>
           <div><strong>Educational guide</strong><span>Step-by-step planting & monarch life-cycle handbook.</span></div>
         </li>
@@ -866,7 +907,7 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
       <a href="#" class="btn btn-primary">Empower change & purchase <span class="btn-arrow">→</span></a>
     </div>
     <div class="kits-visual reveal">
-      <img class="kits-img" src="https://static.wixstatic.com/media/322617_6ebecff961c84a01adf1935c3cb8e4ebf000.jpg/v1/fill/w_1320,h_530,al_t,q_85,usm_0.33_1.00_0.00,enc_avif,quality_auto/322617_6ebecff961c84a01adf1935c3cb8e4ebf000.jpg" alt="Pollinator garden in full bloom">
+      <img class="kits-img" src="https://static.wixstatic.com/media/322617_c3278366455844799679cd65ee8b113f~mv2.jpg/v1/fill/w_800,h_1000,fp_0.50_0.50,q_90,enc_avif,quality_auto/322617_c3278366455844799679cd65ee8b113f~mv2.webp" alt="Milkweed seedlings in early spring">
       <div class="float-card">
         <span class="price">$28</span>
         <p>Starter kit — covers ~25 sq ft of native habitat. Free shipping over $50.</p>
@@ -874,6 +915,61 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
     </div>
   </div>
 </section>
+
+<script>
+(function () {
+  var items = Array.from(document.querySelectorAll('.kit-features li'));
+  var img = document.querySelector('.kits-img');
+  var current = 0;
+  var timer = null;
+
+  // Inject progress bar spans
+  items.forEach(function (li) {
+    var bar = document.createElement('span');
+    bar.className = 'kit-progress';
+    li.appendChild(bar);
+    li.addEventListener('click', function () {
+      clearTimeout(timer);
+      current = items.indexOf(li);
+      activate(current);
+      timer = setTimeout(tick, 8000);
+    });
+  });
+
+  function activate(idx) {
+    items.forEach(function (li) { li.classList.remove('kit-active'); });
+    var li = items[idx];
+    li.classList.add('kit-active');
+
+    // Reset + restart progress animation
+    var bar = li.querySelector('.kit-progress');
+    bar.style.animation = 'none';
+    bar.offsetWidth; // force reflow
+    bar.style.animation = '';
+
+    // Crossfade image
+    var newSrc = li.dataset.img;
+    var newAlt = li.dataset.alt || '';
+    if (newSrc && img) {
+      img.style.opacity = '0';
+      setTimeout(function () {
+        img.src = newSrc;
+        img.alt = newAlt;
+        img.style.opacity = '1';
+      }, 380);
+    }
+  }
+
+  function tick() {
+    current = (current + 1) % items.length;
+    activate(current);
+    timer = setTimeout(tick, 8000);
+  }
+
+  activate(0);
+  timer = setTimeout(tick, 8000);
+})();
+</script>
 
 <section class="about" id="about">
   <div class="about-inner">
