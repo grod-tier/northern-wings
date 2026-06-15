@@ -20,13 +20,20 @@ import {
 } from './lib/blog.js';
 import { researchKeywords } from './lib/keywords.js';
 import { generatePostsBatch } from './lib/generate.js';
+import {
+  isStripeConfigured,
+  createCheckoutSession,
+  constructWebhookEvent,
+  sendOrderNotification,
+} from './lib/checkout.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
-app.use(express.json({ limit: '20mb' }));
+// Capture the raw request body too — needed for Stripe webhook signature verification.
+app.use(express.json({ limit: '20mb', verify: (req, res, buf) => { req.rawBody = buf; } }));
 app.use(express.static(join(__dirname, 'public')));
 
 app.post('/api/search', async (req, res) => {
@@ -63,6 +70,58 @@ app.post('/api/redesign', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+// ─── Shop / checkout routes ────────────────────────────────────────────────
+
+/**
+ * POST /api/checkout/create-session
+ * Create a Stripe Checkout Session for the Pollinator Garden Kit and return its URL.
+ * Body: { quantity?: number } (defaults to 1, max 10)
+ */
+app.post('/api/checkout/create-session', async (req, res) => {
+  if (!isStripeConfigured()) {
+    return res.status(503).json({ error: 'Checkout is not configured yet. Set STRIPE_SECRET_KEY in .env.' });
+  }
+  try {
+    const { quantity } = req.body || {};
+    const siteUrl = process.env.SITE_URL || `${req.protocol}://${req.get('host')}`;
+    const session = await createCheckoutSession({ quantity, siteUrl });
+    res.json({ url: session.url });
+  } catch (err) {
+    console.error('Checkout session error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * POST /api/stripe/webhook
+ * Stripe sends payment events here. On checkout.session.completed, sends an
+ * order notification email (if SMTP + ORDER_NOTIFICATION_EMAIL are configured).
+ * Must receive the raw request body for signature verification (see express.json `verify` above).
+ */
+app.post('/api/stripe/webhook', async (req, res) => {
+  let event;
+  try {
+    event = constructWebhookEvent(req.rawBody, req.headers['stripe-signature']);
+  } catch (err) {
+    console.error('Stripe webhook signature verification failed:', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  if (event.type === 'checkout.session.completed') {
+    try {
+      await sendOrderNotification(event.data.object);
+    } catch (err) {
+      console.error('Order notification error:', err);
+    }
+  }
+
+  res.json({ received: true });
+});
+
+// Checkout redirect pages
+app.get('/checkout/success', (req, res) => res.sendFile(join(__dirname, 'public/checkout-success.html')));
+app.get('/checkout/cancel', (req, res) => res.redirect('/#kits'));
 
 // ─── Blog routes ─────────────────────────────────────────────────────────────
 

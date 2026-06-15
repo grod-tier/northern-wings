@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order received — Northern Wings</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap');
+
+:root {
+  --leaf-deep: oklch(38% 0.06 145);
+  --leaf: oklch(46% 0.085 145);
+  --leaf-mid: oklch(58% 0.09 142);
+  --leaf-soft: oklch(72% 0.07 138);
+  --cream: oklch(96% 0.018 95);
+  --cream-warm: oklch(92% 0.035 88);
+  --ink: oklch(22% 0.025 145);
+  --ink-soft: oklch(34% 0.03 145);
+  --monarch: oklch(68% 0.18 50);
+  --monarch-deep: oklch(56% 0.19 42);
+  --milkweed: oklch(86% 0.04 100);
+
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  --display: 'Fraunces', Georgia, serif;
+  --body: 'Newsreader', Georgia, serif;
+
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--cream);
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img { max-width: 100%; display: block; }
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: var(--space-md) var(--space-2xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: oklch(96% 0.018 95 / 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid oklch(46% 0.085 145 / 0.12);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--leaf-deep);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+.brand-mark { width: 36px; height: 36px; display: grid; place-items: center; color: var(--monarch); }
+.brand-mark svg { width: 100%; height: 100%; }
+.brand small {
+  display: block;
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--leaf-mid);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-xl);
+  align-items: center;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 150ms var(--ease-out);
+}
+.nav-links a:hover { color: var(--leaf-deep); }
+.nav-links a.active { color: var(--leaf-deep); }
+.nav-cta {
+  background: var(--monarch-deep);
+  color: var(--cream) !important;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: transform 150ms var(--ease-out), background 150ms var(--ease-out);
+}
+.nav-cta:hover { background: var(--ink) !important; transform: translateY(-1px); }
+
+/* SUCCESS */
+.success {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 140px var(--space-2xl) var(--space-3xl);
+  background:
+    radial-gradient(ellipse at 80% 10%, oklch(72% 0.07 138 / 0.3), transparent 55%),
+    radial-gradient(ellipse at 10% 90%, oklch(86% 0.04 100 / 0.45), transparent 50%),
+    var(--cream);
+}
+
+.success-inner {
+  max-width: 560px;
+  text-align: center;
+}
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-lg);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--leaf-soft);
+  color: var(--cream);
+}
+.success-icon svg { width: 32px; height: 32px; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--leaf);
+  font-weight: 500;
+  margin-bottom: var(--space-lg);
+}
+
+.success-inner h1 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(32px, 4.5vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: var(--space-lg);
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+}
+.success-inner h1 em { font-style: italic; color: var(--monarch-deep); font-weight: 400; }
+
+.success-inner p {
+  color: var(--ink-soft);
+  margin-bottom: var(--space-xl);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 26px;
+  border-radius: 4px;
+  font-family: var(--body);
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 150ms var(--ease-out), background 150ms var(--ease-out);
+  min-height: 48px;
+}
+.btn-primary { background: var(--monarch-deep); color: var(--cream); }
+.btn-primary:hover { background: oklch(48% 0.15 42); transform: translateY(-2px); }
+.btn-arrow { transition: transform 200ms var(--ease-out); }
+.btn:hover .btn-arrow { transform: translateX(4px); }
+
+/* FOOTER */
+footer {
+  background: var(--ink);
+  color: oklch(78% 0.02 145);
+  padding: var(--space-2xl);
+  border-top: 1px solid oklch(34% 0.03 145);
+  font-size: 14px;
+  text-align: center;
+}
+footer .brand { color: var(--cream); justify-content: center; margin-bottom: var(--space-md); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="brand" aria-label="Northern Wings home">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="19.461 19 161.079 161" xmlns="http://www.w3.org/2000/svg">
+        <path d="M180.499 121.813c-1.763-21.4-19.738-38.163-40.921-38.163-16.892 0-31.857 10.382-38.089 26.119V81.65c0-15.555 12.455-28.21 27.765-28.21 13.525 0 25.027 9.808 27.35 23.321l.085.494.494-.086 1.946-.34.491-.086-.084-.492c-2.57-14.949-15.306-25.8-30.282-25.8-11.845 0-22.709 7.07-27.765 17.83V36.495c1.859-8.409 9.359-14.508 17.853-14.508 8.502 0 16.014 6.111 17.862 14.531l.107.49.489-.108 1.929-.429.487-.108-.107-.487C137.962 26.097 129.228 19 119.341 19c-8.269 0-15.895 5.023-19.341 12.617C96.555 24.023 88.929 19 80.659 19c-9.887 0-18.622 7.097-20.768 16.876l-.107.487.487.108 1.929.429.489.109.107-.49c1.848-8.42 9.36-14.531 17.862-14.531 8.495 0 15.994 6.098 17.853 14.507v31.787c-5.056-10.76-15.92-17.83-27.765-17.83-14.976 0-27.712 10.85-30.282 25.8l-.085.492.491.086 1.946.34.494.086.085-.494c2.324-13.513 13.826-23.321 27.35-23.321 15.31 0 27.765 12.655 27.765 28.21v28.12c-6.23-15.738-21.195-26.12-38.087-26.12-21.183 0-39.157 16.763-40.921 38.163l-.041.498.498.042 1.969.165.499.042.041-.499c1.637-19.863 18.309-35.422 37.956-35.422 21.003 0 38.089 17.358 38.089 38.695V180h2.975v-54.667c0-21.336 17.087-38.695 38.089-38.695 19.647 0 36.319 15.559 37.955 35.422l.041.499.499-.042 1.97-.165.498-.042-.041-.497z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <span>Northern Wings<small>Monarch Waystation</small></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/#mission">Mission</a></li>
+    <li><a href="/plight">The Plight</a></li>
+    <li><a href="/waystation">Our Waystation</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/#kits" class="nav-cta">Shop Kits</a></li>
+  </ul>
+</nav>
+
+<section class="success">
+  <div class="success-inner">
+    <div class="success-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="eyebrow">Order confirmed</div>
+    <h1>Thank you for <em>growing the corridor.</em></h1>
+    <p>Your Pollinator Garden Kit order was received successfully. We'll email you a confirmation shortly with everything you need to know about shipping and planting.</p>
+    <a href="/" class="btn btn-primary">Back to home <span class="btn-arrow">→</span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="19.461 19 161.079 161" xmlns="http://www.w3.org/2000/svg">
+        <path d="M180.499 121.813c-1.763-21.4-19.738-38.163-40.921-38.163-16.892 0-31.857 10.382-38.089 26.119V81.65c0-15.555 12.455-28.21 27.765-28.21 13.525 0 25.027 9.808 27.35 23.321l.085.494.494-.086 1.946-.34.491-.086-.084-.492c-2.57-14.949-15.306-25.8-30.282-25.8-11.845 0-22.709 7.07-27.765 17.83V36.495c1.859-8.409 9.359-14.508 17.853-14.508 8.502 0 16.014 6.111 17.862 14.531l.107.49.489-.108 1.929-.429.487-.108-.107-.487C137.962 26.097 129.228 19 119.341 19c-8.269 0-15.895 5.023-19.341 12.617C96.555 24.023 88.929 19 80.659 19c-9.887 0-18.622 7.097-20.768 16.876l-.107.487.487.108 1.929.429.489.109.107-.49c1.848-8.42 9.36-14.531 17.862-14.531 8.495 0 15.994 6.098 17.853 14.507v31.787c-5.056-10.76-15.92-17.83-27.765-17.83-14.976 0-27.712 10.85-30.282 25.8l-.085.492.491.086 1.946.34.494.086.085-.494c2.324-13.513 13.826-23.321 27.35-23.321 15.31 0 27.765 12.655 27.765 28.21v28.12c-6.23-15.738-21.195-26.12-38.087-26.12-21.183 0-39.157 16.763-40.921 38.163l-.041.498.498.042 1.969.165.499.042.041-.499c1.637-19.863 18.309-35.422 37.956-35.422 21.003 0 38.089 17.358 38.089 38.695V180h2.975v-54.667c0-21.336 17.087-38.695 38.089-38.695 19.647 0 36.319 15.559 37.955 35.422l.041.499.499-.042 1.97-.165.498-.042-.041-.497z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <span>Northern Wings</span>
+  </div>
+  <p>© 2025 Northern Wings · Monarch Waystation #54310 · A youth-led conservation enterprise</p>
+</footer>
+
+</body>
+</html>
