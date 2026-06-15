@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "server": "node server.js",
     "cli": "node cli.js",
-    "agentation": "agentation-mcp server"
+    "agentation": "agentation-mcp server",
+    "build:agentation": "vite build --mode agentation"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
