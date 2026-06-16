@@ -129,7 +129,9 @@ img { max-width: 100%; display: block; }
   font-weight: 500;
   transition: transform 150ms var(--ease-out), background 150ms var(--ease-out);
 }
-.nav-cta:hover { background: var(--ink); color: var(--cream) !important; transform: translateY(-1px); }
+.nav-links a.nav-cta,
+.nav-links a.nav-cta:hover { color: var(--cream); }
+.nav-cta:hover { background: var(--leaf-deep); transform: translateY(-1px); }
 
 /* HERO */
 .hero {
@@ -227,9 +229,9 @@ img { max-width: 100%; display: block; }
   box-shadow: 0 1px 0 oklch(40% 0.18 42), 0 8px 24px -8px oklch(56% 0.19 42 / 0.5);
 }
 .btn-primary:hover {
-  background: var(--ink);
+  background: var(--leaf-deep);
   transform: translateY(-2px);
-  box-shadow: 0 1px 0 var(--ink), 0 12px 28px -8px oklch(22% 0.025 145 / 0.4);
+  box-shadow: 0 1px 0 var(--leaf-deep), 0 12px 28px -8px oklch(38% 0.06 145 / 0.4);
 }
 .btn-primary:focus-visible {
   outline: 3px solid var(--leaf);
@@ -650,8 +652,54 @@ img { max-width: 100%; display: block; }
 }
 .kit-features span { color: var(--ink-soft); font-size: 15px; }
 
+.kit-checkout-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-lg);
+}
+
+.kit-qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border: 1.5px solid oklch(46% 0.085 145 / 0.3);
+  border-radius: 4px;
+  overflow: hidden;
+  height: 48px;
+}
+.kit-qty button {
+  all: unset;
+  width: 40px;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--leaf-deep);
+  transition: background 150ms;
+  user-select: none;
+}
+.kit-qty button:hover { background: oklch(46% 0.085 145 / 0.08); }
+.kit-qty button:disabled { opacity: 0.35; cursor: default; }
+.kit-qty output {
+  width: 36px;
+  text-align: center;
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink);
+  border-left: 1.5px solid oklch(46% 0.085 145 / 0.3);
+  border-right: 1.5px solid oklch(46% 0.085 145 / 0.3);
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
 .kit-checkout-error {
-  margin-top: var(--space-md);
+  margin-top: var(--space-sm);
   font-size: 14px;
   color: var(--monarch-deep);
 }
@@ -1005,13 +1053,20 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
           <div><strong>Educational guide</strong><span>Step-by-step planting & monarch life-cycle handbook.</span></div>
         </li>
       </ul>
-      <button type="button" id="kit-checkout-btn" class="btn btn-primary">Empower change & purchase <span class="btn-arrow">→</span></button>
+      <div class="kit-checkout-row">
+        <div class="kit-qty" role="group" aria-label="Quantity">
+          <button type="button" id="kit-qty-dec" aria-label="Decrease quantity" disabled>−</button>
+          <output id="kit-qty-val" for="kit-qty-dec kit-qty-inc">1</output>
+          <button type="button" id="kit-qty-inc" aria-label="Increase quantity">+</button>
+        </div>
+        <button type="button" id="kit-checkout-btn" class="btn btn-primary">Empower change & purchase <span class="btn-arrow">→</span></button>
+      </div>
       <p id="kit-checkout-error" class="kit-checkout-error" hidden>Checkout is temporarily unavailable. Please try again later.</p>
     </div>
     <div class="kits-visual reveal">
       <img class="kits-img" src="https://static.wixstatic.com/media/322617_c3278366455844799679cd65ee8b113f~mv2.jpg/v1/fill/w_800,h_1000,fp_0.50_0.50,q_90,enc_avif,quality_auto/322617_c3278366455844799679cd65ee8b113f~mv2.webp" alt="Milkweed seedlings in early spring">
       <div class="float-card">
-        <span class="price">$28</span>
+        <span class="price">$15</span>
         <p>Starter kit — covers ~25 sq ft of native habitat. Free shipping over $50.</p>
       </div>
     </div>
@@ -1077,7 +1132,23 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
 (function () {
   var btn = document.getElementById('kit-checkout-btn');
   var errorEl = document.getElementById('kit-checkout-error');
+  var qtyVal = document.getElementById('kit-qty-val');
+  var qtyDec = document.getElementById('kit-qty-dec');
+  var qtyInc = document.getElementById('kit-qty-inc');
   if (!btn) return;
+
+  var qty = 1;
+  var MAX = 10;
+
+  function updateQty(n) {
+    qty = Math.max(1, Math.min(MAX, n));
+    qtyVal.textContent = qty;
+    qtyDec.disabled = qty <= 1;
+    qtyInc.disabled = qty >= MAX;
+  }
+
+  qtyDec.addEventListener('click', function () { updateQty(qty - 1); });
+  qtyInc.addEventListener('click', function () { updateQty(qty + 1); });
 
   btn.addEventListener('click', async function () {
     errorEl.hidden = true;
@@ -1089,7 +1160,7 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
       var res = await fetch('/api/checkout/create-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ quantity: 1 }),
+        body: JSON.stringify({ quantity: qty }),
       });
       var data = await res.json();
       if (!res.ok || !data.url) throw new Error(data.error || 'Checkout failed');

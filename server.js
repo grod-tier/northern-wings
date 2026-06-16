@@ -20,11 +20,13 @@ import {
 } from './lib/blog.js';
 import { researchKeywords } from './lib/keywords.js';
 import { generatePostsBatch } from './lib/generate.js';
+import rateLimit from 'express-rate-limit';
 import {
   isStripeConfigured,
   createCheckoutSession,
   constructWebhookEvent,
   sendOrderNotification,
+  sendCustomerReceipt,
 } from './lib/checkout.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -73,12 +75,20 @@ app.post('/api/redesign', async (req, res) => {
 
 // ─── Shop / checkout routes ────────────────────────────────────────────────
 
+const checkoutRateLimit = rateLimit({
+  windowMs: 60 * 1000,      // 1 minute window
+  max: 5,                    // max 5 sessions per IP per minute
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many checkout attempts. Please wait a moment and try again.' },
+});
+
 /**
  * POST /api/checkout/create-session
  * Create a Stripe Checkout Session for the Pollinator Garden Kit and return its URL.
  * Body: { quantity?: number } (defaults to 1, max 10)
  */
-app.post('/api/checkout/create-session', async (req, res) => {
+app.post('/api/checkout/create-session', checkoutRateLimit, async (req, res) => {
   if (!isStripeConfigured()) {
     return res.status(503).json({ error: 'Checkout is not configured yet. Set STRIPE_SECRET_KEY in .env.' });
   }
@@ -109,11 +119,11 @@ app.post('/api/stripe/webhook', async (req, res) => {
   }
 
   if (event.type === 'checkout.session.completed') {
-    try {
-      await sendOrderNotification(event.data.object);
-    } catch (err) {
-      console.error('Order notification error:', err);
-    }
+    const session = event.data.object;
+    await Promise.allSettled([
+      sendCustomerReceipt(session).catch(err => console.error('Customer receipt error:', err)),
+      sendOrderNotification(session).catch(err => console.error('Order notification error:', err)),
+    ]);
   }
 
   res.json({ received: true });
