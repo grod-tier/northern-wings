@@ -57,7 +57,8 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://site-scraper-design.vercel.app/)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://site-scraper-design.vercel.app/blog)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://site-scraper-design.vercel.app/blog/9-science-backed-benefits-of-vinyasa-yoga-for-body-mind)",
-      "Bash(vercel --prod)"
+      "Bash(vercel --prod)",
+      "mcp__agentation__agentation_get_all_pending"
     ]
   }
 }
