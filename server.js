@@ -28,6 +28,16 @@ import {
   sendOrderNotification,
   sendCustomerReceipt,
 } from './lib/checkout.js';
+import { injectNav } from './lib/injectNav.js';
+
+async function sendPage(res, filePath) {
+  try {
+    const html = await readFile(filePath, 'utf8');
+    res.type('html').send(await injectNav(html));
+  } catch {
+    res.status(404).send('Page not found');
+  }
+}
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -36,6 +46,12 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 // Capture the raw request body too — needed for Stripe webhook signature verification.
 app.use(express.json({ limit: '20mb', verify: (req, res, buf) => { req.rawBody = buf; } }));
+// Serve pages with shared navbar injection before static fallback
+app.get('/', (req, res) => sendPage(res, join(__dirname, 'public/index.html')));
+app.get('/plight', (req, res) => sendPage(res, join(__dirname, 'public/plight.html')));
+app.get('/waystation', (req, res) => sendPage(res, join(__dirname, 'public/waystation.html')));
+app.get('/checkout/success', (req, res) => sendPage(res, join(__dirname, 'public/checkout-success.html')));
+
 app.use(express.static(join(__dirname, 'public')));
 
 app.post('/api/search', async (req, res) => {
@@ -129,8 +145,6 @@ app.post('/api/stripe/webhook', async (req, res) => {
   res.json({ received: true });
 });
 
-// Checkout redirect pages
-app.get('/checkout/success', (req, res) => res.sendFile(join(__dirname, 'public/checkout-success.html')));
 app.get('/checkout/cancel', (req, res) => res.redirect('/#kits'));
 
 // ─── Blog routes ─────────────────────────────────────────────────────────────
@@ -366,15 +380,6 @@ app.post('/api/blog/webhook', async (req, res) => {
  * GET /api/blog/posts
  * List all published posts (JSON).
  */
-// Serve homepage — express.static above handles public/index.html for /
-// This fallback fires only if index.html doesn't exist yet.
-app.get('/', async (req, res) => {
-  res.status(404).send('<h1>No homepage redesign generated yet. Run the redesign pipeline first.</h1>');
-});
-
-// Static inner pages (no .html extension in URL)
-app.get('/plight', (req, res) => res.sendFile(join(__dirname, 'public/plight.html')));
-app.get('/waystation', (req, res) => res.sendFile(join(__dirname, 'public/waystation.html')));
 
 app.get('/api/blog/posts', async (req, res) => {
   try {

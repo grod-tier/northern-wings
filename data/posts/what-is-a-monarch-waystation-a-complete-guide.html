@@ -9,7 +9,7 @@
   <meta property="og:description" content="Discover what a monarch waystation is, why these habitats matter, and how to create one in the Northern US to support migrating monarch butterflies.">
   <meta property="og:image" content="https://images.unsplash.com/photo-1484704193309-27eaa53936a7?w=1200&h=630&fit=crop&auto=format">
   <meta property="og:type" content="article">
-  <meta name="article:published_time" content="2026-06-17T21:03:42.791Z">
+  <meta name="article:published_time" content="2026-06-17T21:31:06.982Z">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
@@ -728,6 +728,9 @@ img { max-width: 100%; display: block; }
   border-top: 1px solid oklch(46% 0.085 145 / 0.15);
   opacity: 0;
   animation: fadeUp 700ms var(--ease-out) 680ms forwards;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .cert-badge {
@@ -995,7 +998,7 @@ img { max-width: 100%; display: block; }
 /* KITS */
 .kits {
   padding: var(--space-4xl) var(--space-2xl);
-  background: var(--milkweed);
+  background: var(--paper);
   position: relative;
   overflow: hidden;
 }
@@ -1190,13 +1193,24 @@ img { max-width: 100%; display: block; }
   max-width: 240px;
   box-shadow: 0 16px 40px -16px oklch(22% 0.025 145 / 0.4);
 }
+.float-card-title {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: oklch(78% 0.08 145);
+  display: block;
+  margin-bottom: var(--space-xs);
+}
 .float-card .price {
   font-family: var(--display);
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
   display: block;
-  margin-bottom: var(--space-2xs);
+  line-height: 1;
+  margin-bottom: var(--space-xs);
 }
 .float-card p { font-size: 13px; color: oklch(88% 0.025 95); line-height: 1.4; }
 
@@ -1410,18 +1424,18 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
   <a href="/" class="brand" aria-label="Northern Wings home">
     <span class="brand-mark" aria-hidden="true">
       <svg viewBox="19.461 19 161.079 161" xmlns="http://www.w3.org/2000/svg">
-        <path d="M180.499 121.813c-1.763-21.4-19.738-38.163-40.921-38.163-16.892 0-31.857 10.382-38.089 26.119V81.65c0-15.555 12.455-28.21 27.765-28.21 13.525 0 25.027 9.808 27.35 23.321l.085.494.494-.086 1.946-.34.491-.086-.084-.492c-2.57-14.949-15.306-25.8-30.282-25.8-11.845 0-22.709 7.07-27.765 17.83V36.495c1.859-8.409 9.359-14.508 17.853-14.508 8.502 0 16.014 6.111 17.862 14.531l.107.49.489-.108 1.929-.429.487-.108-.107-.487C137.962 26.097 129.228 19 119.341 19c-8.269 0-15.895 5.023-19.341 12.617C96.555 24.023 88.929 19 80.659 19c-9.887 0-18.622 7.097-20.768 16.876l-.107.487.487.108 1.929.429.489.109.107-.49c1.848-8.42 9.36-14.531 17.862-14.531 8.495 0 15.994 6.098 17.853 14.507v31.787c-5.056-10.76-15.92-17.83-27.765-17.83-14.976 0-27.712 10.85-30.282 25.8l-.085.492.491.086 1.946.34.494.086.085-.494c2.324-13.513 13.826-23.321 27.35-23.321 15.31 0 27.765 12.655 27.765 28.21v28.12c-6.23-15.738-21.195-26.12-38.087-26.12-21.183 0-39.157 16.763-40.921 38.163l-.041.498.498.042 1.969.165.499.042.041-.499c1.637-19.863 18.309-35.422 37.956-35.422 21.003 0 38.089 17.358 38.089 38.695V180h2.975v-54.667c0-21.336 17.087-38.695 38.089-38.695 19.647 0 36.319 15.559 37.955 35.422l.041.499.499-.042 1.97-.165.498-.042-.041-.497z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+        <path d="M180.499 121.813c-1.763-21.4-19.738-38.163-40.921-38.163-16.892 0-31.857 10.382-38.089 26.119V81.65c0-15.555 12.455-28.21 27.765-28.21 13.525 0 25.027 9.808 27.35 23.321l.085.494.494-.086 1.946-.34.491-.086-.084-.492c-2.57-14.949-15.306-25.8-30.282-25.8-11.845 0-22.709 7.07-27.765 17.83V36.495c1.859-8.409 9.359-14.508 17.853-14.508 8.502 0 16.014 6.111 17.862 14.531l.107.49.489-.108 1.929-.429.487-.108-.107-.487C137.962 26.097 129.228 19 119.341 19c-8.269 0-15.895 5.023-19.341 12.617C96.555 24.023 88.929 19 80.659 19c-9.887 0-18.622 7.097-20.768 16.876l-.107.487.487.108 1.929.429.489.109.107-.49c1.848-8.42 9.36-14.531 17.862-14.531 8.495 0 15.994 6.098 17.853 14.507v31.787c-5.056-10.76-15.92-17.83-27.765-17.83-14.976 0-27.712 10.85-30.282 25.8l-.085.492.491.086 1.946.34.494.086.085-.494c2.324-13.513 13.826-23.321 27.35-23.321 15.31 0 27.765 12.655 27.765 28.21v28.12c-6.23-15.738-21.195-26.12-38.087-26.12-21.183 0-39.157 16.763-40.921 38.163l-.041.498.498.042 1.969.165.499.042.041-.499c1.637-19.863 18.309-35.422 37.956-35.422 21.003 0 38.089 17.358 38.089 38.695V180h2.975v-54.667c0-21.336 17.087-38.695 38.089-38.695 19.647 0 36.319 15.559 37.955 35.422l.041.499.499-.042 1.97-.165.498-.042-.041-.497z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
       </svg>
     </span>
     <span>Northern Wings<small>Monarch Waystation</small></span>
   </a>
   <ul class="nav-links">
-    <li><a href="#mission">Mission</a></li>
+    <li><a href="/#mission">Mission</a></li>
     <li><a href="/plight">The Plight</a></li>
     <li><a href="/waystation">Our Waystation</a></li>
-    <li><a href="/blog">Blog</a></li>
-    <li><a href="#kits" class="nav-cta">Shop Kits</a></li>
-    </ul>
+    <!-- <li><a href="/blog">Blog</a></li> -->
+    <li><a href="/#kits" class="nav-cta">Shop Kits</a></li>
+  </ul>
 </nav>
 
     <!-- Article header -->
@@ -1432,7 +1446,7 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
       <div class="article-header__meta">
         <span>The Team</span>
         <span class="article-header__meta-dot">●</span>
-        <time datetime="2026-06-17T21:03:42.791Z">June 17, 2026</time>
+        <time datetime="2026-06-17T21:31:06.982Z">June 17, 2026</time>
         <span class="article-header__meta-dot">●</span>
         <span>5 min read</span>
       </div>

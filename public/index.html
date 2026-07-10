@@ -268,6 +268,9 @@ img { max-width: 100%; display: block; }
   border-top: 1px solid oklch(46% 0.085 145 / 0.15);
   opacity: 0;
   animation: fadeUp 700ms var(--ease-out) 680ms forwards;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .cert-badge {
@@ -698,6 +701,14 @@ img { max-width: 100%; display: block; }
   place-items: center;
 }
 
+.kit-proceeds {
+  font-size: 13px;
+  color: oklch(46% 0.03 145);
+  font-style: italic;
+  margin-top: var(--space-md);
+  line-height: 1.5;
+}
+
 .kit-checkout-error {
   margin-top: var(--space-sm);
   font-size: 14px;
@@ -730,13 +741,24 @@ img { max-width: 100%; display: block; }
   max-width: 240px;
   box-shadow: 0 16px 40px -16px oklch(22% 0.025 145 / 0.4);
 }
+.float-card-title {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: oklch(78% 0.08 145);
+  display: block;
+  margin-bottom: var(--space-xs);
+}
 .float-card .price {
   font-family: var(--display);
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
   display: block;
-  margin-bottom: var(--space-2xs);
+  line-height: 1;
+  margin-bottom: var(--space-xs);
 }
 .float-card p { font-size: 13px; color: oklch(88% 0.025 95); line-height: 1.4; }
 
@@ -798,6 +820,65 @@ img { max-width: 100%; display: block; }
   color: var(--ink-soft);
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ABOUT ME */
+.about-me {
+  background: var(--paper);
+  padding: var(--space-4xl) var(--space-lg);
+}
+.about-me .section-label { color: var(--leaf); }
+.about-me-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: var(--space-3xl);
+  align-items: center;
+}
+.about-me-text h2 {
+  font-family: var(--display);
+  font-size: clamp(36px, 4.5vw, 56px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: var(--space-md) 0 var(--space-lg);
+}
+.about-me-text h2 em { font-style: italic; color: var(--monarch-deep); font-weight: 400; }
+.about-me-text p {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin-bottom: var(--space-md);
+}
+.about-me-visual {
+  position: relative;
+}
+.about-me-img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.about-me-signature {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid oklch(46% 0.085 145 / 0.18);
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--leaf-deep);
+}
+.about-me-signature small {
+  display: block;
+  font-family: var(--body);
+  font-style: normal;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
   margin-top: 4px;
 }
 
@@ -878,7 +959,7 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .hero { padding: 110px var(--space-lg) var(--space-2xl); }
-  .hero-grid, .mission-inner, .kits-inner, .about-inner {
+  .hero-grid, .mission-inner, .kits-inner, .about-inner, .about-me-inner {
     grid-template-columns: 1fr;
     gap: var(--space-2xl);
   }
@@ -889,7 +970,7 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
   .nav-links a:not(.nav-cta) { display: none; }
   .brand { font-size: 16px; }
   .brand small { font-size: 10px; }
-  .mission, .highlights, .kits, .about, .cta-final { padding: var(--space-3xl) var(--space-md); }
+  .mission, .highlights, .kits, .about, .about-me, .cta-final { padding: var(--space-3xl) var(--space-md); }
   .hero-stat { left: auto; right: 8%; top: 28%; }
   .float-card { left: var(--space-md); bottom: -16px; }
   .highlights-head { flex-direction: column; align-items: start; }
@@ -908,23 +989,7 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
 </head>
 <body>
 
-<nav class="nav">
-  <a href="#" class="brand" aria-label="Northern Wings home">
-    <span class="brand-mark" aria-hidden="true">
-      <svg viewBox="19.461 19 161.079 161" xmlns="http://www.w3.org/2000/svg">
-        <path d="M180.499 121.813c-1.763-21.4-19.738-38.163-40.921-38.163-16.892 0-31.857 10.382-38.089 26.119V81.65c0-15.555 12.455-28.21 27.765-28.21 13.525 0 25.027 9.808 27.35 23.321l.085.494.494-.086 1.946-.34.491-.086-.084-.492c-2.57-14.949-15.306-25.8-30.282-25.8-11.845 0-22.709 7.07-27.765 17.83V36.495c1.859-8.409 9.359-14.508 17.853-14.508 8.502 0 16.014 6.111 17.862 14.531l.107.49.489-.108 1.929-.429.487-.108-.107-.487C137.962 26.097 129.228 19 119.341 19c-8.269 0-15.895 5.023-19.341 12.617C96.555 24.023 88.929 19 80.659 19c-9.887 0-18.622 7.097-20.768 16.876l-.107.487.487.108 1.929.429.489.109.107-.49c1.848-8.42 9.36-14.531 17.862-14.531 8.495 0 15.994 6.098 17.853 14.507v31.787c-5.056-10.76-15.92-17.83-27.765-17.83-14.976 0-27.712 10.85-30.282 25.8l-.085.492.491.086 1.946.34.494.086.085-.494c2.324-13.513 13.826-23.321 27.35-23.321 15.31 0 27.765 12.655 27.765 28.21v28.12c-6.23-15.738-21.195-26.12-38.087-26.12-21.183 0-39.157 16.763-40.921 38.163l-.041.498.498.042 1.969.165.499.042.041-.499c1.637-19.863 18.309-35.422 37.956-35.422 21.003 0 38.089 17.358 38.089 38.695V180h2.975v-54.667c0-21.336 17.087-38.695 38.089-38.695 19.647 0 36.319 15.559 37.955 35.422l.041.499.499-.042 1.97-.165.498-.042-.041-.497z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-      </svg>
-    </span>
-    <span>Northern Wings<small>Monarch Waystation</small></span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#mission">Mission</a></li>
-    <li><a href="/plight">The Plight</a></li>
-    <li><a href="/waystation">Our Waystation</a></li>
-    <li><a href="/blog">Blog</a></li>
-    <li><a href="#kits" class="nav-cta">Shop Kits</a></li>
-    </ul>
-</nav>
+<!-- NAVBAR -->
 
 <section class="hero">
   <div class="hero-grid">
@@ -937,17 +1002,17 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
         <a href="#about" class="btn btn-secondary">Read our story</a>
       </div>
       <p class="micro">✦ Native seeds · Bio-degradable materials · Ships across North America</p>
-      <div class="trust">
+      <a href="/waystation#certification" class="trust" aria-label="View our Monarch Watch certification">
         <div class="cert-badge" aria-hidden="true">MONARCH<br>WATCH</div>
         <div class="trust-text">
           <strong>Certified Monarch Waystation #54310</strong>
           Recognized by Monarch Watch for creating, conserving, and protecting monarch habitats.
         </div>
-      </div>
+      </a>
     </div>
     <div class="hero-visual">
       <img class="hero-img-main" src="/monarch-hero.jpg" alt="Monarch butterfly on milkweed" loading="eager">
-      <div class="hero-cert">
+      <a href="/waystation#certification" class="hero-cert" aria-label="View our Monarch Watch certification">
         <div class="hero-cert-inner">
           <div class="hero-cert-seal" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -973,7 +1038,7 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
           <div class="hero-cert-divider"></div>
           <p class="hero-cert-num">№ 54310</p>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -1061,13 +1126,15 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
         </div>
         <button type="button" id="kit-checkout-btn" class="btn btn-primary">Empower change & purchase <span class="btn-arrow">→</span></button>
       </div>
+      <p class="kit-proceeds">100% of proceeds go directly toward maintaining and expanding our waystation habitat.</p>
       <p id="kit-checkout-error" class="kit-checkout-error" hidden>Checkout is temporarily unavailable. Please try again later.</p>
     </div>
     <div class="kits-visual reveal">
       <img class="kits-img" src="https://static.wixstatic.com/media/322617_c3278366455844799679cd65ee8b113f~mv2.jpg/v1/fill/w_800,h_1000,fp_0.50_0.50,q_90,enc_avif,quality_auto/322617_c3278366455844799679cd65ee8b113f~mv2.webp" alt="Milkweed seedlings in early spring">
       <div class="float-card">
+        <span class="float-card-title">Pollinator Garden Kit</span>
         <span class="price">$15</span>
-        <p>Starter kit — covers ~25 sq ft of native habitat.<br>Free shipping over $50.</p>
+        <p>Covers ~25 sq ft of native habitat.<br>Free shipping over $50.</p>
       </div>
     </div>
   </div>
@@ -1188,6 +1255,25 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
         Avery Siudara
         <small>Founder · Northern Wings</small>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-me">
+  <div class="about-me-inner">
+    <div class="about-me-text reveal">
+      <div class="section-label">Meet the Founder</div>
+      <h2>Conservation is <em>personal.</em></h2>
+      <p>I am a high school student passionate about the environment. As someone who spends a great deal of time outdoors — hunting, fishing, hiking, skiing, and photographing wildlife — nature conservation is a cause that's very close to my heart.</p>
+      <p>Recently, I've been researching the decline of the Monarch butterfly population, particularly the impact of habitat loss, and I'm eager to contribute meaningfully to conservation efforts.</p>
+      <p>Merging my interests in both conservation and community engagement, I started the Northern Waystation Project to help protect monarch butterflies and raise awareness about the importance of native plants and pollinators.</p>
+      <div class="about-me-signature">
+        Avery Siudara
+        <small>Founder · Northern Wings</small>
+      </div>
+    </div>
+    <div class="about-me-visual reveal">
+      <img class="about-me-img" src="/avery-tractor.avif" alt="Avery Siudara standing beside farm equipment used for waystation habitat restoration">
     </div>
   </div>
 </section>
