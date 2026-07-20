@@ -364,6 +364,120 @@ img { max-width: 100%; display: block; }
   border-radius: 8px;
 }
 
+/* HIGHLIGHTS */
+.highlights {
+  padding: var(--space-4xl) var(--space-2xl);
+  background: var(--cream);
+}
+.highlights .section-label { color: var(--leaf); }
+.highlights-head {
+  max-width: 1320px;
+  margin: 0 auto var(--space-3xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: var(--space-2xl);
+  flex-wrap: wrap;
+}
+.highlights-head h2 {
+  font-family: var(--display);
+  font-size: clamp(36px, 4.5vw, 60px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  max-width: 700px;
+}
+.highlights-head h2 em { font-style: italic; color: var(--leaf); font-weight: 400; }
+.highlights-head p {
+  font-size: 17px;
+  color: var(--ink-soft);
+  max-width: 320px;
+}
+.timeline {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xl);
+}
+.month-img-pending {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 4px;
+  margin-bottom: var(--space-md);
+  background: oklch(92% 0.02 145);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: oklch(55% 0.04 145);
+}
+.month-img-duo {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  aspect-ratio: 4/3;
+}
+.month-img-duo .month-img-pending {
+  flex: 1;
+  aspect-ratio: unset;
+  margin-bottom: 0;
+}
+.month-img-duo img {
+  flex: 1;
+  min-width: 0;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.month-span {
+  grid-column: span 2;
+}
+.month { position: relative; }
+.month-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: var(--space-md);
+  transition: transform 400ms var(--ease-out);
+}
+.month:hover .month-img { transform: scale(1.02); }
+.month-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-xs);
+}
+.month-num {
+  font-family: var(--display);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--leaf);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.month-tag { font-size: 13px; color: var(--ink-soft); font-style: italic; }
+.month h3 {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: var(--space-sm);
+  line-height: 1.05;
+}
+.month p { font-size: 16px; line-height: 1.55; color: var(--ink-soft); }
+@media (max-width: 900px) {
+  .highlights { padding: var(--space-3xl) var(--space-md); }
+  .timeline { grid-template-columns: 1fr; }
+  .month-span { grid-column: span 1; }
+  .highlights-head { flex-direction: column; align-items: start; }
+}
+
 /* CTA BAND */
 .cta-band {
   background: var(--ink);
@@ -534,6 +648,99 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="highlights" id="highlights">
+  <div class="highlights-head">
+    <h2 class="reveal">Project highlights, <em>month by month</em></h2>
+    <p class="reveal">A growing season at the waystation: from seedling to sanctuary.</p>
+  </div>
+  <div class="timeline">
+    <article class="month reveal">
+      <img class="month-img" src="/seed-sourcing.jpg" alt="Holding a bag of Renovo Seed native wildflower mix sourced for the waystation" style="object-position: top;">
+      <div class="month-meta">
+        <span class="month-num">Month 1 · August</span>
+        <span class="month-tag">Seed sourcing</span>
+      </div>
+      <h3>The seeds arrived</h3>
+      <p>After researching Michigan-native species, we sourced a custom wildflower and milkweed blend from Renovo Seed — chosen for bloom timing, monarch host value, and regional hardiness.</p>
+    </article>
+    <article class="month reveal">
+      <img class="month-img" src="/avery-tractor.avif" alt="Avery Siudara standing beside farm equipment used for waystation site preparation">
+      <div class="month-meta">
+        <span class="month-num">Month 2 · September</span>
+        <span class="month-tag">Site prep</span>
+      </div>
+      <h3>Breaking ground</h3>
+      <p>With a tractor, brush mower, and seed drill on loan, we cleared and prepped the field — laying the groundwork for over an acre of native wildflower and milkweed habitat.</p>
+    </article>
+    <article class="month reveal">
+      <img class="month-img" src="/seed-drill.jpg" alt="Land Pride seed drill poised over freshly tilled soil, ready to plant the native wildflower mix">
+      <div class="month-meta">
+        <span class="month-num">Month 3 · October</span>
+        <span class="month-tag">Planting day</span>
+      </div>
+      <h3>Seeds planted</h3>
+      <p>With the Land Pride drill loaded and the field tilled, we made pass after pass across the acre — pressing thousands of native wildflower and milkweed seeds into the soil. This was done as late in season as possible to avoid early germination but before the first snow.</p>
+    </article>
+    <article class="month reveal">
+      <div class="month-img-pending">Photo coming soon</div>
+      <div class="month-meta">
+        <span class="month-num">Month 4 · November</span>
+        <span class="month-tag">Winterizing</span>
+      </div>
+      <h3>Ready for winter!</h3>
+      <p>The waystation fields are ready for a long winter's nap.</p>
+    </article>
+    <article class="month month-span reveal">
+      <div class="month-img-pending" style="aspect-ratio: 8/3;">Photo coming soon</div>
+      <div class="month-meta">
+        <span class="month-num">Months 5–8 · December–March</span>
+        <span class="month-tag">Winter</span>
+      </div>
+      <h3>Winter!</h3>
+      <p>Northern Michigan experienced a classic, heavy snowfall season. Lake-effect belts and inland areas easily surpassed 125 to 150 inches of total accumulation. This included a late blizzard in March which dropped 20" of snow on the waystation.</p>
+    </article>
+    <article class="month reveal">
+      <div class="month-img-pending">No photo yet</div>
+      <div class="month-meta">
+        <span class="month-num">Month 9 · April</span>
+        <span class="month-tag">Early spring</span>
+      </div>
+      <h3>Spring is finally here?</h3>
+      <p>By the end of April, the snow had finally melted from the waystation fields. Early spring remained very cold, with no signs of growth yet. Will keep watching!</p>
+    </article>
+    <article class="month reveal">
+      <div class="month-img-pending">Photo coming soon</div>
+      <div class="month-meta">
+        <span class="month-num">Month 10 · May</span>
+        <span class="month-tag">First growth</span>
+      </div>
+      <h3>Growth?</h3>
+      <p>The first green shoots from the fields are coming up. Hard to tell what they are though. We planted a mixture of seeds and pre-existing natural grasses will likely also sprout.</p>
+    </article>
+    <article class="month reveal">
+      <div class="month-img-pending">Photo coming soon</div>
+      <div class="month-meta">
+        <span class="month-num">Month 11 · June</span>
+        <span class="month-tag">Success!</span>
+      </div>
+      <h3>Success!</h3>
+      <p>I could not get up to visit the waystation in June due to school final exams and sports playoffs. But a neighbor snapped this picture for me. Lots of plants are coming up and I can see stalks of milkweed.</p>
+    </article>
+    <article class="month reveal">
+      <div class="month-img-duo">
+        <img src="/milkweed-up-close.jpg" alt="Mature milkweed growing at the waystation" loading="lazy">
+        <img src="/monarch-on-fern.jpg" alt="Monarch butterfly resting on fern" loading="lazy">
+      </div>
+      <div class="month-meta">
+        <span class="month-num">Month 12 · July</span>
+        <span class="month-tag">Monarchs!</span>
+      </div>
+      <h3>Mature plants and Monarchs are here.</h3>
+      <p>Mature Milkweed and Wildflower plants have grown, and more are coming up. The bigger of the two fields is having good growth and we saw our first Monarchs on July 3rd!</p>
+    </article>
   </div>
 </section>
 
