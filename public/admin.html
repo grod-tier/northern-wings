@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Northern Wings</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap');
+:root {
+  --leaf-deep: oklch(38% 0.06 145);
+  --leaf: oklch(46% 0.085 145);
+  --leaf-mid: oklch(58% 0.09 142);
+  --cream: oklch(96% 0.018 95);
+  --cream-warm: oklch(92% 0.035 88);
+  --ink: oklch(22% 0.025 145);
+  --ink-soft: oklch(34% 0.03 145);
+  --monarch-deep: oklch(56% 0.19 42);
+  --display: 'Fraunces', Georgia, serif;
+  --body: 'Newsreader', Georgia, serif;
+  --ease: cubic-bezier(0.25, 1, 0.5, 1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--body); background: var(--cream); color: var(--ink); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+/* LOGIN */
+.login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.login-card {
+  background: white;
+  border-radius: 12px;
+  padding: 48px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 40px oklch(22% 0.025 145 / 0.08);
+}
+.login-card h1 {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.login-card p { font-size: 15px; color: var(--ink-soft); margin-bottom: 32px; }
+.login-card label { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
+.login-card input { width: 100%; padding: 12px 14px; font-family: var(--body); font-size: 16px; border: 1.5px solid oklch(46% 0.085 145 / 0.2); border-radius: 6px; outline: none; background: var(--cream-warm); }
+.login-card input:focus { border-color: var(--leaf); }
+.login-card .err { color: oklch(50% 0.18 30); font-size: 14px; margin-top: 8px; display: none; }
+.btn { display: inline-flex; align-items: center; gap: 8px; background: var(--monarch-deep); color: white; border: none; border-radius: 999px; padding: 12px 28px; font-family: var(--body); font-size: 15px; font-weight: 500; cursor: pointer; margin-top: 20px; width: 100%; justify-content: center; transition: background 150ms, transform 150ms; }
+.btn:hover { background: var(--leaf-deep); transform: translateY(-1px); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn-ghost { background: transparent; color: var(--ink-soft); border: 1.5px solid oklch(46% 0.085 145 / 0.25); }
+.btn-ghost:hover { background: var(--cream-warm); color: var(--ink); }
+
+/* APP SHELL */
+.app { display: none; min-height: 100vh; flex-direction: column; }
+.topbar { background: var(--leaf-deep); color: white; padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; }
+.topbar-brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-size: 18px; font-weight: 500; }
+.topbar-brand img { width: 32px; height: 32px; border-radius: 50%; object-fit: contain; }
+.topbar-right { display: flex; align-items: center; gap: 16px; font-size: 14px; opacity: 0.8; }
+.topbar-right a { color: white; text-decoration: none; opacity: 0.7; }
+.topbar-right a:hover { opacity: 1; }
+
+.tabs { background: white; border-bottom: 1px solid oklch(46% 0.085 145 / 0.12); padding: 0 32px; display: flex; gap: 0; }
+.tab { padding: 16px 20px; font-size: 15px; font-weight: 500; color: var(--ink-soft); border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 150ms; }
+.tab.active { color: var(--leaf-deep); border-bottom-color: var(--leaf-deep); }
+
+.panels { flex: 1; padding: 40px 32px; max-width: 800px; margin: 0 auto; width: 100%; }
+.panel { display: none; }
+.panel.active { display: block; }
+
+.panel h2 { font-family: var(--display); font-size: 24px; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 6px; }
+.panel .panel-desc { font-size: 15px; color: var(--ink-soft); margin-bottom: 32px; }
+
+/* FORM ELEMENTS */
+.field { margin-bottom: 20px; }
+.field label { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
+.field input, .field textarea, .field select {
+  width: 100%; padding: 11px 14px; font-family: var(--body); font-size: 16px;
+  border: 1.5px solid oklch(46% 0.085 145 / 0.2); border-radius: 6px; outline: none;
+  background: var(--cream-warm); color: var(--ink); transition: border-color 150ms;
+}
+.field input:focus, .field textarea:focus { border-color: var(--leaf); box-shadow: 0 0 0 3px oklch(46% 0.085 145 / 0.1); }
+.field textarea { min-height: 160px; resize: vertical; line-height: 1.6; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* DROP ZONE */
+.dropzone {
+  border: 2px dashed oklch(46% 0.085 145 / 0.3);
+  border-radius: 10px;
+  padding: 48px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 150ms, background 150ms;
+  background: var(--cream-warm);
+  margin-bottom: 20px;
+  position: relative;
+}
+.dropzone.drag-over { border-color: var(--leaf); background: oklch(46% 0.085 145 / 0.06); }
+.dropzone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.dropzone-icon { font-size: 36px; margin-bottom: 12px; }
+.dropzone-label { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.dropzone-sub { font-size: 14px; color: var(--ink-soft); }
+
+/* PREVIEW STRIP */
+.preview-strip { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+.preview-thumb { position: relative; width: 80px; height: 80px; border-radius: 6px; overflow: hidden; }
+.preview-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.preview-thumb .remove { position: absolute; top: 3px; right: 3px; background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+/* UPLOAD QUEUE */
+.upload-queue { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+.queue-item { background: white; border: 1px solid oklch(46% 0.085 145 / 0.12); border-radius: 8px; padding: 12px 16px; display: grid; grid-template-columns: 60px 1fr; gap: 12px; align-items: center; }
+.queue-thumb { width: 60px; height: 60px; border-radius: 6px; object-fit: cover; }
+.queue-fields { display: flex; flex-direction: column; gap: 6px; }
+.queue-fields input { padding: 6px 10px; font-size: 14px; border: 1px solid oklch(46% 0.085 145 / 0.2); border-radius: 4px; font-family: var(--body); background: var(--cream-warm); }
+.queue-fields input:focus { outline: none; border-color: var(--leaf); }
+
+/* STATUS */
+.status-bar { padding: 12px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; margin-bottom: 20px; display: none; }
+.status-bar.success { display: block; background: oklch(46% 0.085 145 / 0.1); color: var(--leaf-deep); border: 1px solid oklch(46% 0.085 145 / 0.25); }
+.status-bar.error { display: block; background: oklch(60% 0.18 30 / 0.08); color: oklch(40% 0.15 30); border: 1px solid oklch(60% 0.18 30 / 0.2); }
+.status-bar.loading { display: block; background: oklch(78% 0.07 90 / 0.2); color: oklch(50% 0.08 90); border: 1px solid oklch(78% 0.07 90 / 0.3); }
+
+/* COVER IMAGE PREVIEW */
+.cover-preview { width: 100%; aspect-ratio: 16/7; object-fit: cover; border-radius: 8px; margin-bottom: 8px; display: none; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div class="login-wrap" id="login-screen">
+  <div class="login-card">
+    <h1>Northern Wings</h1>
+    <p>Admin — sign in to manage content</p>
+    <label for="pw-input">Password</label>
+    <input type="password" id="pw-input" placeholder="Enter password" autocomplete="current-password">
+    <div class="err" id="pw-err">Incorrect password. Try again.</div>
+    <button class="btn" id="pw-btn">Sign in</button>
+  </div>
+</div>
+
+<!-- APP SHELL -->
+<div class="app" id="app">
+  <div class="topbar">
+    <div class="topbar-brand">
+      <img src="/logo.png" alt="">
+      Northern Wings Admin
+    </div>
+    <div class="topbar-right">
+      <a href="/" target="_blank">View site ↗</a>
+      <span>|</span>
+      <a href="#" id="logout-btn">Sign out</a>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-panel="gallery">📷 Gallery</button>
+    <button class="tab" data-panel="journal">📝 Journal</button>
+  </div>
+
+  <div class="panels">
+    <!-- GALLERY PANEL -->
+    <div class="panel active" id="panel-gallery">
+      <h2>Upload photos</h2>
+      <p class="panel-desc">Drag and drop photos below. Add a caption and date for each, then click Upload all.</p>
+
+      <div class="dropzone" id="gallery-dropzone">
+        <input type="file" id="gallery-file-input" accept="image/*" multiple>
+        <div class="dropzone-icon">🌿</div>
+        <div class="dropzone-label">Drop photos here</div>
+        <div class="dropzone-sub">or click to browse · JPG, PNG, HEIC</div>
+      </div>
+
+      <div class="upload-queue" id="upload-queue"></div>
+
+      <div class="status-bar" id="gallery-status"></div>
+
+      <button class="btn" id="gallery-upload-btn" style="display:none;">
+        Upload all photos →
+      </button>
+    </div>
+
+    <!-- JOURNAL PANEL -->
+    <div class="panel" id="panel-journal">
+      <h2>New journal post</h2>
+      <p class="panel-desc">Write an update from the waystation. Posts appear at northernwings.org/journal.</p>
+
+      <div class="field">
+        <label>Title</label>
+        <input type="text" id="post-title" placeholder="e.g. First monarch spotted this season">
+      </div>
+
+      <div class="field">
+        <label>Cover image</label>
+        <div class="dropzone" id="cover-dropzone" style="padding: 24px;">
+          <input type="file" id="cover-file-input" accept="image/*">
+          <div class="dropzone-icon" style="font-size:24px;margin-bottom:6px;">🖼</div>
+          <div class="dropzone-label" style="font-size:14px;">Drop a cover photo or click to browse</div>
+        </div>
+        <img class="cover-preview" id="cover-preview">
+      </div>
+
+      <div class="field">
+        <label>Excerpt <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-soft);font-size:11px;">(shown on listing page)</span></label>
+        <input type="text" id="post-excerpt" placeholder="A short summary…">
+      </div>
+
+      <div class="field">
+        <label>Body</label>
+        <textarea id="post-body" placeholder="Write your journal entry here…"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Date</label>
+        <input type="date" id="post-date">
+      </div>
+
+      <div class="status-bar" id="journal-status"></div>
+
+      <button class="btn" id="journal-submit-btn">Publish post →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Auth ────────────────────────────────────────────────────────────────────
+const session = { token: null };
+
+document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+document.getElementById('pw-btn').addEventListener('click', login);
+document.getElementById('logout-btn').addEventListener('click', e => { e.preventDefault(); logout(); });
+
+async function login() {
+  const pw = document.getElementById('pw-input').value;
+  const err = document.getElementById('pw-err');
+  const btn = document.getElementById('pw-btn');
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  err.style.display = 'none';
+  try {
+    const res = await fetch('/api/admin/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: pw }) });
+    const json = await res.json();
+    if (res.ok) {
+      session.token = json.token;
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'flex';
+    } else {
+      err.style.display = 'block';
+    }
+  } catch { err.style.display = 'block'; }
+  btn.disabled = false; btn.textContent = 'Sign in';
+}
+
+function logout() {
+  session.token = null;
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('pw-input').value = '';
+}
+
+function authHeaders() { return { 'x-admin-token': session.token }; }
+
+// ── Tabs ─────────────────────────────────────────────────────────────────────
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+  });
+});
+
+// ── Gallery ──────────────────────────────────────────────────────────────────
+const galleryFiles = [];
+const dropzone = document.getElementById('gallery-dropzone');
+const fileInput = document.getElementById('gallery-file-input');
+const queue = document.getElementById('upload-queue');
+const uploadBtn = document.getElementById('gallery-upload-btn');
+
+dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag-over'); });
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
+dropzone.addEventListener('drop', e => { e.preventDefault(); dropzone.classList.remove('drag-over'); addFiles(e.dataTransfer.files); });
+fileInput.addEventListener('change', () => addFiles(fileInput.files));
+
+function addFiles(files) {
+  Array.from(files).forEach(file => {
+    const id = Date.now() + Math.random();
+    galleryFiles.push({ id, file, caption: '', date: '', location: '' });
+    renderQueue();
+  });
+}
+
+function renderQueue() {
+  queue.innerHTML = '';
+  galleryFiles.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'queue-item';
+    div.innerHTML = `
+      <img class="queue-thumb" src="${URL.createObjectURL(item.file)}" alt="">
+      <div class="queue-fields">
+        <input type="text" placeholder="Caption (optional)" value="${item.caption}" data-id="${item.id}" data-field="caption">
+        <input type="text" placeholder="Location (optional)" value="${item.location}" data-id="${item.id}" data-field="location">
+        <input type="date" value="${item.date}" data-id="${item.id}" data-field="date">
+      </div>`;
+    queue.appendChild(div);
+    div.querySelectorAll('input').forEach(inp => {
+      inp.addEventListener('input', () => {
+        const f = galleryFiles.find(x => x.id == inp.dataset.id);
+        if (f) f[inp.dataset.field] = inp.value;
+      });
+    });
+  });
+  uploadBtn.style.display = galleryFiles.length ? 'inline-flex' : 'none';
+}
+
+uploadBtn.addEventListener('click', async () => {
+  const status = document.getElementById('gallery-status');
+  uploadBtn.disabled = true;
+  status.className = 'status-bar loading';
+  status.textContent = `Uploading ${galleryFiles.length} photo${galleryFiles.length > 1 ? 's' : ''}…`;
+
+  let done = 0, failed = 0;
+  for (const item of galleryFiles) {
+    try {
+      const fd = new FormData();
+      fd.append('image', item.file);
+      fd.append('caption', item.caption);
+      fd.append('location', item.location);
+      fd.append('date', item.date);
+      const res = await fetch('/api/admin/upload-photo', { method: 'POST', headers: authHeaders(), body: fd });
+      if (res.ok) done++; else failed++;
+    } catch { failed++; }
+  }
+
+  galleryFiles.length = 0;
+  renderQueue();
+  uploadBtn.disabled = false;
+  if (failed === 0) {
+    status.className = 'status-bar success';
+    status.textContent = `✓ ${done} photo${done > 1 ? 's' : ''} uploaded and published.`;
+  } else {
+    status.className = 'status-bar error';
+    status.textContent = `${done} uploaded, ${failed} failed. Check your connection and try again.`;
+  }
+});
+
+// ── Journal ───────────────────────────────────────────────────────────────────
+let coverFile = null;
+const coverDropzone = document.getElementById('cover-dropzone');
+const coverInput = document.getElementById('cover-file-input');
+const coverPreview = document.getElementById('cover-preview');
+
+coverDropzone.addEventListener('dragover', e => { e.preventDefault(); coverDropzone.classList.add('drag-over'); });
+coverDropzone.addEventListener('dragleave', () => coverDropzone.classList.remove('drag-over'));
+coverDropzone.addEventListener('drop', e => { e.preventDefault(); coverDropzone.classList.remove('drag-over'); setCover(e.dataTransfer.files[0]); });
+coverInput.addEventListener('change', () => setCover(coverInput.files[0]));
+
+function setCover(file) {
+  if (!file) return;
+  coverFile = file;
+  coverPreview.src = URL.createObjectURL(file);
+  coverPreview.style.display = 'block';
+  coverDropzone.style.display = 'none';
+}
+
+// Set today's date as default
+document.getElementById('post-date').value = new Date().toISOString().slice(0, 10);
+
+document.getElementById('journal-submit-btn').addEventListener('click', async () => {
+  const title = document.getElementById('post-title').value.trim();
+  const excerpt = document.getElementById('post-excerpt').value.trim();
+  const body = document.getElementById('post-body').value.trim();
+  const date = document.getElementById('post-date').value;
+  const status = document.getElementById('journal-status');
+  const btn = document.getElementById('journal-submit-btn');
+
+  if (!title) { status.className = 'status-bar error'; status.textContent = 'Title is required.'; return; }
+
+  btn.disabled = true;
+  status.className = 'status-bar loading';
+  status.textContent = 'Publishing…';
+
+  const fd = new FormData();
+  fd.append('title', title);
+  fd.append('excerpt', excerpt);
+  fd.append('body', body);
+  fd.append('date', date);
+  if (coverFile) fd.append('cover', coverFile);
+
+  try {
+    const res = await fetch('/api/admin/create-post', { method: 'POST', headers: authHeaders(), body: fd });
+    const json = await res.json();
+    if (res.ok) {
+      status.className = 'status-bar success';
+      status.textContent = `✓ Published! View at northernwings.org/journal/${json.slug}`;
+      document.getElementById('post-title').value = '';
+      document.getElementById('post-excerpt').value = '';
+      document.getElementById('post-body').value = '';
+      coverFile = null;
+      coverPreview.style.display = 'none';
+      coverDropzone.style.display = 'block';
+    } else {
+      throw new Error(json.error || 'Unknown error');
+    }
+  } catch (err) {
+    status.className = 'status-bar error';
+    status.textContent = 'Failed to publish: ' + err.message;
+  }
+  btn.disabled = false;
+});
+</script>
+</body>
+</html>

@@ -29,7 +29,21 @@ import {
   sendCustomerReceipt,
 } from './lib/checkout.js';
 import { injectNav } from './lib/injectNav.js';
-import { getJournalPosts, getJournalPost, getGalleryPhotos, imageUrl } from './lib/sanity.js';
+import { getJournalPosts, getJournalPost, getGalleryPhotos, imageUrl, sanityWrite } from './lib/sanity.js';
+import multer from 'multer';
+import crypto from 'crypto';
+
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 50 * 1024 * 1024 } });
+
+function makeAdminToken(password) {
+  return crypto.createHmac('sha256', password + '_nw_admin').update(password).digest('hex');
+}
+function checkAdmin(req, res) {
+  const token = req.headers['x-admin-token'];
+  const expected = makeAdminToken(process.env.ADMIN_PASSWORD || '');
+  if (!token || token !== expected) { res.status(401).json({ error: 'Unauthorized' }); return false; }
+  return true;
+}
 
 async function sendPage(res, filePath) {
   try {
@@ -55,6 +69,80 @@ app.get('/checkout/success', (req, res) => sendPage(res, join(__dirname, 'public
 app.get('/privacy', (req, res) => sendPage(res, join(__dirname, 'public/privacy.html')));
 app.get('/terms', (req, res) => sendPage(res, join(__dirname, 'public/terms.html')));
 app.get('/contact', (req, res) => sendPage(res, join(__dirname, 'public/contact.html')));
+app.get('/admin', (req, res) => res.sendFile(join(__dirname, 'public/admin.html')));
+
+// ─── Admin API ────────────────────────────────────────────────────────────────
+app.post('/api/admin/login', (req, res) => {
+  const { password } = req.body || {};
+  if (password === process.env.ADMIN_PASSWORD) {
+    res.json({ token: makeAdminToken(password) });
+  } else {
+    res.status(401).json({ error: 'Incorrect password' });
+  }
+});
+
+app.post('/api/admin/upload-photo', upload.single('image'), async (req, res) => {
+  if (!checkAdmin(req, res)) return;
+  if (!req.file) return res.status(400).json({ error: 'No image file' });
+  if (!sanityWrite) return res.status(500).json({ error: 'Sanity write client not configured' });
+  try {
+    const asset = await sanityWrite.assets.upload('image', req.file.buffer, {
+      filename: req.file.originalname,
+      contentType: req.file.mimetype,
+    });
+    const doc = {
+      _type: 'galleryPhoto',
+      image: { _type: 'image', asset: { _type: 'reference', _ref: asset._id } },
+      caption: req.body.caption || '',
+      location: req.body.location || '',
+      takenAt: req.body.date || new Date().toISOString().slice(0, 10),
+    };
+    await sanityWrite.create(doc);
+    res.json({ ok: true });
+  } catch (err) {
+    console.error('Photo upload error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/admin/create-post', upload.single('cover'), async (req, res) => {
+  if (!checkAdmin(req, res)) return;
+  if (!sanityWrite) return res.status(500).json({ error: 'Sanity write client not configured' });
+  const { title, excerpt, body, date } = req.body || {};
+  if (!title) return res.status(400).json({ error: 'Title required' });
+  try {
+    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80);
+    let coverRef = null;
+    if (req.file) {
+      const asset = await sanityWrite.assets.upload('image', req.file.buffer, {
+        filename: req.file.originalname,
+        contentType: req.file.mimetype,
+      });
+      coverRef = { _type: 'image', asset: { _type: 'reference', _ref: asset._id } };
+    }
+    const bodyBlocks = (body || '').split(/\n\n+/).filter(Boolean).map((para, i) => ({
+      _type: 'block',
+      _key: `block${i}`,
+      style: 'normal',
+      children: [{ _type: 'span', _key: `span${i}`, text: para.trim(), marks: [] }],
+      markDefs: [],
+    }));
+    const doc = {
+      _type: 'journalPost',
+      title,
+      slug: { _type: 'slug', current: slug },
+      publishedAt: date ? new Date(date).toISOString() : new Date().toISOString(),
+      excerpt: excerpt || '',
+      ...(coverRef && { mainImage: coverRef }),
+      body: bodyBlocks,
+    };
+    await sanityWrite.create(doc);
+    res.json({ ok: true, slug });
+  } catch (err) {
+    console.error('Post create error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // ─── Journal (Sanity-backed blog) ─────────────────────────────────────────────
 app.get('/journal', async (req, res) => {
