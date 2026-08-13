@@ -74,7 +74,7 @@ app.post('/api/contact', async (req, res) => {
     });
     await transporter.sendMail({
       from: `"Northern Wings Website" <${process.env.SMTP_FROM}>`,
-      to: process.env.SMTP_USER,
+      to: process.env.CONTACT_EMAIL || process.env.SMTP_USER,
       replyTo: email,
       subject: `[Contact] ${subject || 'New message'} — ${firstName} ${lastName}`,
       text: `From: ${firstName} ${lastName} <${email}>\nSubject: ${subject}\n\n${message}`,
