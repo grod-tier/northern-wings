@@ -53,8 +53,39 @@ app.get('/waystation', (req, res) => sendPage(res, join(__dirname, 'public/wayst
 app.get('/checkout/success', (req, res) => sendPage(res, join(__dirname, 'public/checkout-success.html')));
 app.get('/privacy', (req, res) => sendPage(res, join(__dirname, 'public/privacy.html')));
 app.get('/terms', (req, res) => sendPage(res, join(__dirname, 'public/terms.html')));
+app.get('/contact', (req, res) => sendPage(res, join(__dirname, 'public/contact.html')));
 
 app.use(express.static(join(__dirname, 'public')));
+
+app.post('/api/contact', async (req, res) => {
+  const { firstName, lastName, email, subject, message } = req.body || {};
+  if (!firstName || !email || !message) {
+    return res.status(400).json({ error: 'Please fill in all required fields.' });
+  }
+  try {
+    const nodemailer = (await import('nodemailer')).default;
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT || 587),
+      secure: process.env.SMTP_SECURE === 'true',
+      auth: process.env.SMTP_USER
+        ? { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
+        : undefined,
+    });
+    await transporter.sendMail({
+      from: `"Northern Wings Website" <${process.env.SMTP_FROM}>`,
+      to: process.env.SMTP_USER,
+      replyTo: email,
+      subject: `[Contact] ${subject || 'New message'} — ${firstName} ${lastName}`,
+      text: `From: ${firstName} ${lastName} <${email}>\nSubject: ${subject}\n\n${message}`,
+      html: `<p><strong>From:</strong> ${firstName} ${lastName} &lt;${email}&gt;</p><p><strong>Subject:</strong> ${subject}</p><hr><p>${message.replace(/\n/g, '<br>')}</p>`,
+    });
+    res.json({ ok: true });
+  } catch (err) {
+    console.error('Contact form error:', err);
+    res.status(500).json({ error: 'Failed to send message. Please email us directly.' });
+  }
+});
 
 app.post('/api/search', async (req, res) => {
   const { zipcode, niche } = req.body;
