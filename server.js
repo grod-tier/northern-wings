@@ -619,7 +619,7 @@ img{max-width:100%;display:block}
 .post-back{display:inline-flex;align-items:center;gap:6px;font-size:15px;color:var(--leaf-deep);text-decoration:none;margin-bottom:var(--space-2xl)}
 .post-back:hover{text-decoration:underline}
 /* Gallery */
-.gallery-grid{max-width:1200px;margin:0 auto;padding:var(--space-4xl) var(--space-2xl);columns:3;column-gap:var(--space-md)}
+.gallery-grid{max-width:1200px;margin:0 auto;padding:var(--space-lg) var(--space-2xl) var(--space-4xl);columns:3;column-gap:var(--space-md)}
 .gallery-item{break-inside:avoid;margin-bottom:var(--space-md)}
 .gallery-item img{width:100%;border-radius:6px;display:block}
 .gallery-item figcaption{font-size:14px;color:var(--ink-soft);padding:var(--space-xs) 0 var(--space-sm);line-height:1.4}
