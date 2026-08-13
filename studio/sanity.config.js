@@ -7,8 +7,8 @@ export default defineConfig({
   name: 'northern-wings',
   title: 'Northern Wings',
 
-  projectId: process.env.SANITY_PROJECT_ID,
-  dataset: process.env.SANITY_DATASET || 'production',
+  projectId: 'ryf1dyhh',
+  dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
 
