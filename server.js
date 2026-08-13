@@ -51,6 +51,8 @@ app.get('/', (req, res) => sendPage(res, join(__dirname, 'public/index.html')));
 app.get('/plight', (req, res) => sendPage(res, join(__dirname, 'public/plight.html')));
 app.get('/waystation', (req, res) => sendPage(res, join(__dirname, 'public/waystation.html')));
 app.get('/checkout/success', (req, res) => sendPage(res, join(__dirname, 'public/checkout-success.html')));
+app.get('/privacy', (req, res) => sendPage(res, join(__dirname, 'public/privacy.html')));
+app.get('/terms', (req, res) => sendPage(res, join(__dirname, 'public/terms.html')));
 
 app.use(express.static(join(__dirname, 'public')));
 

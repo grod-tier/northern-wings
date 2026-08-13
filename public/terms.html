@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms &amp; Conditions — Northern Wings</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap');
+
+:root {
+  --leaf-deep: oklch(38% 0.06 145);
+  --leaf: oklch(46% 0.085 145);
+  --leaf-mid: oklch(58% 0.09 142);
+  --leaf-soft: oklch(72% 0.07 138);
+  --cream: oklch(96% 0.018 95);
+  --cream-warm: oklch(92% 0.035 88);
+  --ink: oklch(22% 0.025 145);
+  --ink-soft: oklch(34% 0.03 145);
+  --monarch: oklch(68% 0.18 50);
+  --monarch-deep: oklch(56% 0.19 42);
+
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  --display: 'Fraunces', Georgia, serif;
+  --body: 'Newsreader', Georgia, serif;
+
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--cream);
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: var(--space-md) var(--space-2xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: oklch(96% 0.018 95 / 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid oklch(46% 0.085 145 / 0.12);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--leaf-deep);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+.brand-mark { width: 36px; height: 36px; display: grid; place-items: center; color: var(--monarch); }
+.brand small {
+  display: block;
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--leaf-mid);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-xl);
+  align-items: center;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 150ms var(--ease-out);
+}
+.nav-links a:hover { color: var(--leaf-deep); }
+.nav-cta {
+  background: var(--monarch-deep);
+  color: var(--cream) !important;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: transform 150ms var(--ease-out), background 150ms var(--ease-out);
+}
+.nav-cta:hover { background: var(--leaf-deep) !important; transform: translateY(-1px); }
+
+/* PAGE HEADER */
+.page-header {
+  padding: 130px var(--space-2xl) var(--space-3xl);
+  background: var(--cream);
+  border-bottom: 1px solid oklch(46% 0.085 145 / 0.1);
+}
+.page-header-inner { max-width: 740px; margin: 0 auto; }
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--leaf);
+  font-weight: 500;
+  margin-bottom: var(--space-lg);
+}
+
+.page-header h1 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: var(--space-md);
+}
+
+.page-header .meta {
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+/* CONTENT */
+.content {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: var(--space-4xl) var(--space-2xl) var(--space-4xl);
+}
+
+.content h2 {
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-top: var(--space-3xl);
+  margin-bottom: var(--space-md);
+}
+.content h2:first-child { margin-top: 0; }
+
+.content p {
+  color: var(--ink-soft);
+  margin-bottom: var(--space-md);
+}
+
+.content ul {
+  margin: var(--space-md) 0 var(--space-md) var(--space-xl);
+  color: var(--ink-soft);
+}
+.content ul li { margin-bottom: var(--space-xs); }
+
+.content a { color: var(--leaf-deep); }
+
+/* FOOTER */
+footer {
+  background: var(--ink);
+  color: oklch(78% 0.02 145);
+  padding: var(--space-2xl);
+  border-top: 1px solid oklch(34% 0.03 145);
+  font-size: 14px;
+  text-align: center;
+}
+footer .brand { color: var(--cream); justify-content: center; margin-bottom: var(--space-md); }
+footer .footer-links { margin-top: var(--space-sm); display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap; }
+footer .footer-links a { color: oklch(78% 0.02 145); text-decoration: none; transition: color 150ms; }
+footer .footer-links a:hover { color: var(--cream); }
+
+@media (max-width: 900px) {
+  .page-header { padding: 110px var(--space-md) var(--space-2xl); }
+  .content { padding: var(--space-3xl) var(--space-md); }
+  .nav { padding: var(--space-sm) var(--space-md); }
+  .nav-links { gap: var(--space-md); }
+  .nav-links a:not(.nav-cta) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="eyebrow">Legal</div>
+    <h1>Terms &amp; Conditions</h1>
+    <p class="meta">Last updated: August 13, 2025</p>
+  </div>
+</header>
+
+<main class="content">
+
+  <h2>Overview</h2>
+  <p>By purchasing from Northern Wings or using this website, you agree to these Terms and Conditions. Northern Wings is a youth-led conservation enterprise selling monarch habitat kits and educational resources. Our mailing address is available upon request at <a href="mailto:hello@northernwings.co">hello@northernwings.co</a>.</p>
+
+  <h2>Products and orders</h2>
+  <p>All kit contents are described on the product page. We reserve the right to substitute equivalent plant species if the listed species are temporarily unavailable due to season or supply, while preserving the educational and conservation intent of the kit.</p>
+  <p>We reserve the right to refuse or cancel any order at our discretion, including in cases of suspected fraud or if a product becomes unavailable after the order is placed. You will receive a full refund in such cases.</p>
+
+  <h2>Pricing and payment</h2>
+  <p>All prices are listed in U.S. dollars. We accept major credit and debit cards through Stripe. Payment is charged at the time of order. Free shipping applies to all orders shipped within the contiguous United States.</p>
+
+  <h2>Shipping</h2>
+  <p>We ship within the contiguous United States. Orders are typically processed within 2–5 business days. Shipping times vary by carrier and destination. Northern Wings is not responsible for delays caused by carriers or circumstances outside our control.</p>
+  <p>We are not currently able to ship live plant material to all U.S. states due to agricultural restrictions. If your state has restrictions that prevent delivery, we will notify you and issue a full refund.</p>
+
+  <h2>Returns and refunds</h2>
+  <p>Because our kits contain live or perishable plant material, we are unable to accept returns. If your order arrives damaged or with a significant portion of the contents dead or unusable, please contact us within 7 days of delivery with photos and we will work with you on a replacement or partial refund at our discretion.</p>
+  <p>To initiate a refund request, email <a href="mailto:hello@northernwings.co">hello@northernwings.co</a> with your order number and a description of the issue.</p>
+
+  <h2>Conservation outcomes</h2>
+  <p>Northern Wings makes no guarantee of specific conservation outcomes, plant survival rates, or monarch activity resulting from use of our kits. Results depend on local conditions, climate, planting practices, and other factors outside our control. Our planting instructions represent best-practice guidance, not a warranty of results.</p>
+
+  <h2>Intellectual property</h2>
+  <p>All content on this website — including text, photography, and design — is the property of Northern Wings and may not be reproduced without permission.</p>
+
+  <h2>Limitation of liability</h2>
+  <p>To the fullest extent permitted by applicable law, Northern Wings shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of our products or website. Our maximum liability for any claim arising from a purchase is limited to the amount you paid for that order.</p>
+
+  <h2>Governing law</h2>
+  <p>These Terms are governed by the laws of the State of Michigan, without regard to its conflict of law provisions. Any dispute shall be resolved in the courts of Michigan.</p>
+
+  <h2>Changes to these terms</h2>
+  <p>We may update these Terms from time to time. Continued use of our website or purchase of products after changes constitutes acceptance of the revised terms.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about these Terms? Email us at <a href="mailto:hello@northernwings.co">hello@northernwings.co</a>.</p>
+
+</main>
+
+<footer>
+  <div class="brand">
+    <img src="/logo.png" alt="" aria-hidden="true" class="brand-mark" style="width:36px;height:36px;object-fit:contain;border-radius:50%;">
+    <span>Northern Wings</span>
+  </div>
+  <p>© 2025 Northern Wings · Monarch Waystation #54310 · A youth-led conservation enterprise</p>
+  <div class="footer-links">
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms &amp; Conditions</a>
+  </div>
+</footer>
+
+<!-- NAVBAR -->
+<script src="/nav-inject.js" defer></script>
+</body>
+</html>
