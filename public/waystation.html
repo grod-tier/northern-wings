@@ -432,6 +432,26 @@ img { max-width: 100%; display: block; }
   object-fit: cover;
   border-radius: 4px;
 }
+.month-full {
+  grid-column: span 4;
+}
+.month-full .month-img-quad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+.month-full .month-img-quad img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 4px;
+}
+@media (max-width: 900px) {
+  .month-full { grid-column: span 1; }
+  .month-full .month-img-quad { grid-template-columns: repeat(2, 1fr); }
+}
 .month-span {
   grid-column: span 2;
 }
@@ -485,7 +505,7 @@ img { max-width: 100%; display: block; }
   border-top: 1px solid oklch(46% 0.085 145 / 0.12);
 }
 .thankyou-inner {
-  max-width: 640px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 .thankyou .section-label { color: var(--leaf); margin-bottom: var(--space-sm); }
@@ -591,7 +611,7 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
   .page-header { padding: 110px var(--space-md) var(--space-2xl); }
   .header-inner, .location-inner { grid-template-columns: 1fr; gap: var(--space-2xl); }
   .img-grid { grid-template-columns: 1fr; }
-  .steps, .waystation-images { padding: var(--space-3xl) var(--space-md); }
+  .steps, .waystation-images, .thankyou { padding: var(--space-3xl) var(--space-md); }
   .nav { padding: var(--space-sm) var(--space-md); }
   .nav-links { gap: var(--space-md); }
   .nav-links a:not(.nav-cta) { display: none; }
@@ -790,6 +810,20 @@ footer .brand { color: var(--cream); justify-content: center; margin-bottom: var
       </div>
       <h3>Mature plants and Monarchs are here.</h3>
       <p>Mature Milkweed and Wildflower plants have grown, and more are coming up. The bigger of the two fields is having good growth and we saw our first Monarchs on July 3rd!</p>
+    </article>
+    <article class="month month-full reveal">
+      <div class="month-img-quad">
+        <img src="/month-13-a.jpg" alt="Avery with the Northern Wings waystation sign" loading="lazy">
+        <img src="/month-13-b.jpg" alt="Avery pointing out milkweed plant with caterpillar" loading="lazy">
+        <img src="/month-13-c.jpg" alt="Avery documenting progress at the waystation" loading="lazy">
+        <img src="/month-13-d.jpg" alt="Monarch caterpillar on milkweed leaf" loading="lazy">
+      </div>
+      <div class="month-meta">
+        <span class="month-num">Month 13 · Results</span>
+        <span class="month-tag">Year One</span>
+      </div>
+      <h3>The first growing season.</h3>
+      <p>The first growing season has cultivated over 100 native milkweed plants, including at least 40 observed caterpillars — creating meaningful habitat for one of North America's most iconic pollinators.</p>
     </article>
   </div>
 </section>
