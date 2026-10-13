@@ -29,7 +29,7 @@ import {
   sendCustomerReceipt,
 } from './lib/checkout.js';
 import { injectNav } from './lib/injectNav.js';
-import { getJournalPosts, getJournalPost, getGalleryPhotos, imageUrl, sanityWrite } from './lib/sanity.js';
+import { getJournalPosts, getJournalPost, getGalleryPhotos, getAdminPosts, getAdminPhotos, imageUrl, sanityWrite } from './lib/sanity.js';
 import multer from 'multer';
 import crypto from 'crypto';
 
@@ -144,6 +144,70 @@ app.post('/api/admin/create-post', upload.single('cover'), async (req, res) => {
   }
 });
 
+// ─── Admin list / edit / delete ───────────────────────────────────────────────
+app.get('/api/admin/photos', async (req, res) => {
+  if (!checkAdmin(req, res)) return;
+  try { res.json(await getAdminPhotos()); } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.get('/api/admin/posts', async (req, res) => {
+  if (!checkAdmin(req, res)) return;
+  try { res.json(await getAdminPosts()); } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.delete('/api/admin/photos/:id', async (req, res) => {
+  if (!checkAdmin(req, res)) return;
+  if (!sanityWrite) return res.status(500).json({ error: 'Not configured' });
+  try { await sanityWrite.delete(req.params.id); res.json({ ok: true }); }
+  catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.delete('/api/admin/posts/:id', async (req, res) => {
+  if (!checkAdmin(req, res)) return;
+  if (!sanityWrite) return res.status(500).json({ error: 'Not configured' });
+  try { await sanityWrite.delete(req.params.id); res.json({ ok: true }); }
+  catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.patch('/api/admin/photos/:id', async (req, res) => {
+  if (!checkAdmin(req, res)) return;
+  if (!sanityWrite) return res.status(500).json({ error: 'Not configured' });
+  const { caption, location, takenAt } = req.body || {};
+  try {
+    await sanityWrite.patch(req.params.id).set({ caption, location, takenAt }).commit();
+    res.json({ ok: true });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.patch('/api/admin/posts/:id', upload.single('cover'), async (req, res) => {
+  if (!checkAdmin(req, res)) return;
+  if (!sanityWrite) return res.status(500).json({ error: 'Not configured' });
+  const { title, excerpt, body, date } = req.body || {};
+  try {
+    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80);
+    const bodyBlocks = (body || '').split(/\n\n+/).filter(Boolean).map((para, i) => ({
+      _type: 'block', _key: `block${i}`, style: 'normal',
+      children: [{ _type: 'span', _key: `span${i}`, text: para.trim(), marks: [] }],
+      markDefs: [],
+    }));
+    const patch = sanityWrite.patch(req.params.id).set({
+      title,
+      slug: { _type: 'slug', current: slug },
+      publishedAt: date ? new Date(date).toISOString() : new Date().toISOString(),
+      excerpt: excerpt || '',
+      body: bodyBlocks,
+    });
+    if (req.file) {
+      const asset = await sanityWrite.assets.upload('image', req.file.buffer, {
+        filename: req.file.originalname, contentType: req.file.mimetype,
+      });
+      patch.set({ mainImage: { _type: 'image', asset: { _type: 'reference', _ref: asset._id } } });
+    }
+    await patch.commit();
+    res.json({ ok: true, slug });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
 // ─── Journal (Sanity-backed blog) ─────────────────────────────────────────────
 app.get('/journal', async (req, res) => {
   try {
@@ -184,11 +248,17 @@ app.get('/journal/:slug', async (req, res) => {
 app.get('/gallery', async (req, res) => {
   try {
     const photos = await getGalleryPhotos();
-    const items = photos.map(p => `
-      <figure class="gallery-item">
-        <img src="${imageUrl(p.image, 1200)}" alt="${p.caption || ''}" loading="lazy">
-        ${p.caption ? `<figcaption>${p.caption}${p.location ? ` · <span class="gallery-location">${p.location}</span>` : ''}${p.takenAt ? ` · <span class="gallery-date">${new Date(p.takenAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>` : ''}</figcaption>` : ''}
-      </figure>`).join('');
+    const items = photos.map((p, i) => {
+      const dateStr = p.takenAt ? new Date(p.takenAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : '';
+      const meta = [p.location, dateStr].filter(Boolean).join(' · ');
+      const wide = i % 5 === 0;
+      return `<figure class="gallery-item${wide ? ' gallery-item--wide' : ''}">
+        <div class="gallery-img-wrap">
+          <img src="${imageUrl(p.image, wide ? 2000 : 1200)}" alt="${p.caption || ''}" loading="lazy">
+          ${p.caption || meta ? `<div class="gallery-overlay"><div class="gallery-overlay-inner">${p.caption ? `<span class="gallery-caption">${p.caption}</span>` : ''}${meta ? `<span class="gallery-meta">${meta}</span>` : ''}</div></div>` : ''}
+        </div>
+      </figure>`;
+    }).join('');
     const html = galleryPageHtml(items, photos.length);
     res.type('html').send(await injectNav(html));
   } catch (err) {
@@ -619,19 +689,27 @@ img{max-width:100%;display:block}
 .post-back{display:inline-flex;align-items:center;gap:6px;font-size:15px;color:var(--leaf-deep);text-decoration:none;margin-bottom:var(--space-2xl)}
 .post-back:hover{text-decoration:underline}
 /* Gallery */
-.gallery-grid{max-width:1200px;margin:0 auto;padding:var(--space-lg) var(--space-2xl) var(--space-4xl);columns:3;column-gap:var(--space-md)}
-.gallery-item{break-inside:avoid;margin-bottom:var(--space-md)}
-.gallery-item img{width:100%;border-radius:6px;display:block}
-.gallery-item figcaption{font-size:14px;color:var(--ink-soft);padding:var(--space-xs) 0 var(--space-sm);line-height:1.4}
-.gallery-location,.gallery-date{color:var(--leaf-mid)}
+.gallery-grid{max-width:1200px;margin:0 auto;padding:var(--space-lg) var(--space-2xl) var(--space-4xl);display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gallery-item{margin:0}
+.gallery-item--wide{grid-column:span 3}
+.gallery-img-wrap{position:relative;overflow:hidden;border-radius:10px;background:var(--cream-warm)}
+.gallery-item img{width:100%;display:block;object-fit:cover;object-position:center center;transition:transform 500ms cubic-bezier(0.25,1,0.5,1)}
+.gallery-item--wide img{aspect-ratio:16/7}
+.gallery-item:not(.gallery-item--wide) img{aspect-ratio:4/3}
+.gallery-img-wrap:hover img{transform:scale(1.04)}
+.gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,oklch(22% 0.025 145/.7) 0%,transparent 55%);opacity:0;transition:opacity 300ms ease;display:flex;align-items:flex-end}
+.gallery-img-wrap:hover .gallery-overlay{opacity:1}
+.gallery-overlay-inner{padding:20px;display:flex;flex-direction:column;gap:3px}
+.gallery-caption{color:white;font-size:15px;font-weight:500;line-height:1.3}
+.gallery-meta{color:oklch(85% 0.06 140);font-size:13px;letter-spacing:.02em}
 /* Footer */
 footer{background:var(--ink);color:oklch(78% 0.02 145);padding:var(--space-2xl);border-top:1px solid oklch(34% 0.03 145);font-size:14px;text-align:center}
 footer .brand{color:var(--cream);justify-content:center;margin-bottom:var(--space-md)}
 footer .footer-links{margin-top:var(--space-sm);display:flex;justify-content:center;gap:var(--space-lg);flex-wrap:wrap}
 footer .footer-links a{color:oklch(78% 0.02 145);text-decoration:none;transition:color 150ms}
 footer .footer-links a:hover{color:var(--cream)}
-@media(max-width:900px){.nav{padding:var(--space-sm) var(--space-md)}.nav-links{gap:var(--space-md)}.nav-links a:not(.nav-cta){display:none}.page-header{padding:110px var(--space-md) var(--space-2xl)}.post-grid{grid-template-columns:1fr;padding:var(--space-3xl) var(--space-md)}.gallery-grid{columns:2;padding:var(--space-3xl) var(--space-md)}.post-wrap{padding:var(--space-3xl) var(--space-md)}}
-@media(max-width:600px){.gallery-grid{columns:1}}
+@media(max-width:900px){.nav{padding:var(--space-sm) var(--space-md)}.nav-links{gap:var(--space-md)}.nav-links a:not(.nav-cta){display:none}.page-header{padding:110px var(--space-md) var(--space-2xl)}.post-grid{grid-template-columns:1fr;padding:var(--space-3xl) var(--space-md)}.gallery-grid{grid-template-columns:repeat(2,1fr);padding:var(--space-3xl) var(--space-md)}.gallery-item--wide{grid-column:span 2}.post-wrap{padding:var(--space-3xl) var(--space-md)}}
+@media(max-width:600px){.gallery-grid{grid-template-columns:1fr}.gallery-item--wide{grid-column:span 1}}
 </style>`;
 
 const PAGE_FOOTER = `<footer>
