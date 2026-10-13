@@ -62,9 +62,9 @@ app.use(cors());
 // Capture the raw request body too — needed for Stripe webhook signature verification.
 app.use(express.json({ limit: '20mb', verify: (req, res, buf) => { req.rawBody = buf; } }));
 // Serve pages with shared navbar injection before static fallback
-app.get('/', (req, res) => sendPage(res, join(__dirname, 'public/index.html')));
+app.get('/', (req, res) => sendPage(res, join(__dirname, 'public/waystation.html')));
 app.get('/plight', (req, res) => sendPage(res, join(__dirname, 'public/plight.html')));
-app.get('/waystation', (req, res) => sendPage(res, join(__dirname, 'public/waystation.html')));
+app.get('/waystation', (req, res) => res.redirect('/'));
 app.get('/checkout/success', (req, res) => sendPage(res, join(__dirname, 'public/checkout-success.html')));
 app.get('/privacy', (req, res) => sendPage(res, join(__dirname, 'public/privacy.html')));
 app.get('/terms', (req, res) => sendPage(res, join(__dirname, 'public/terms.html')));
