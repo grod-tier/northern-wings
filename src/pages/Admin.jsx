@@ -306,7 +306,7 @@ function JournalPanel({ token }) {
       const res = await fetch('/api/admin/create-post', { method: 'POST', headers: authHeaders(), body: fd });
       const json = await res.json();
       if (res.ok) {
-        setCreateStatus({ type: 'success', text: `✓ Published! View at northernwings.co/journal/${json.slug}` });
+        setCreateStatus({ type: 'success', text: `✓ Published! View at northernwings.org/journal/${json.slug}` });
         setForm({ title: '', excerpt: '', body: '', date: new Date().toISOString().slice(0, 10) });
         setCoverFile(null); setCoverPreview(null);
         loadPosts();
@@ -358,7 +358,7 @@ function JournalPanel({ token }) {
   return (
     <div className="admin-panel">
       <div className="admin-section-head">
-        <div><h2>New journal post</h2><p>Posts appear at northernwings.co/journal</p></div>
+        <div><h2>New journal post</h2><p>Posts appear at northernwings.org/journal</p></div>
       </div>
 
       <div className="admin-field">

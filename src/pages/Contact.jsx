@@ -54,7 +54,7 @@ export default function Contact() {
               <div className="detail-icon">✉</div>
               <div className="detail-text">
                 <strong>Email</strong>
-                <a href="mailto:hello@northernwings.co">hello@northernwings.co</a>
+                <a href="mailto:hello@northernwings.org">hello@northernwings.org</a>
               </div>
             </div>
             <div className="detail-item">

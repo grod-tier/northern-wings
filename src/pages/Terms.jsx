@@ -14,7 +14,7 @@ export default function Terms() {
       </header>
       <main className="legal-content">
         <h2>Overview</h2>
-        <p>By purchasing from Northern Wings or using this website, you agree to these Terms and Conditions. Northern Wings is a youth-led conservation enterprise selling monarch habitat kits and educational resources. Our mailing address is available upon request at <a href="mailto:hello@northernwings.co">hello@northernwings.co</a>.</p>
+        <p>By purchasing from Northern Wings or using this website, you agree to these Terms and Conditions. Northern Wings is a youth-led conservation enterprise selling monarch habitat kits and educational resources. Our mailing address is available upon request at <a href="mailto:hello@northernwings.org">hello@northernwings.org</a>.</p>
 
         <h2>Products and orders</h2>
         <p>All kit contents are described on the product page. We reserve the right to substitute equivalent plant species if the listed species are temporarily unavailable due to season or supply, while preserving the educational and conservation intent of the kit.</p>
@@ -29,7 +29,7 @@ export default function Terms() {
 
         <h2>Returns and refunds</h2>
         <p>Because our kits contain live or perishable plant material, we are unable to accept returns. If your order arrives damaged or with a significant portion of the contents dead or unusable, please contact us within 7 days of delivery with photos and we will work with you on a replacement or partial refund at our discretion.</p>
-        <p>To initiate a refund request, email <a href="mailto:hello@northernwings.co">hello@northernwings.co</a> with your order number and a description of the issue.</p>
+        <p>To initiate a refund request, email <a href="mailto:hello@northernwings.org">hello@northernwings.org</a> with your order number and a description of the issue.</p>
 
         <h2>Conservation outcomes</h2>
         <p>Northern Wings makes no guarantee of specific conservation outcomes, plant survival rates, or monarch activity resulting from use of our kits. Results depend on local conditions, climate, planting practices, and other factors outside our control. Our planting instructions represent best-practice guidance, not a warranty of results.</p>
@@ -47,7 +47,7 @@ export default function Terms() {
         <p>We may update these Terms from time to time. Continued use of our website or purchase of products after changes constitutes acceptance of the revised terms.</p>
 
         <h2>Contact</h2>
-        <p>Questions about these Terms? Email us at <a href="mailto:hello@northernwings.co">hello@northernwings.co</a>.</p>
+        <p>Questions about these Terms? Email us at <a href="mailto:hello@northernwings.org">hello@northernwings.org</a>.</p>
       </main>
       <Footer />
     </>

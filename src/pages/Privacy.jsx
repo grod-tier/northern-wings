@@ -14,7 +14,7 @@ export default function Privacy() {
       </header>
       <main className="legal-content">
         <h2>Who we are</h2>
-        <p>Northern Wings is a youth-led conservation enterprise operating Monarch Waystation #54310. We sell monarch habitat kits and share educational resources about native pollinators. Our website is <strong>northernwings.co</strong>.</p>
+        <p>Northern Wings is a youth-led conservation enterprise operating Monarch Waystation #54310. We sell monarch habitat kits and share educational resources about native pollinators. Our website is <strong>northernwings.org</strong>.</p>
 
         <h2>What information we collect</h2>
         <p>When you purchase a kit, we collect:</p>
@@ -48,7 +48,7 @@ export default function Privacy() {
           <li>Correct inaccurate information</li>
           <li>Request deletion of your information (subject to legal retention requirements)</li>
         </ul>
-        <p>To exercise any of these rights, please contact us at <a href="mailto:hello@northernwings.co">hello@northernwings.co</a>.</p>
+        <p>To exercise any of these rights, please contact us at <a href="mailto:hello@northernwings.org">hello@northernwings.org</a>.</p>
 
         <h2>Cookies</h2>
         <p>Our website does not use advertising or tracking cookies. We use only functional session data necessary for checkout (via Stripe's secure payment flow).</p>
@@ -60,7 +60,7 @@ export default function Privacy() {
         <p>We may update this Privacy Policy from time to time. When we do, we will revise the "Last updated" date above. Continued use of our website after changes constitutes acceptance of the revised policy.</p>
 
         <h2>Contact</h2>
-        <p>Questions? Reach us at <a href="mailto:hello@northernwings.co">hello@northernwings.co</a>.</p>
+        <p>Questions? Reach us at <a href="mailto:hello@northernwings.org">hello@northernwings.org</a>.</p>
       </main>
       <Footer />
     </>
