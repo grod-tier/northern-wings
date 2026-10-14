@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Northern Wings</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap');
+
+:root {
+  --leaf-deep: oklch(38% 0.06 145);
+  --leaf: oklch(46% 0.085 145);
+  --leaf-mid: oklch(58% 0.09 142);
+  --leaf-soft: oklch(72% 0.07 138);
+  --cream: oklch(96% 0.018 95);
+  --cream-warm: oklch(92% 0.035 88);
+  --ink: oklch(22% 0.025 145);
+  --ink-soft: oklch(34% 0.03 145);
+  --monarch: oklch(68% 0.18 50);
+  --monarch-deep: oklch(56% 0.19 42);
+
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  --display: 'Fraunces', Georgia, serif;
+  --body: 'Newsreader', Georgia, serif;
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--cream);
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: var(--space-md) var(--space-2xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: oklch(96% 0.018 95 / 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid oklch(46% 0.085 145 / 0.12);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--leaf-deep);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+.brand-mark { width: 36px; height: 36px; display: grid; place-items: center; color: var(--monarch); }
+.brand small {
+  display: block;
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--leaf-mid);
+  font-weight: 500;
+  margin-top: 2px;
+}
+.nav-links {
+  display: flex;
+  gap: var(--space-xl);
+  align-items: center;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 150ms var(--ease-out);
+}
+.nav-links a:hover { color: var(--leaf-deep); }
+.nav-links a.active { color: var(--leaf-deep); }
+.nav-cta {
+  background: var(--monarch-deep);
+  color: var(--cream) !important;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: transform 150ms var(--ease-out), background 150ms var(--ease-out);
+}
+.nav-cta:hover { background: var(--leaf-deep) !important; transform: translateY(-1px); }
+
+/* PAGE LAYOUT */
+.page-wrap {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 72px;
+}
+
+/* LEFT PANEL */
+.contact-info {
+  background: var(--leaf-deep);
+  color: var(--cream);
+  padding: var(--space-4xl) var(--space-3xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-label {
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--leaf-soft);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-info h1 {
+  font-family: var(--display);
+  font-size: clamp(36px, 3.5vw, 52px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--space-lg);
+}
+.contact-info h1 em { font-style: italic; color: var(--monarch); }
+
+.contact-info .lede {
+  font-size: 18px;
+  line-height: 1.6;
+  color: oklch(88% 0.02 95);
+  margin-bottom: var(--space-3xl);
+  max-width: 400px;
+}
+
+.contact-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.detail-item {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+
+.detail-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: oklch(100% 0 0 / 0.1);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+.detail-text strong {
+  display: block;
+  font-family: var(--display);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--leaf-soft);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.detail-text span, .detail-text a {
+  font-size: 16px;
+  color: oklch(90% 0.02 95);
+  text-decoration: none;
+}
+.detail-text a:hover { color: var(--cream); text-decoration: underline; }
+
+/* RIGHT PANEL — FORM */
+.contact-form-wrap {
+  background: var(--cream);
+  padding: var(--space-4xl) var(--space-3xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-head {
+  margin-bottom: var(--space-2xl);
+}
+.form-head h2 {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: var(--space-xs);
+}
+.form-head p {
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field.full { grid-column: span 2; }
+
+label {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+input, textarea, select {
+  font-family: var(--body);
+  font-size: 16px;
+  color: var(--ink);
+  background: var(--cream-warm);
+  border: 1.5px solid oklch(46% 0.085 145 / 0.18);
+  border-radius: 6px;
+  padding: 12px 14px;
+  transition: border-color 150ms var(--ease-out), box-shadow 150ms var(--ease-out);
+  width: 100%;
+  outline: none;
+  resize: vertical;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--leaf);
+  box-shadow: 0 0 0 3px oklch(46% 0.085 145 / 0.1);
+}
+textarea { min-height: 130px; }
+
+.submit-row {
+  margin-top: var(--space-lg);
+}
+
+.btn-submit {
+  background: var(--monarch-deep);
+  color: var(--cream);
+  border: none;
+  border-radius: 999px;
+  padding: 14px 32px;
+  font-family: var(--body);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 150ms var(--ease-out), transform 150ms var(--ease-out);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.btn-submit:hover { background: var(--leaf-deep); transform: translateY(-1px); }
+.btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* STATES */
+.form-status {
+  display: none;
+  margin-top: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.form-status.success {
+  display: block;
+  background: oklch(46% 0.085 145 / 0.1);
+  color: var(--leaf-deep);
+  border: 1px solid oklch(46% 0.085 145 / 0.25);
+}
+.form-status.error {
+  display: block;
+  background: oklch(60% 0.18 30 / 0.08);
+  color: oklch(40% 0.15 30);
+  border: 1px solid oklch(60% 0.18 30 / 0.2);
+}
+
+/* FOOTER */
+footer {
+  background: var(--ink);
+  color: oklch(78% 0.02 145);
+  padding: var(--space-2xl);
+  border-top: 1px solid oklch(34% 0.03 145);
+  font-size: 14px;
+  text-align: center;
+}
+footer .brand { color: var(--cream); justify-content: center; margin-bottom: var(--space-md); }
+footer .footer-links { margin-top: var(--space-sm); display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap; }
+footer .footer-links a { color: oklch(78% 0.02 145); text-decoration: none; transition: color 150ms; }
+footer .footer-links a:hover { color: var(--cream); }
+
+@media (max-width: 900px) {
+  .page-wrap { grid-template-columns: 1fr; }
+  .contact-info { padding: var(--space-3xl) var(--space-md); }
+  .contact-form-wrap { padding: var(--space-3xl) var(--space-md); }
+  .form-grid { grid-template-columns: 1fr; }
+  .field.full { grid-column: span 1; }
+  .nav { padding: var(--space-sm) var(--space-md); }
+  .nav-links { gap: var(--space-md); }
+  .nav-links a:not(.nav-cta) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<div class="page-wrap">
+  <aside class="contact-info">
+    <div class="section-label">Get in touch</div>
+    <h1>We'd love to <em>hear</em> from you.</h1>
+    <p class="lede">Whether you have questions about our kits, want to learn more about the waystation, or are interested in partnering with us — reach out.</p>
+
+    <div class="contact-detail">
+      <div class="detail-item">
+        <div class="detail-icon">✉</div>
+        <div class="detail-text">
+          <strong>Email</strong>
+          <a href="mailto:hello@northernwings.co">hello@northernwings.co</a>
+        </div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-icon">📍</div>
+        <div class="detail-text">
+          <strong>Waystation</strong>
+          <span>Michigan, United States</span>
+        </div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-icon">⏱</div>
+        <div class="detail-text">
+          <strong>Response time</strong>
+          <span>Usually within 1–2 business days</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <section class="contact-form-wrap">
+    <div class="form-head">
+      <h2>Send us a message</h2>
+      <p>Fill out the form and we'll get back to you shortly.</p>
+    </div>
+
+    <form id="contact-form" novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label for="firstName">First name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="Avery" required>
+        </div>
+        <div class="field">
+          <label for="lastName">Last name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Siudara" required>
+        </div>
+        <div class="field full">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+        <div class="field full">
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject">
+            <option value="Kit question">Question about a kit</option>
+            <option value="Waystation inquiry">Waystation inquiry</option>
+            <option value="Partnership">Partnership opportunity</option>
+            <option value="Media / Press">Media / Press</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us what's on your mind…" required></textarea>
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn-submit" id="submit-btn">
+          Send message <span>→</span>
+        </button>
+      </div>
+
+      <div class="form-status" id="form-status"></div>
+    </form>
+  </section>
+</div>
+
+<footer>
+  <div class="brand">
+    <img src="/logo.png" alt="" aria-hidden="true" class="brand-mark" style="width:36px;height:36px;object-fit:contain;border-radius:50%;">
+    <span>Northern Wings</span>
+  </div>
+  <p>© 2025 Northern Wings · Monarch Waystation #54310 · A youth-led conservation enterprise</p>
+  <div class="footer-links">
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms &amp; Conditions</a>
+  </div>
+</footer>
+
+<script>
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  const status = document.getElementById('form-status');
+  const form = e.target;
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  status.className = 'form-status';
+  status.textContent = '';
+
+  const data = {
+    firstName: form.firstName.value.trim(),
+    lastName: form.lastName.value.trim(),
+    email: form.email.value.trim(),
+    subject: form.subject.value,
+    message: form.message.value.trim(),
+  };
+
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    const json = await res.json();
+    if (res.ok) {
+      status.className = 'form-status success';
+      status.textContent = 'Message sent! We\'ll be in touch within 1–2 business days.';
+      form.reset();
+    } else {
+      throw new Error(json.error || 'Something went wrong.');
+    }
+  } catch (err) {
+    status.className = 'form-status error';
+    status.textContent = err.message || 'Failed to send. Please try emailing us directly.';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = 'Send message <span>→</span>';
+  }
+});
+</script>
+
+</body>
+</html>

@@ -6,7 +6,6 @@ import express from 'express';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { readFile } from 'fs/promises';
 import rateLimit from 'express-rate-limit';
 import {
   isStripeConfigured,
@@ -15,8 +14,7 @@ import {
   sendOrderNotification,
   sendCustomerReceipt,
 } from './lib/checkout.js';
-import { injectNav } from './lib/injectNav.js';
-import { getJournalPosts, getJournalPost, getGalleryPhotos, getAdminPosts, getAdminPhotos, imageUrl, sanityWrite } from './lib/sanity.js';
+import { getAdminPosts, getAdminPhotos, sanityWrite } from './lib/sanity.js';
 import multer from 'multer';
 import crypto from 'crypto';
 
@@ -32,31 +30,13 @@ function checkAdmin(req, res) {
   return true;
 }
 
-async function sendPage(res, filePath) {
-  try {
-    const html = await readFile(filePath, 'utf8');
-    res.type('html').send(await injectNav(html));
-  } catch {
-    res.status(404).send('Page not found');
-  }
-}
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 // Capture the raw request body too — needed for Stripe webhook signature verification.
 app.use(express.json({ limit: '20mb', verify: (req, res, buf) => { req.rawBody = buf; } }));
-// Serve pages with shared navbar injection before static fallback
-app.get('/', (req, res) => sendPage(res, join(__dirname, 'public/waystation.html')));
-app.get('/plight', (req, res) => sendPage(res, join(__dirname, 'public/plight.html')));
-app.get('/waystation', (req, res) => res.redirect('/'));
-app.get('/checkout/success', (req, res) => sendPage(res, join(__dirname, 'public/checkout-success.html')));
-app.get('/privacy', (req, res) => sendPage(res, join(__dirname, 'public/privacy.html')));
-app.get('/terms', (req, res) => sendPage(res, join(__dirname, 'public/terms.html')));
-app.get('/contact', (req, res) => sendPage(res, join(__dirname, 'public/contact.html')));
-app.get('/admin', (req, res) => res.sendFile(join(__dirname, 'public/admin.html')));
 
 // ─── Admin API ────────────────────────────────────────────────────────────────
 app.post('/api/admin/login', (req, res) => {
@@ -195,66 +175,14 @@ app.patch('/api/admin/posts/:id', upload.single('cover'), async (req, res) => {
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// ─── Journal (Sanity-backed blog) ─────────────────────────────────────────────
-app.get('/journal', async (req, res) => {
-  try {
-    const posts = await getJournalPosts();
-    const cards = posts.map(p => `
-      <article class="post-card">
-        ${p.mainImage ? `<a href="/journal/${p.slug.current}" class="post-card__img-wrap">
-          <img class="post-card__img" src="${imageUrl(p.mainImage, 800)}" alt="${p.title}" loading="lazy">
-        </a>` : ''}
-        <div class="post-card__body">
-          <p class="post-card__tag">Journal</p>
-          <h2 class="post-card__title"><a href="/journal/${p.slug.current}">${p.title}</a></h2>
-          ${p.excerpt ? `<p class="post-card__excerpt">${p.excerpt}</p>` : ''}
-          <p class="post-card__meta">${p.publishedAt ? new Date(p.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</p>
-        </div>
-      </article>`).join('');
-    const html = journalListingHtml(cards, posts.length);
-    res.type('html').send(await injectNav(html));
-  } catch (err) {
-    console.error('Journal listing error:', err);
-    res.status(500).send(err.message);
-  }
-});
-
-app.get('/journal/:slug', async (req, res) => {
-  try {
-    const post = await getJournalPost(req.params.slug);
-    if (!post) return res.status(404).send('<h1>Post not found</h1>');
-    const bodyHtml = renderPortableText(post.body || []);
-    const html = journalPostHtml(post, bodyHtml);
-    res.type('html').send(await injectNav(html));
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-});
-
-// ─── Gallery (Sanity-backed photo dump) ───────────────────────────────────────
-app.get('/gallery', async (req, res) => {
-  try {
-    const photos = await getGalleryPhotos();
-    const items = photos.map((p, i) => {
-      const dateStr = p.takenAt ? new Date(p.takenAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : '';
-      const meta = [p.location, dateStr].filter(Boolean).join(' · ');
-      const wide = i % 5 === 0;
-      return `<figure class="gallery-item${wide ? ' gallery-item--wide' : ''}">
-        <div class="gallery-img-wrap">
-          <img src="${imageUrl(p.image, wide ? 2000 : 1200)}" alt="${p.caption || ''}" loading="lazy">
-          ${p.caption || meta ? `<div class="gallery-overlay"><div class="gallery-overlay-inner">${p.caption ? `<span class="gallery-caption">${p.caption}</span>` : ''}${meta ? `<span class="gallery-meta">${meta}</span>` : ''}</div></div>` : ''}
-        </div>
-      </figure>`;
-    }).join('');
-    const html = galleryPageHtml(items, photos.length);
-    res.type('html').send(await injectNav(html));
-  } catch (err) {
-    console.error('Gallery error:', err);
-    res.status(500).send(err.message);
-  }
-});
-
+// Serve public assets (images, etc.) — Vite also serves these in dev from /public
 app.use(express.static(join(__dirname, 'public')));
+
+// In production, serve the built React app and fall back to index.html for SPA routing
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(join(__dirname, 'dist')));
+  app.get('*', (req, res) => res.sendFile(join(__dirname, 'dist/index.html')));
+}
 
 app.post('/api/contact', async (req, res) => {
   const { firstName, lastName, email, subject, message } = req.body || {};
@@ -343,163 +271,6 @@ app.post('/api/stripe/webhook', async (req, res) => {
 });
 
 app.get('/checkout/cancel', (req, res) => res.redirect('/#kits'));
-
-// ─── Page template helpers ────────────────────────────────────────────────────
-
-const PAGE_CSS = `
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-<style>
-:root{--leaf-deep:oklch(38% 0.06 145);--leaf:oklch(46% 0.085 145);--leaf-mid:oklch(58% 0.09 142);--leaf-soft:oklch(72% 0.07 138);--cream:oklch(96% 0.018 95);--cream-warm:oklch(92% 0.035 88);--ink:oklch(22% 0.025 145);--ink-soft:oklch(34% 0.03 145);--monarch:oklch(68% 0.18 50);--monarch-deep:oklch(56% 0.19 42);--space-xs:8px;--space-sm:12px;--space-md:16px;--space-lg:24px;--space-xl:32px;--space-2xl:48px;--space-3xl:64px;--space-4xl:96px;--display:'Fraunces',Georgia,serif;--body:'Newsreader',Georgia,serif;--ease-out:cubic-bezier(0.25,1,0.5,1)}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{font-family:var(--body);font-size:18px;line-height:1.65;color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-img{max-width:100%;display:block}
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:var(--space-md) var(--space-2xl);display:flex;justify-content:space-between;align-items:center;background:oklch(96% 0.018 95/.92);backdrop-filter:blur(12px);border-bottom:1px solid oklch(46% 0.085 145/.12)}
-.brand{display:flex;align-items:center;gap:var(--space-sm);font-family:var(--display);font-weight:600;font-size:20px;color:var(--leaf-deep);letter-spacing:-.01em;text-decoration:none}
-.brand-mark{width:36px;height:36px;display:grid;place-items:center;color:var(--monarch)}
-.brand small{display:block;font-family:var(--body);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--leaf-mid);font-weight:500;margin-top:2px}
-.nav-links{display:flex;gap:var(--space-xl);align-items:center;list-style:none}
-.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:15px;font-weight:500;transition:color 150ms var(--ease-out)}
-.nav-links a:hover{color:var(--leaf-deep)}
-.nav-cta{background:var(--monarch-deep);color:var(--cream)!important;padding:10px 18px;border-radius:999px;font-size:14px;font-weight:500;transition:transform 150ms var(--ease-out),background 150ms var(--ease-out)}
-.nav-cta:hover{background:var(--leaf-deep)!important;transform:translateY(-1px)}
-.page-header{padding:130px var(--space-2xl) var(--space-3xl);background:radial-gradient(ellipse at 80% 10%,oklch(72% 0.07 138/.25),transparent 55%),var(--cream)}
-.page-header-inner{max-width:1100px;margin:0 auto}
-.eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--leaf);font-weight:500;margin-bottom:var(--space-lg)}
-.page-header h1{font-family:var(--display);font-weight:500;font-size:clamp(36px,5vw,58px);line-height:1.05;letter-spacing:-.025em;color:var(--ink);margin-bottom:var(--space-md)}
-.page-header h1 em{font-style:italic;color:var(--monarch-deep);font-weight:400}
-.page-header .lede{font-size:19px;line-height:1.55;color:var(--ink-soft);max-width:600px}
-/* Journal listing */
-.post-grid{max-width:1100px;margin:0 auto;padding:var(--space-4xl) var(--space-2xl);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-2xl)}
-.post-card{display:flex;flex-direction:column}
-.post-card__img-wrap{display:block;aspect-ratio:3/2;overflow:hidden;border-radius:8px;margin-bottom:var(--space-md)}
-.post-card__img{width:100%;height:100%;object-fit:cover;transition:transform 400ms var(--ease-out)}
-.post-card__img-wrap:hover .post-card__img{transform:scale(1.03)}
-.post-card__body{flex:1;display:flex;flex-direction:column}
-.post-card__tag{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--leaf);font-weight:500;margin-bottom:var(--space-xs)}
-.post-card__title{font-family:var(--display);font-size:22px;font-weight:500;letter-spacing:-.015em;line-height:1.2;margin-bottom:var(--space-sm)}
-.post-card__title a{color:var(--ink);text-decoration:none;transition:color 150ms}
-.post-card__title a:hover{color:var(--leaf-deep)}
-.post-card__excerpt{font-size:16px;color:var(--ink-soft);line-height:1.55;margin-bottom:var(--space-sm);flex:1}
-.post-card__meta{font-size:14px;color:var(--leaf-mid)}
-.empty-state{max-width:1100px;margin:0 auto;padding:var(--space-4xl) var(--space-2xl);text-align:center;color:var(--ink-soft)}
-/* Journal post */
-.post-wrap{max-width:740px;margin:0 auto;padding:var(--space-4xl) var(--space-2xl)}
-.post-cover{width:100%;aspect-ratio:16/7;object-fit:cover;border-radius:8px;margin-bottom:var(--space-3xl)}
-.post-meta{font-size:14px;color:var(--leaf-mid);margin-bottom:var(--space-md);letter-spacing:.04em}
-.post-wrap h1{font-family:var(--display);font-size:clamp(32px,4.5vw,52px);font-weight:500;line-height:1.08;letter-spacing:-.025em;margin-bottom:var(--space-xl)}
-.post-body p{color:var(--ink-soft);margin-bottom:var(--space-md)}
-.post-body h2{font-family:var(--display);font-size:26px;font-weight:500;letter-spacing:-.015em;margin:var(--space-2xl) 0 var(--space-md)}
-.post-body h3{font-family:var(--display);font-size:20px;font-weight:500;margin:var(--space-xl) 0 var(--space-sm)}
-.post-body ul,.post-body ol{margin:var(--space-md) 0 var(--space-md) var(--space-xl);color:var(--ink-soft)}
-.post-body li{margin-bottom:var(--space-xs)}
-.post-body img{border-radius:6px;margin:var(--space-xl) 0}
-.post-body figcaption{font-size:14px;color:var(--ink-soft);text-align:center;margin-top:calc(-1*var(--space-sm))}
-.post-back{display:inline-flex;align-items:center;gap:6px;font-size:15px;color:var(--leaf-deep);text-decoration:none;margin-bottom:var(--space-2xl)}
-.post-back:hover{text-decoration:underline}
-/* Gallery */
-.gallery-grid{max-width:1200px;margin:0 auto;padding:var(--space-lg) var(--space-2xl) var(--space-4xl);display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.gallery-item{margin:0}
-.gallery-item--wide{grid-column:span 3}
-.gallery-img-wrap{position:relative;overflow:hidden;border-radius:10px;background:var(--cream-warm)}
-.gallery-item img{width:100%;display:block;object-fit:cover;object-position:center center;transition:transform 500ms cubic-bezier(0.25,1,0.5,1)}
-.gallery-item--wide img{aspect-ratio:16/7}
-.gallery-item:not(.gallery-item--wide) img{aspect-ratio:4/3}
-.gallery-img-wrap:hover img{transform:scale(1.04)}
-.gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,oklch(22% 0.025 145/.7) 0%,transparent 55%);opacity:0;transition:opacity 300ms ease;display:flex;align-items:flex-end}
-.gallery-img-wrap:hover .gallery-overlay{opacity:1}
-.gallery-overlay-inner{padding:20px;display:flex;flex-direction:column;gap:3px}
-.gallery-caption{color:white;font-size:15px;font-weight:500;line-height:1.3}
-.gallery-meta{color:oklch(85% 0.06 140);font-size:13px;letter-spacing:.02em}
-/* Footer */
-footer{background:var(--ink);color:oklch(78% 0.02 145);padding:var(--space-2xl);border-top:1px solid oklch(34% 0.03 145);font-size:14px;text-align:center}
-footer .brand{color:var(--cream);justify-content:center;margin-bottom:var(--space-md)}
-footer .footer-links{margin-top:var(--space-sm);display:flex;justify-content:center;gap:var(--space-lg);flex-wrap:wrap}
-footer .footer-links a{color:oklch(78% 0.02 145);text-decoration:none;transition:color 150ms}
-footer .footer-links a:hover{color:var(--cream)}
-@media(max-width:900px){.nav{padding:var(--space-sm) var(--space-md)}.nav-links{gap:var(--space-md)}.nav-links a:not(.nav-cta){display:none}.page-header{padding:110px var(--space-md) var(--space-2xl)}.post-grid{grid-template-columns:1fr;padding:var(--space-3xl) var(--space-md)}.gallery-grid{grid-template-columns:repeat(2,1fr);padding:var(--space-3xl) var(--space-md)}.gallery-item--wide{grid-column:span 2}.post-wrap{padding:var(--space-3xl) var(--space-md)}}
-@media(max-width:600px){.gallery-grid{grid-template-columns:1fr}.gallery-item--wide{grid-column:span 1}}
-</style>`;
-
-const PAGE_FOOTER = `<footer>
-  <div class="brand">
-    <img src="/logo.png" alt="" aria-hidden="true" class="brand-mark" style="width:36px;height:36px;object-fit:contain;border-radius:50%;">
-    <span>Northern Wings</span>
-  </div>
-  <p>© 2025 Northern Wings · Monarch Waystation #54310 · A youth-led conservation enterprise</p>
-  <div class="footer-links">
-    <a href="/privacy">Privacy Policy</a>
-    <a href="/terms">Terms &amp; Conditions</a>
-  </div>
-</footer>`;
-
-function journalListingHtml(cards, count) {
-  return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal — Northern Wings</title>${PAGE_CSS}</head><body>
-<!-- NAVBAR -->
-<header class="page-header">
-  <div class="page-header-inner">
-    <div class="eyebrow">Northern Wings · Field Notes</div>
-    <h1>The <em>journal.</em></h1>
-    <p class="lede">Updates from the waystation — planting milestones, monarch sightings, and seasonal notes from the field.</p>
-  </div>
-</header>
-${count > 0
-  ? `<section class="post-grid">${cards}</section>`
-  : `<div class="empty-state"><p>No posts yet — check back soon.</p></div>`}
-${PAGE_FOOTER}</body></html>`;
-}
-
-function journalPostHtml(post, bodyHtml) {
-  const date = post.publishedAt
-    ? new Date(post.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
-    : '';
-  return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${post.title} — Northern Wings Journal</title>${PAGE_CSS}</head><body>
-<!-- NAVBAR -->
-<div class="post-wrap">
-  <a href="/journal" class="post-back">← Back to Journal</a>
-  ${post.mainImage ? `<img class="post-cover" src="${imageUrl(post.mainImage, 1400)}" alt="${post.title}">` : ''}
-  ${date ? `<p class="post-meta">${date}</p>` : ''}
-  <h1>${post.title}</h1>
-  <div class="post-body">${bodyHtml}</div>
-</div>
-${PAGE_FOOTER}</body></html>`;
-}
-
-function galleryPageHtml(items, count) {
-  return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Photo Gallery — Northern Wings</title>${PAGE_CSS}</head><body>
-<!-- NAVBAR -->
-<header class="page-header">
-  <div class="page-header-inner">
-    <div class="eyebrow">Northern Wings · Field Photos</div>
-    <h1>From the <em>field.</em></h1>
-    <p class="lede">Photos from the waystation — milkweed, monarchs, and the seasons in between.</p>
-  </div>
-</header>
-${count > 0
-  ? `<section class="gallery-grid">${items}</section>`
-  : `<div class="empty-state"><p>No photos yet — check back soon.</p></div>`}
-${PAGE_FOOTER}</body></html>`;
-}
-
-function renderPortableText(blocks) {
-  if (!blocks || !blocks.length) return '';
-  return blocks.map(block => {
-    if (block._type === 'image') {
-      const src = imageUrl(block.asset?._ref, 1200);
-      return `<figure><img src="${src}" alt="${block.alt || ''}"><figcaption>${block.caption || ''}</figcaption></figure>`;
-    }
-    if (block._type !== 'block') return '';
-    const tag = { h1: 'h1', h2: 'h2', h3: 'h3', h4: 'h4', blockquote: 'blockquote', normal: 'p' }[block.style] || 'p';
-    const text = (block.children || []).map(span => {
-      let t = (span.text || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-      if (span.marks?.includes('strong')) t = `<strong>${t}</strong>`;
-      if (span.marks?.includes('em')) t = `<em>${t}</em>`;
-      return t;
-    }).join('');
-    if (block.listItem === 'bullet') return `<li>${text}</li>`;
-    return `<${tag}>${text}</${tag}>`;
-  }).join('\n');
-}
 
 // Local dev: start the server. On Vercel the default export is used instead.
 if (!process.env.VERCEL) {

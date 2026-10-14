@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Northern Wings</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap');
+
+:root {
+  --leaf-deep: oklch(38% 0.06 145);
+  --leaf: oklch(46% 0.085 145);
+  --leaf-mid: oklch(58% 0.09 142);
+  --leaf-soft: oklch(72% 0.07 138);
+  --cream: oklch(96% 0.018 95);
+  --cream-warm: oklch(92% 0.035 88);
+  --ink: oklch(22% 0.025 145);
+  --ink-soft: oklch(34% 0.03 145);
+  --monarch: oklch(68% 0.18 50);
+  --monarch-deep: oklch(56% 0.19 42);
+
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  --display: 'Fraunces', Georgia, serif;
+  --body: 'Newsreader', Georgia, serif;
+
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--cream);
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: var(--space-md) var(--space-2xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: oklch(96% 0.018 95 / 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid oklch(46% 0.085 145 / 0.12);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--leaf-deep);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+.brand-mark { width: 36px; height: 36px; display: grid; place-items: center; color: var(--monarch); }
+.brand small {
+  display: block;
+  font-family: var(--body);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--leaf-mid);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-xl);
+  align-items: center;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 150ms var(--ease-out);
+}
+.nav-links a:hover { color: var(--leaf-deep); }
+.nav-cta {
+  background: var(--monarch-deep);
+  color: var(--cream) !important;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: transform 150ms var(--ease-out), background 150ms var(--ease-out);
+}
+.nav-cta:hover { background: var(--leaf-deep) !important; transform: translateY(-1px); }
+
+/* PAGE HEADER */
+.page-header {
+  padding: 130px var(--space-2xl) var(--space-3xl);
+  background: var(--cream);
+  border-bottom: 1px solid oklch(46% 0.085 145 / 0.1);
+}
+.page-header-inner { max-width: 740px; margin: 0 auto; }
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--leaf);
+  font-weight: 500;
+  margin-bottom: var(--space-lg);
+}
+
+.page-header h1 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: var(--space-md);
+}
+
+.page-header .meta {
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+/* CONTENT */
+.content {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: var(--space-4xl) var(--space-2xl) var(--space-4xl);
+}
+
+.content h2 {
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-top: var(--space-3xl);
+  margin-bottom: var(--space-md);
+}
+.content h2:first-child { margin-top: 0; }
+
+.content p {
+  color: var(--ink-soft);
+  margin-bottom: var(--space-md);
+}
+
+.content ul {
+  margin: var(--space-md) 0 var(--space-md) var(--space-xl);
+  color: var(--ink-soft);
+}
+.content ul li { margin-bottom: var(--space-xs); }
+
+.content a { color: var(--leaf-deep); }
+
+/* FOOTER */
+footer {
+  background: var(--ink);
+  color: oklch(78% 0.02 145);
+  padding: var(--space-2xl);
+  border-top: 1px solid oklch(34% 0.03 145);
+  font-size: 14px;
+  text-align: center;
+}
+footer .brand { color: var(--cream); justify-content: center; margin-bottom: var(--space-md); }
+footer .footer-links { margin-top: var(--space-sm); display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap; }
+footer .footer-links a { color: oklch(78% 0.02 145); text-decoration: none; transition: color 150ms; }
+footer .footer-links a:hover { color: var(--cream); }
+
+@media (max-width: 900px) {
+  .page-header { padding: 110px var(--space-md) var(--space-2xl); }
+  .content { padding: var(--space-3xl) var(--space-md); }
+  .nav { padding: var(--space-sm) var(--space-md); }
+  .nav-links { gap: var(--space-md); }
+  .nav-links a:not(.nav-cta) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="eyebrow">Legal</div>
+    <h1>Privacy Policy</h1>
+    <p class="meta">Last updated: August 13, 2025</p>
+  </div>
+</header>
+
+<main class="content">
+
+  <h2>Who we are</h2>
+  <p>Northern Wings is a youth-led conservation enterprise operating Monarch Waystation #54310. We sell monarch habitat kits and share educational resources about native pollinators. Our website is <strong>northernwings.co</strong>.</p>
+
+  <h2>What information we collect</h2>
+  <p>When you purchase a kit, we collect:</p>
+  <ul>
+    <li>Your name, email address, and shipping address</li>
+    <li>Payment information (processed securely by Stripe — we never store card details)</li>
+    <li>Order history and transaction records</li>
+  </ul>
+  <p>When you visit our website, we may automatically receive standard technical data such as your IP address, browser type, and pages visited. We do not use tracking cookies or third-party advertising networks.</p>
+
+  <h2>How we use your information</h2>
+  <p>We use your information solely to:</p>
+  <ul>
+    <li>Fulfill and ship your order</li>
+    <li>Send order confirmations and shipping updates</li>
+    <li>Respond to customer service inquiries</li>
+    <li>Comply with applicable legal obligations</li>
+  </ul>
+  <p>We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
+
+  <h2>Payment processing</h2>
+  <p>All payments are processed by <strong>Stripe, Inc.</strong> We do not store credit card numbers or payment card data on our servers. Stripe's privacy policy governs the handling of your payment information and is available at <a href="https://stripe.com/privacy" target="_blank" rel="noopener">stripe.com/privacy</a>.</p>
+
+  <h2>Data retention</h2>
+  <p>We retain order and transaction records for a minimum of 7 years to comply with tax and financial record-keeping requirements. You may request deletion of your personal information by emailing us; where we are required by law to retain records, we will honor that obligation while deleting other data where possible.</p>
+
+  <h2>Your rights</h2>
+  <p>You may request to:</p>
+  <ul>
+    <li>Access the personal information we hold about you</li>
+    <li>Correct inaccurate information</li>
+    <li>Request deletion of your information (subject to legal retention requirements)</li>
+  </ul>
+  <p>To exercise any of these rights, please contact us at <a href="mailto:hello@northernwings.co">hello@northernwings.co</a>.</p>
+
+  <h2>Cookies</h2>
+  <p>Our website does not use advertising or tracking cookies. We use only functional session data necessary for checkout (via Stripe's secure payment flow).</p>
+
+  <h2>Children's privacy</h2>
+  <p>Our website is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you believe we have inadvertently collected such information, please contact us and we will promptly delete it.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>We may update this Privacy Policy from time to time. When we do, we will revise the "Last updated" date above. Continued use of our website after changes constitutes acceptance of the revised policy.</p>
+
+  <h2>Contact</h2>
+  <p>Questions? Reach us at <a href="mailto:hello@northernwings.co">hello@northernwings.co</a>.</p>
+
+</main>
+
+<footer>
+  <div class="brand">
+    <img src="/logo.png" alt="" aria-hidden="true" class="brand-mark" style="width:36px;height:36px;object-fit:contain;border-radius:50%;">
+    <span>Northern Wings</span>
+  </div>
+  <p>© 2025 Northern Wings · Monarch Waystation #54310 · A youth-led conservation enterprise</p>
+  <div class="footer-links">
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms &amp; Conditions</a>
+  </div>
+</footer>
+
+<!-- NAVBAR -->
+<script src="/nav-inject.js" defer></script>
+</body>
+</html>
