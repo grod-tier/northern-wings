@@ -16,23 +16,23 @@ export default function Contact() {
     setSubmitting(true);
     setStatus(null);
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          firstName: form.firstName.trim(),
-          lastName: form.lastName.trim(),
+          access_key: import.meta.env.VITE_WEB3FORMS_KEY,
+          name: `${form.firstName.trim()} ${form.lastName.trim()}`,
           email: form.email.trim(),
-          subject: form.subject,
+          subject: `[Contact] ${form.subject} — ${form.firstName.trim()} ${form.lastName.trim()}`,
           message: form.message.trim(),
         }),
       });
       const json = await res.json();
-      if (res.ok) {
+      if (json.success) {
         setStatus({ type: 'success', text: "Message sent! We'll be in touch within 1–2 business days." });
         setForm({ firstName: '', lastName: '', email: '', subject: 'Kit question', message: '' });
       } else {
-        throw new Error(json.error || 'Something went wrong.');
+        throw new Error(json.message || 'Something went wrong.');
       }
     } catch (err) {
       setStatus({ type: 'error', text: err.message || 'Failed to send. Please try emailing us directly.' });
